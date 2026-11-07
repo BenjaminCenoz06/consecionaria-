@@ -89,17 +89,17 @@ export default function Modelos() {
       aria-roledescription="carrusel"
       aria-label="Modelos"
       onKeyDown={alTeclear}
-      className="bg-ink relative overflow-hidden pt-20 pb-24 lg:pt-28 lg:pb-32"
+      className="bg-ink relative overflow-hidden pt-12 pb-14 lg:pt-14 lg:pb-16"
     >
       <Container>
         <Reveal className="flex items-start justify-between gap-6">
-          <h2 className="type-normal text-bone text-4xl font-bold uppercase md:text-5xl">
+          <h2 className="type-normal text-bone text-3xl font-bold uppercase md:text-4xl">
             Modelos
           </h2>
 
           <a
             href="#stock"
-            className="group type-condensed text-bone border-bone/70 hover:border-brass hover:text-brass inline-flex items-center gap-4 border-b pt-1 pr-1 pb-4 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[19rem] sm:justify-between"
+            className="group type-condensed text-bone border-bone/70 hover:border-brass hover:text-brass inline-flex items-center gap-4 border-b pt-1 pr-1 pb-3 text-sm font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[17rem] sm:justify-between"
           >
             <span>
               Descubrir
@@ -113,7 +113,7 @@ export default function Modelos() {
           </a>
         </Reveal>
 
-        <div className="relative mt-10 lg:mt-14">
+        <div className="relative mt-6 lg:mt-4">
           {/* Flechas hexagonales: a los costados en escritorio. */}
           <Hexagono
             lado="izq"
@@ -144,7 +144,7 @@ export default function Modelos() {
                       : "pointer-events-none translate-y-4 opacity-0 duration-300"
                   }`}
                 >
-                  <p className="type-normal text-bone -skew-x-12 text-2xl font-extrabold tracking-[0.16em] uppercase md:text-4xl">
+                  <p className="type-normal text-bone -skew-x-12 text-xl font-extrabold tracking-[0.16em] uppercase md:text-3xl">
                     {m.marca} <span className="text-brass">{m.nombre}</span>
                   </p>
 
@@ -152,14 +152,14 @@ export default function Modelos() {
                       la paleta del sitio: latón, hueso, latón apagado. */}
                   <span
                     aria-hidden="true"
-                    className="mt-3 flex h-[3px] w-full max-w-[300px]"
+                    className="mt-2.5 flex h-[3px] w-full max-w-[240px]"
                   >
                     <i className="bg-brass flex-1" />
                     <i className="bg-bone/80 flex-1" />
                     <i className="bg-brass/45 flex-1" />
                   </span>
 
-                  <p className="display-tight mt-7 bg-gradient-to-b from-white to-white/50 bg-clip-text text-5xl font-bold text-transparent sm:text-7xl lg:text-[6.25rem]">
+                  <p className="display-tight mt-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-[4rem]">
                     {m.lema}
                   </p>
                 </div>
@@ -175,15 +175,15 @@ export default function Modelos() {
         onPointerDown={alPresionar}
         onPointerUp={alSoltar}
         onPointerCancel={() => (inicioX.current = null)}
-        className="relative mt-4 touch-pan-y select-none lg:mt-2"
+        className="relative mt-2 touch-pan-y select-none"
       >
         {/* Resplandor cálido en el piso, detrás del auto. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-20 h-3/4 bg-[radial-gradient(ellipse_42%_55%_at_50%_100%,rgba(194,160,91,0.16),transparent_72%)]"
+          className="pointer-events-none absolute inset-x-0 bottom-10 h-3/4 bg-[radial-gradient(ellipse_42%_55%_at_50%_100%,rgba(194,160,91,0.16),transparent_72%)]"
         />
 
-        <div className="relative overflow-hidden pb-28 [--g:clamp(1.25rem,5vw,4rem)] [--w:min(920px,78vw)] 2xl:[--w:min(1120px,58vw)]">
+        <div className="relative overflow-hidden pb-14 [--g:clamp(1.25rem,5vw,3.5rem)] [--w:min(720px,78vw)] 2xl:[--w:min(860px,50vw)]">
           <ul
             className="ease-premium relative left-1/2 flex w-max transition-transform duration-[900ms]"
             style={{
@@ -198,7 +198,7 @@ export default function Modelos() {
                   key={m.id}
                   aria-hidden={!enFoco}
                   style={{ width: "var(--w)" }}
-                  className={`ease-premium h-[clamp(140px,24vw,300px)] shrink-0 origin-bottom transition-[opacity,transform] duration-[900ms] 2xl:h-[360px] ${
+                  className={`ease-premium h-[clamp(110px,20vw,215px)] shrink-0 origin-bottom transition-[opacity,transform] duration-[900ms] 2xl:h-[260px] ${
                     enFoco
                       ? "scale-100 opacity-100"
                       : "scale-[0.88] opacity-[0.16]"
@@ -209,7 +209,7 @@ export default function Modelos() {
                     alt={m.alt}
                     width={m.ancho}
                     height={m.alto}
-                    sizes="(min-width: 1536px) 1120px, (min-width: 1024px) 920px, 78vw"
+                    sizes="(min-width: 1536px) 860px, (min-width: 1024px) 720px, 78vw"
                     quality={90}
                     /* Los vecinos se bajan antes de hacer falta; el resto
                        espera. Pasar de "lazy" a "eager" dispara la descarga
@@ -233,7 +233,7 @@ export default function Modelos() {
           {/* Línea de piso: ancla el auto y separa el reflejo. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-28 left-1/2 h-px w-(--w) -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+            className="pointer-events-none absolute bottom-14 left-1/2 h-px w-(--w) -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent"
           />
         </div>
       </div>
@@ -274,7 +274,7 @@ export default function Modelos() {
         </div>
 
         {/* En celular las flechas bajan acá, junto al contador. */}
-        <div className="mt-8 flex items-center justify-center gap-6 lg:hidden">
+        <div className="mt-6 flex items-center justify-center gap-6 lg:hidden">
           <Hexagono lado="izq" onClick={() => ir(activo - 1)} />
           <p
             className="type-normal text-graphite w-16 text-center text-sm tabular-nums"
@@ -286,10 +286,10 @@ export default function Modelos() {
           <Hexagono lado="der" onClick={() => ir(activo + 1)} />
         </div>
 
-        <div className="mt-12 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <a
             href="#stock"
-            className="type-condensed bg-brass text-ink hover:bg-bone group inline-flex h-14 items-center justify-center gap-5 px-7 text-base font-bold tracking-wide uppercase transition-colors duration-300"
+            className="type-condensed bg-brass text-ink hover:bg-bone group inline-flex h-12 items-center justify-center gap-4 px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
           >
             Explorar el modelo
             <ArrowRight
@@ -301,14 +301,14 @@ export default function Modelos() {
 
           <a
             href="#reservar"
-            className="type-condensed text-bone border-bone/60 hover:bg-bone hover:text-ink hover:border-bone inline-flex h-14 items-center justify-center gap-5 border px-7 text-base font-bold tracking-wide uppercase transition-colors duration-300"
+            className="type-condensed text-bone border-bone/60 hover:bg-bone hover:text-ink hover:border-bone inline-flex h-12 items-center justify-center gap-4 border px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
           >
             Solicitar información
             <EnvelopeSimple size={20} weight="regular" />
           </a>
         </div>
 
-        <p className="text-graphite mt-16 max-w-[1040px] text-xs leading-relaxed">
+        <p className="text-graphite mt-8 max-w-[1040px] text-xs leading-relaxed">
           Imágenes ilustrativas. Las unidades están sujetas a disponibilidad;
           precio, historial y estado se informan por nuestros asesores, con el
           informe de los 180 puntos de control firmado.
