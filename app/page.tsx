@@ -5,10 +5,7 @@ import Ubicacion from "@/components/Ubicacion";
 import Tagline from "@/components/Tagline";
 import Destacados from "@/components/Destacados";
 import ComoFunciona from "@/components/ComoFunciona";
-import Stock from "@/components/Stock";
 import Beneficios from "@/components/Beneficios";
-import Testimonios from "@/components/Testimonios";
-import BannerShowroom from "@/components/BannerShowroom";
 import Preguntas from "@/components/Preguntas";
 import Reservar from "@/components/Reservar";
 import Footer from "@/components/Footer";
@@ -58,10 +55,7 @@ export default function Home() {
         <Tagline />
         <Destacados />
         <ComoFunciona />
-        <Stock />
         <Beneficios />
-        <Testimonios />
-        <BannerShowroom />
         <Preguntas />
         <Reservar />
       </main>

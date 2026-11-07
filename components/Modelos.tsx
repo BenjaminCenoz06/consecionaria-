@@ -93,7 +93,7 @@ export default function Modelos() {
           </h2>
 
           <a
-            href="#stock"
+            href="#destacados"
             className="group type-condensed text-bone border-bone/70 hover:border-brass hover:text-brass inline-flex items-center gap-4 border-b pt-1 pr-1 pb-3 text-sm font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[17rem] sm:justify-between"
           >
             <span>

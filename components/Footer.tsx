@@ -4,9 +4,9 @@ const COLUMNAS = [
   {
     titulo: "Catálogo",
     enlaces: [
-      { href: "#stock", texto: "Stock completo" },
+      { href: "#modelos", texto: "Modelos" },
       { href: "#reservar", texto: "Reservar prueba" },
-      { href: "#showroom", texto: "Showroom" },
+      { href: "#ubicacion", texto: "Showroom" },
     ],
   },
   {

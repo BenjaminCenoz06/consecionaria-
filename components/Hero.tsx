@@ -124,8 +124,8 @@ export default function Hero() {
 
       {/* Señal de scroll. Sin texto: una línea que baja y vuelve.   */}
       <a
-        href="#stock"
-        aria-label="Ir al stock"
+        href="#modelos"
+        aria-label="Ir a los modelos"
         className="group absolute bottom-8 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center"
       >
         <span

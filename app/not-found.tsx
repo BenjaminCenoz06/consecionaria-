@@ -21,7 +21,7 @@ export default function NoEncontrada() {
         </p>
         <div className="mt-10 flex flex-wrap gap-8">
           <CtaTexto href="/">Volver al inicio</CtaTexto>
-          <CtaTexto href="/#stock">Ver el stock</CtaTexto>
+          <CtaTexto href="/#modelos">Ver los modelos</CtaTexto>
         </div>
       </Container>
     </main>

@@ -6,9 +6,9 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
 const ENLACES = [
-  { href: "#stock", etiqueta: "Stock" },
+  { href: "#modelos", etiqueta: "Modelos" },
   { href: "#como-funciona", etiqueta: "Cómo funciona" },
-  { href: "#showroom", etiqueta: "Showroom" },
+  { href: "#ubicacion", etiqueta: "Showroom" },
   { href: "#preguntas", etiqueta: "Preguntas" },
 ] as const;
 
