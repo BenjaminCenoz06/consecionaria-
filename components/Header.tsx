@@ -15,7 +15,32 @@ const ENLACES = [
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
   const [activo, setActivo] = useState<string>("");
+  const [conFondo, setConFondo] = useState(false);
   const sinMovimiento = useReducedMotion();
+
+  /* Sobre el hero la barra es transparente: flota encima del video.
+     Cuando el hero termina de pasar bajo la barra, toma un velo oscuro
+     con desenfoque, lo justo para leerse sobre las secciones claras sin
+     dejar de sentirse de vidrio. Se observa el hero con un
+     IntersectionObserver (nada de listeners de scroll): el margen
+     superior de -80px es el alto aproximado de la barra. */
+  useEffect(() => {
+    const hero = document.getElementById("top");
+    if (!hero) {
+      /* Páginas sin hero: el velo aparece apenas se baja un poco. */
+      const alScroll = () => setConFondo(window.scrollY > 24);
+      alScroll();
+      window.addEventListener("scroll", alScroll, { passive: true });
+      return () => window.removeEventListener("scroll", alScroll);
+    }
+
+    const observador = new IntersectionObserver(
+      ([entrada]) => setConFondo(!entrada.isIntersecting),
+      { rootMargin: "-80px 0px 0px 0px", threshold: 0 },
+    );
+    observador.observe(hero);
+    return () => observador.disconnect();
+  }, []);
 
   /* Scroll-spy: marca en el menú la sección que se está mirando.
      IntersectionObserver, nunca un listener de scroll sin throttle. */
@@ -48,10 +73,16 @@ export default function Header() {
 
   return (
     <header className="fixed top-4 right-0 left-0 z-50">
-      <div className="mx-auto flex w-[calc(100%-2rem)] max-w-[1320px] items-center justify-between border border-white/10 bg-black/60 px-4 py-3 backdrop-blur-xl">
+      <div
+        className={`mx-auto flex w-[calc(100%-2rem)] max-w-[1320px] items-center justify-between border px-4 py-3 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          conFondo
+            ? "border-white/10 bg-black/55 backdrop-blur-lg backdrop-saturate-150"
+            : "border-transparent bg-transparent backdrop-blur-none"
+        }`}
+      >
         <a
           href="#top"
-          className="type-condensed text-bone text-xl font-bold uppercase"
+          className="type-condensed text-bone over-media text-xl font-bold uppercase"
           aria-label="Vértice, inicio"
         >
           Vértice
@@ -65,8 +96,8 @@ export default function Header() {
                 key={enlace.href}
                 href={enlace.href}
                 aria-current={esActivo ? "true" : undefined}
-                className={`type-normal relative text-sm font-semibold uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  esActivo ? "text-bone" : "text-graphite hover:text-bone"
+                className={`type-normal over-media relative text-sm font-semibold uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                  esActivo ? "text-bone" : "text-bone/75 hover:text-bone"
                 }`}
               >
                 {enlace.etiqueta}
