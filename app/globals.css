@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   TOKENS
+   Derivados de docs/01-investigacion-lamborghini.md
+   ============================================================ */
+
+@theme {
+  /* --- Color -------------------------------------------------
+     Monocromo. Un solo acento, usado tres veces en toda la página.
+     Fondos oscuros tomados de la paleta permitida.           */
+  --color-ink: #000000; /* fondo base, hero */
+  --color-surface: #181818; /* sección oscura */
+  --color-elevated: #1f1f1f; /* tarjeta sobre surface */
+  --color-hairline: #272727; /* borde sobre oscuro */
+
+  --color-paper: #ffffff; /* fondo claro */
+  --color-bone: #f5f5f5; /* texto sobre oscuro (no blanco puro) */
+  --color-ash: #dcdcdc; /* borde sobre claro */
+  --color-graphite: #767676; /* texto secundario */
+  --color-dim: #494949; /* texto apagado sobre oscuro */
+  --color-near: #202020; /* texto sobre claro */
+
+  --color-brass: #c2a05b; /* ÚNICO acento */
+
+  /* --- Tipografía --------------------------------------------
+     Una sola familia variable. El contraste sale del eje wdth. */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  /* --- Movimiento ---------------------------------------------
+     Una curva para todo. Cuatro duraciones, ni una más.        */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Señal de scroll del hero: una línea que cae y vuelve.      */
+  --animate-baja: baja 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes baja {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  35% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  65% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    opacity: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   EJES DE LA FUENTE VARIABLE
+   El hallazgo central: el contraste tipográfico no viene de
+   mezclar familias, viene de mover el ancho de una sola.
+   ============================================================ */
+
+@utility type-condensed {
+  font-variation-settings: "wdth" 70;
+}
+
+@utility type-normal {
+  font-variation-settings: "wdth" 100;
+}
+
+/* Leading negativo: 120px de cuerpo sobre 110px de línea = 0.92.
+   Es lo que le da peso de cartel a los títulos grandes.        */
+@utility display-tight {
+  font-variation-settings: "wdth" 70;
+  line-height: 0.92;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* Legibilidad sobre video, con el radio mínimo que funciona.
+   Nada de scrim negro encima del material.                    */
+@utility over-media {
+  text-shadow: 0 0 3px rgb(0 0 0 / 0.7);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-variation-settings: "wdth" 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Un solo anillo de foco en todo el sitio. Requisito, no opción. */
+  :focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-brass);
+    color: var(--color-ink);
+  }
+
+  /* El scroll suave lo maneja Lenis; el nativo queda desactivado
+     para que no peleen entre sí.                                */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   ACCESIBILIDAD
+   Todo el movimiento se apaga. Lo que queda es opacidad.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
