@@ -1,6 +1,12 @@
 "use client";
 
-import { useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -14,6 +20,9 @@ import { MODELOS } from "@/lib/modelos";
 
 /** Cuánto hay que arrastrar para que cuente como un deslizamiento. */
 const UMBRAL_SWIPE = 48;
+
+/** Cuántos modelos a cada lado se descargan antes de que se necesiten. */
+const PRECARGA = 2;
 
 /**
  * Vitrina de modelos.
@@ -30,9 +39,31 @@ const UMBRAL_SWIPE = 48;
 export default function Modelos() {
   const [activo, setActivo] = useState(0);
   const inicioX = useRef<number | null>(null);
+  const pestanas = useRef<HTMLDivElement>(null);
   const total = MODELOS.length;
 
   const ir = (indice: number) => setActivo((indice + total) % total);
+
+  /* Distancia circular: del último al primero hay un paso, no total-1. */
+  const distancia = (i: number) => {
+    const d = Math.abs(i - activo);
+    return Math.min(d, total - d);
+  };
+
+  /* Con muchos modelos las pestañas no entran en una fila: se
+     desplazan solas para que la activa quede centrada. Se mueve el
+     contenedor, nunca la página (scrollTo, no scrollIntoView). */
+  useEffect(() => {
+    const barra = pestanas.current;
+    const pestana = barra?.firstElementChild?.children[activo] as
+      | HTMLElement
+      | undefined;
+    if (!barra || !pestana) return;
+    barra.scrollTo({
+      left: pestana.offsetLeft - (barra.clientWidth - pestana.offsetWidth) / 2,
+      behavior: "smooth",
+    });
+  }, [activo]);
 
   const alPresionar = (e: PointerEvent) => {
     inicioX.current = e.clientX;
@@ -152,7 +183,7 @@ export default function Modelos() {
           className="pointer-events-none absolute inset-x-0 bottom-20 h-3/4 bg-[radial-gradient(ellipse_42%_55%_at_50%_100%,rgba(194,160,91,0.16),transparent_72%)]"
         />
 
-        <div className="relative overflow-hidden pb-28 [--g:clamp(1.25rem,5vw,4rem)] [--w:min(880px,78vw)]">
+        <div className="relative overflow-hidden pb-28 [--g:clamp(1.25rem,5vw,4rem)] [--w:min(920px,78vw)] 2xl:[--w:min(1120px,58vw)]">
           <ul
             className="ease-premium relative left-1/2 flex w-max transition-transform duration-[900ms]"
             style={{
@@ -167,7 +198,7 @@ export default function Modelos() {
                   key={m.id}
                   aria-hidden={!enFoco}
                   style={{ width: "var(--w)" }}
-                  className={`ease-premium h-[clamp(140px,24vw,300px)] shrink-0 origin-bottom transition-[opacity,transform] duration-[900ms] ${
+                  className={`ease-premium h-[clamp(140px,24vw,300px)] shrink-0 origin-bottom transition-[opacity,transform] duration-[900ms] 2xl:h-[360px] ${
                     enFoco
                       ? "scale-100 opacity-100"
                       : "scale-[0.88] opacity-[0.16]"
@@ -178,8 +209,13 @@ export default function Modelos() {
                     alt={m.alt}
                     width={m.ancho}
                     height={m.alto}
-                    sizes="(min-width: 1024px) 880px, 78vw"
-                    loading="eager"
+                    sizes="(min-width: 1536px) 1120px, (min-width: 1024px) 920px, 78vw"
+                    quality={90}
+                    /* Los vecinos se bajan antes de hacer falta; el resto
+                       espera. Pasar de "lazy" a "eager" dispara la descarga
+                       al instante, así el deslizamiento nunca muestra un
+                       hueco. */
+                    loading={distancia(i) <= PRECARGA ? "eager" : "lazy"}
                     draggable={false}
                     className="h-full w-full object-contain object-bottom"
                     /* Reflejo en el piso. Chromium y Safari lo dibujan;
@@ -197,7 +233,7 @@ export default function Modelos() {
           {/* Línea de piso: ancla el auto y separa el reflejo. */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-28 left-1/2 h-px w-[min(880px,78vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+            className="pointer-events-none absolute bottom-28 left-1/2 h-px w-(--w) -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent"
           />
         </div>
       </div>
@@ -205,29 +241,36 @@ export default function Modelos() {
       <Container>
         {/* Pestañas: una por modelo, con el subrayado de la referencia. */}
         <div
-          role="tablist"
-          aria-label="Elegir modelo"
-          className="flex flex-wrap justify-center gap-x-5 gap-y-4"
+          ref={pestanas}
+          className="-mx-6 overflow-x-auto px-6 [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {MODELOS.map((m, i) => {
-            const enFoco = i === activo;
-            return (
-              <button
-                key={m.id}
-                type="button"
-                role="tab"
-                aria-selected={enFoco}
-                onClick={() => ir(i)}
-                className={`type-normal border-b px-3 pb-3 text-sm font-medium uppercase transition-colors duration-300 sm:min-w-[14rem] ${
-                  enFoco
-                    ? "text-bone border-bone"
-                    : "text-graphite border-hairline hover:text-bone hover:border-dim"
-                }`}
-              >
-                {m.marca} {m.nombre}
-              </button>
-            );
-          })}
+          {/* `mx-auto w-max`: centrado si entran, desplazable si no. */}
+          <div
+            role="tablist"
+            aria-label="Elegir modelo"
+            className="mx-auto flex w-max gap-5 px-6"
+          >
+            {MODELOS.map((m, i) => {
+              const enFoco = i === activo;
+              return (
+                <button
+                  key={m.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={enFoco}
+                  tabIndex={enFoco ? 0 : -1}
+                  onClick={() => ir(i)}
+                  className={`type-normal shrink-0 border-b px-4 pb-3 text-sm font-medium whitespace-nowrap uppercase transition-colors duration-300 sm:min-w-[11rem] ${
+                    enFoco
+                      ? "text-bone border-bone"
+                      : "text-graphite border-hairline hover:text-bone hover:border-dim"
+                  }`}
+                >
+                  {m.marca} {m.nombre}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* En celular las flechas bajan acá, junto al contador. */}
