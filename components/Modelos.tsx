@@ -8,12 +8,7 @@ import {
   type PointerEvent,
 } from "react";
 import Image from "next/image";
-import {
-  ArrowRight,
-  CaretLeft,
-  CaretRight,
-  EnvelopeSimple,
-} from "@phosphor-icons/react";
+import { ArrowRight, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import { MODELOS } from "@/lib/modelos";
@@ -286,29 +281,7 @@ export default function Modelos() {
           <Hexagono lado="der" onClick={() => ir(activo + 1)} />
         </div>
 
-        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a
-            href="#stock"
-            className="type-condensed bg-brass text-ink hover:bg-bone group inline-flex h-12 items-center justify-center gap-4 px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
-          >
-            Explorar el modelo
-            <ArrowRight
-              size={18}
-              weight="regular"
-              className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
-            />
-          </a>
-
-          <a
-            href="#reservar"
-            className="type-condensed text-bone border-bone/60 hover:bg-bone hover:text-ink hover:border-bone inline-flex h-12 items-center justify-center gap-4 border px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
-          >
-            Solicitar información
-            <EnvelopeSimple size={20} weight="regular" />
-          </a>
-        </div>
-
-        <p className="text-graphite mt-8 max-w-[1040px] text-xs leading-relaxed">
+        <p className="text-graphite mt-10 max-w-[1040px] text-xs leading-relaxed">
           Imágenes ilustrativas. Las unidades están sujetas a disponibilidad;
           precio, historial y estado se informan por nuestros asesores, con el
           informe de los 180 puntos de control firmado.
