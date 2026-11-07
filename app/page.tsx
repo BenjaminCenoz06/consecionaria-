@@ -48,7 +48,9 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main id="contenido" className="flex-1">
+      {/* `relative z-10` + fondo sólido: es la cortina que tapa al footer
+          (sticky, z-0) hasta que se llega al final. Ver Footer.tsx. */}
+      <main id="contenido" className="bg-ink relative z-10 flex-1">
         <Hero />
         <Modelos />
         <Ubicacion />

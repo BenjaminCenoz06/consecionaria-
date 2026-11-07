@@ -135,6 +135,86 @@
 }
 
 /* ============================================================
+   FOOTER EN CORTINA
+   Dos efectos juntos, tomados del footer de psg.fr:
+
+   1. Cortina. El footer queda pegado al borde inferior de la pantalla
+      y por debajo de todo (z-index 0); el <main> lleva z-index 10 y
+      fondo sólido, así que lo tapa. Al llegar al final de la página el
+      contenido se desliza hacia arriba y descubre el footer, que no se
+      mueve. Sólo en pantallas de 768px o más y 720px o más de alto: si
+      el footer no entra entero en la pantalla, no se pega.
+
+   2. Barrido del lema. Cada palabra tiene encima un panel del color del
+      fondo que cruza de izquierda a derecha. Justo cuando lo cubre por
+      completo (50%) la palabra pasa de invisible a visible, y cuando el
+      panel se va la palabra termina de entrar deslizándose 50px. Curva
+      casi de "pared": arranca y frena fuerte. Cada palabra sale 100ms
+      después de la anterior.
+   ============================================================ */
+
+@keyframes cortina-barrido {
+  0% {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(101%);
+  }
+}
+
+@keyframes cortina-palabra {
+  0%,
+  50% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  51% {
+    opacity: 1;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@utility cortina {
+  position: relative;
+  z-index: 0;
+
+  @media (min-width: 768px) and (min-height: 720px) {
+    position: sticky;
+    bottom: 0;
+  }
+}
+
+/* `both` y no `forwards`: mientras corre el retardo de cada palabra tiene
+   que mantenerse el primer cuadro (invisible), si no asoma entera un
+   instante antes de que le toque. */
+@utility barrido {
+  animation: cortina-barrido 0.8s cubic-bezier(0.9, 0, 0.1, 1)
+    var(--retardo, 0s) both;
+}
+
+@utility palabra-entra {
+  animation: cortina-palabra 0.8s cubic-bezier(0.9, 0, 0.1, 1)
+    var(--retardo, 0s) both;
+}
+
+/* Sin JavaScript nadie dispara el barrido: el lema se muestra entero. */
+@media (scripting: none) {
+  .cortina-palabra {
+    opacity: 1 !important;
+  }
+}
+
+/* ============================================================
    ACCESIBILIDAD
    Todo el movimiento se apaga. Lo que queda es opacidad.
    ============================================================ */
@@ -144,6 +224,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
