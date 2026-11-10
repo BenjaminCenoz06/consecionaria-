@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import Container from "./Container";
+import Plano3D from "./Plano3D";
 
 const TEXTO =
   "Cada unidad pasa 180 puntos de control. Si uno solo falla, no entra al showroom.";
@@ -27,20 +28,22 @@ export default function Tagline() {
   return (
     <section className="bg-ink py-24 lg:py-32">
       <Container>
-        <p
-          ref={referencia}
-          className="type-condensed text-bone max-w-[980px] text-4xl leading-[1.05] font-bold uppercase md:text-5xl lg:text-6xl"
-        >
-          {palabras.map((palabra, i) => (
-            <Palabra
-              key={`${palabra}-${i}`}
-              progreso={scrollYProgress}
-              rango={[i / palabras.length, (i + 1) / palabras.length]}
-            >
-              {palabra}
-            </Palabra>
-          ))}
-        </p>
+        <Plano3D inclinacion={9}>
+          <p
+            ref={referencia}
+            className="type-condensed text-bone max-w-[980px] text-4xl leading-[1.05] font-bold uppercase md:text-5xl lg:text-6xl"
+          >
+            {palabras.map((palabra, i) => (
+              <Palabra
+                key={`${palabra}-${i}`}
+                progreso={scrollYProgress}
+                rango={[i / palabras.length, (i + 1) / palabras.length]}
+              >
+                {palabra}
+              </Palabra>
+            ))}
+          </p>
+        </Plano3D>
       </Container>
     </section>
   );

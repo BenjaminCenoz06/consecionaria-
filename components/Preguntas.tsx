@@ -1,6 +1,7 @@
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import Plano3D from "./Plano3D";
 
 const PREGUNTAS = [
   {
@@ -53,6 +54,7 @@ export default function Preguntas() {
           </Reveal>
 
           <Reveal delay={0.08}>
+            <Plano3D inclinacion={8}>
             <dl className="border-ash border-t">
               {PREGUNTAS.map((item) => (
                 <details
@@ -77,6 +79,7 @@ export default function Preguntas() {
                 </details>
               ))}
             </dl>
+            </Plano3D>
           </Reveal>
         </div>
       </Container>

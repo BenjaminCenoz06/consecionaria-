@@ -32,14 +32,31 @@ export default function Reveal({
       /* El desenfoque es lo que separa un "aparece" de un "entra en
          foco". Son 6px, no 20: a partir de ahí se lee como pantalla
          sucia y el texto se vuelve ilegible mientras dura. */
+      /* Entra en perspectiva: arranca echado hacia atrás y se pone de
+         pie. 14° y 60px de fondo bastan; más y el texto se deforma
+         mientras se lee. `transformPerspective` va en el propio
+         elemento para que no dependa de un padre con `perspective`. */
+      style={{ transformPerspective: 1200, transformOrigin: "50% 100%" }}
       initial={
         sinMovimiento
           ? { opacity: 0 }
-          : { opacity: 0, y: 32, filter: "blur(6px)" }
+          : {
+              opacity: 0,
+              y: 40,
+              z: -60,
+              rotateX: 14,
+              filter: "blur(6px)",
+            }
       }
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        z: 0,
+        rotateX: 0,
+        filter: "blur(0px)",
+      }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.7, delay, ease: CURVA }}
+      transition={{ duration: 0.9, delay, ease: CURVA }}
     >
       {children}
     </Etiqueta>

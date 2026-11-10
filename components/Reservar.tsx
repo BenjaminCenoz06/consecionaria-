@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import { CheckCircle } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import Tilt3D from "./Tilt3D";
+import Plano3D from "./Plano3D";
 import { VEHICULOS } from "@/lib/vehiculos";
 
 type Clave = "nombre" | "email" | "telefono";
@@ -99,8 +101,18 @@ export default function Reservar() {
           </Reveal>
 
           <Reveal delay={0.08}>
+            <Plano3D inclinacion={8}>
+            {/* Panel flotante: el formulario se apoya sobre el negro con
+                un borde de luz arriba y sombra profunda abajo. Giro
+                mínimo (3°): es un formulario, tiene que quedarse quieto
+                para poder escribir. */}
+            <Tilt3D grados={3} escala={1.005} brillo={false} className="rounded-sm">
+            <div
+              className="bg-surface border-hairline rounded-sm border p-6 shadow-[inset_0_1px_0_rgb(255_255_255/0.07),0_30px_60px_-24px_rgb(0_0_0/0.9)] md:p-10"
+              style={{ transformStyle: "preserve-3d" }}
+            >
             {estado === "listo" ? (
-              <div role="status" className="border-brass/40 flex h-full flex-col justify-center border p-10">
+              <div role="status" className="flex h-full flex-col justify-center">
                 <CheckCircle size={32} weight="light" className="text-brass" aria-hidden="true" />
                 <p className="type-condensed text-bone mt-5 text-3xl font-bold uppercase">
                   Listo, {nombreEnviado}
@@ -143,6 +155,9 @@ export default function Reservar() {
                 </p>
               </form>
             )}
+            </div>
+            </Tilt3D>
+            </Plano3D>
           </Reveal>
         </div>
       </Container>
