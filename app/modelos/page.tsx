@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PaginaBase from "@/components/PaginaBase";
-import IndiceModelos from "@/components/IndiceModelos";
+import CatalogoAutos from "@/components/CatalogoAutos";
 
 export const metadata: Metadata = {
   title: "Modelos",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <PaginaBase>
-      <IndiceModelos />
+      <CatalogoAutos />
     </PaginaBase>
   );
 }

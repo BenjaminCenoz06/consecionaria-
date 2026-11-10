@@ -6,21 +6,16 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 import TarjetaImagen from "./TarjetaImagen";
-import { MODELOS } from "@/lib/modelos";
+import { AUTOS, formatoUSD } from "@/lib/catalogo";
 import { useIdioma } from "@/lib/idioma";
-import {
-  CATEGORIAS,
-  COMBUSTIBLE,
-  paginasDe,
-  type Texto,
-} from "@/lib/sitio";
+import { CATEGORIAS, paginasDe, type Texto } from "@/lib/sitio";
 
 /** La curva del sitio. El panel y las tarjetas usan la misma. */
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
 const T = (es: string, en: string): Texto => ({ es, en });
 
-const BASE_MODELO = (id: string) => MODELOS.find((m) => m.id === id) ?? MODELOS[0];
+const BASE_MODELO = (id: string) => AUTOS.find((m) => m.id === id) ?? AUTOS[0];
 
 /** Enlaces que se suman a los de las páginas de cada categoría. */
 const EXTRAS: Record<string, { etiqueta: Texto; href: string }[]> = {
@@ -50,7 +45,7 @@ export default function MenuPanel({
   onCerrar: () => void;
 }) {
   const sinMovimiento = useReducedMotion();
-  const { l, t } = useIdioma();
+  const { idioma, l, t } = useIdioma();
   const [activo, setActivo] = useState(CATEGORIAS[0].id);
   /* En pantallas chicas es un "drill-down": lista → detalle. */
   const [detalleMovil, setDetalleMovil] = useState(false);
@@ -262,7 +257,7 @@ export default function MenuPanel({
                           de la referencia. */}
                       {categoria.id === "modelos" && (
                         <ul className="mt-2 flex flex-col gap-7">
-                          {MODELOS.map((m, i) => (
+                          {AUTOS.map((m, i) => (
                             <motion.li
                               key={m.id}
                               {...entrada(0.06 + Math.min(i, 6) * 0.05, 22)}
@@ -272,8 +267,13 @@ export default function MenuPanel({
                                 onClick={onCerrar}
                                 className="group block"
                               >
-                                <p className="type-normal text-[1.1rem] font-medium">
-                                  {m.marca} {m.nombre}
+                                <p className="type-normal flex items-baseline justify-between gap-3 text-[1.1rem] font-medium">
+                                  <span>
+                                    {m.marca} {m.nombre}
+                                  </span>
+                                  <span className="text-sm font-normal text-[#6b6b72]">
+                                    {formatoUSD(m.precio, idioma)}
+                                  </span>
                                 </p>
                                 <span className="relative mt-2 block h-[104px] w-full max-w-[250px]">
                                   <Image
@@ -287,7 +287,7 @@ export default function MenuPanel({
                                   />
                                 </span>
                                 <span className="mt-2 flex flex-wrap gap-2">
-                                  {(COMBUSTIBLE[m.id] ?? []).map((e) => (
+                                  {m.combustible.map((e) => (
                                     <span
                                       key={e}
                                       className="type-normal rounded-full bg-white px-3 py-1 text-[11px] font-medium"

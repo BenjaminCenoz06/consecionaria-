@@ -6,9 +6,9 @@ import EncabezadoPagina from "./EncabezadoPagina";
 import BandaCta from "./BandaCta";
 import TarjetaImagen from "./TarjetaImagen";
 import ZonaClara from "./ZonaClara";
-import { MODELOS } from "@/lib/modelos";
+import { AUTOS, formatoUSD } from "@/lib/catalogo";
 import { useIdioma } from "@/lib/idioma";
-import { COMBUSTIBLE, categoriaPorId, paginasDe } from "@/lib/sitio";
+import { categoriaPorId, paginasDe } from "@/lib/sitio";
 
 /**
  * Portada de una categoría del menú (Asesoramiento y compra, Servicios,
@@ -16,7 +16,7 @@ import { COMBUSTIBLE, categoriaPorId, paginasDe } from "@/lib/sitio";
  * tarjetas de imagen. En "Eléctricos e híbridos" van primero los autos.
  */
 export default function IndiceCategoria({ categoriaId }: { categoriaId: string }) {
-  const { l, t } = useIdioma();
+  const { idioma, l, t } = useIdioma();
   const categoria = categoriaPorId(categoriaId);
   if (!categoria) return null;
 
@@ -24,20 +24,20 @@ export default function IndiceCategoria({ categoriaId }: { categoriaId: string }
 
   const autos =
     categoria.id === "electricos-hibridos"
-      ? MODELOS.filter((m) =>
-          (COMBUSTIBLE[m.id] ?? []).some((c) => c === "Eléctrico" || c === "Híbrido"),
+      ? AUTOS.filter((m) =>
+          m.combustible.some((c) => c === "Eléctrico" || c === "Híbrido"),
         ).map((m) => ({
           href: `/modelos/${m.id}`,
           titulo: `${m.marca} ${m.nombre}`,
-          subtitulo: t(m.lema),
+          subtitulo: formatoUSD(m.precio, idioma),
           imagen: m.foto,
           alt: t(m.alt),
-          etiquetas: COMBUSTIBLE[m.id],
+          etiquetas: m.combustible,
         }))
       : [];
 
   const paginasTarjetas = paginas.map((p) => {
-    const auto = MODELOS.find((m) => m.id === p.auto) ?? MODELOS[0];
+    const auto = AUTOS.find((m) => m.id === p.auto) ?? AUTOS[0];
     return {
       href: `/${p.slug}`,
       titulo: l(p.nombre),

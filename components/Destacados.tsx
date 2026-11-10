@@ -11,7 +11,9 @@ import { SteeringWheel, WhatsappLogo } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import Link from "next/link";
 import { DESTACADOS } from "@/lib/destacados";
+import { autoPorId, formatoUSD } from "@/lib/catalogo";
 import { useIdioma } from "@/lib/idioma";
 
 const WHATSAPP = "https://wa.me/5491150000000";
@@ -32,7 +34,7 @@ export default function Destacados() {
   const barra = useRef<HTMLDivElement>(null);
   const pestanas = useRef<(HTMLButtonElement | null)[]>([]);
   const total = DESTACADOS.length;
-  const { t } = useIdioma();
+  const { idioma, t } = useIdioma();
 
   /* En pantallas angostas las pestañas no entran: se desplazan solas
      para dejar la activa centrada. Se mueve el contenedor, no la página. */
@@ -138,6 +140,15 @@ export default function Destacados() {
                       {d.nombre}
                     </p>
 
+                    {autoPorId(d.id) && (
+                      <p className="type-normal text-tinta mt-5 text-2xl font-medium">
+                        {formatoUSD(autoPorId(d.id)!.precio, idioma)}
+                        <span className="text-graphite ml-3 text-sm font-normal">
+                          {t("Precio final publicado")}
+                        </span>
+                      </p>
+                    )}
+
                     <div className="mt-8 flex flex-wrap gap-3">
                       <a
                         href="#reservar"
@@ -161,6 +172,13 @@ export default function Destacados() {
                           {t(" (se abre en una pestaña nueva)")}
                         </span>
                       </a>
+
+                      <Link
+                        href={`/modelos/${d.id}`}
+                        className="type-condensed text-tinta border-tinta/60 hover:bg-tinta hover:text-lienzo hover:border-tinta inline-flex h-14 items-center justify-center gap-5 border px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                      >
+                        {t("Ver ficha completa")}
+                      </Link>
                     </div>
                   </div>
                 );
