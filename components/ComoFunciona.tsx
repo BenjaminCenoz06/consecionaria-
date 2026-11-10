@@ -10,19 +10,19 @@ const PASOS = [
     n: "01",
     titulo: "Elegís la unidad",
     texto:
-      "Todo el stock está online con el informe de 180 puntos y el historial de service adjuntos. Sin turno previo, sin dejar tus datos para ver un precio.",
+      "Mirá el catálogo y consultanos por la que te gustó. Te respondemos por WhatsApp, sin vueltas.",
   },
   {
     n: "02",
-    titulo: "La probás 40 minutos",
+    titulo: "Coordinamos tu visita",
     texto:
-      "Te damos la llave y te vas solo. Ruta, ciudad, el recorrido que quieras. Nadie va de acompañante diciéndote lo bien que anda.",
+      "Vení a La Cumbre a ver el auto y probarlo con calma, sin compromiso.",
   },
   {
     n: "03",
-    titulo: "Te la llevás en 48 horas",
+    titulo: "Te asesoramos",
     texto:
-      "Transferencia, verificación policial y patente nueva los hacemos nosotros. El precio publicado ya los incluye.",
+      "Con financiación exclusiva y ayuda con la documentación, para que salgas manejando.",
   },
 ];
 

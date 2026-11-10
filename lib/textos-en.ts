@@ -12,7 +12,7 @@ export const EN: Record<string, string> = {
   "Abrir menú": "Open menu",
   "Cerrar menú": "Close menu",
   "Menú principal": "Main menu",
-  "Vértice, inicio": "Vértice, home",
+  "Bárcena, inicio": "Bárcena, home",
   "Idioma": "Language",
   "Elegir idioma": "Choose language",
   "Saltar al contenido": "Skip to content",
@@ -33,16 +33,16 @@ export const EN: Record<string, string> = {
   "Te la llevás en 48 horas": "You drive it home in 48 hours",
   "Visitá el showroom.": "Visit the showroom.",
   "Núñez, Buenos Aires": "Núñez, Buenos Aires",
-  "Interior del showroom de Vértice Automotores":
-    "Inside the Vértice Automotores showroom",
+  "Interior del showroom de Bárcena Automotores":
+    "Inside the Bárcena Automotores showroom",
   "Cómo llegar y horarios": "Directions and opening hours",
   "¿Qué cubre la garantía?": "What does the warranty cover?",
   "Permuta y financiación": "Trade-in and financing",
   "¿Necesito turno?": "Do I need an appointment?",
 
   /* --- Hero --- */
-  "Vértice Automotores — autos seleccionados en Buenos Aires":
-    "Vértice Automotores — hand-picked cars in Buenos Aires",
+  "Bárcena Automotores — autos seleccionados en Buenos Aires":
+    "Bárcena Automotores — hand-picked cars in Buenos Aires",
   "Ir a los modelos": "Go to the models",
 
   /* --- Modelos --- */
@@ -269,6 +269,81 @@ export const EN: Record<string, string> = {
   "Año": "Year",
   "Clase": "Class",
 
+  /* --- Bárcena: textos nuevos --- */
+  "Bárcena Automotores — compra, venta y consignación de autos en La Cumbre, Córdoba":
+    "Bárcena Automotores — buying, selling and consigning cars in La Cumbre, Córdoba",
+  "Compra, venta y consignación. 0 km multimarcas y usados seleccionados, con financiación exclusiva.":
+    "Buying, selling and consignment. New multi-brand cars and hand-picked used cars, with exclusive financing.",
+  "Coordinamos tu visita": "We arrange your visit",
+  "Mirá el catálogo y consultanos por la que te gustó. Te respondemos por WhatsApp, sin vueltas.":
+    "Browse the catalogue and ask us about the one you liked. We reply on WhatsApp, no fuss.",
+  "Vení a La Cumbre a ver el auto y probarlo con calma, sin compromiso.":
+    "Come to La Cumbre to see the car and try it at your own pace, no strings attached.",
+  "Te asesoramos": "We advise you",
+  "Con financiación exclusiva y ayuda con la documentación, para que salgas manejando.":
+    "With exclusive financing and help with the paperwork, so you drive away happy.",
+  "¿Qué servicios ofrecen?": "What services do you offer?",
+  "Compra, venta y consignación de autos. Trabajamos 0 km multimarcas y usados seleccionados, con financiación exclusiva.":
+    "Buying, selling and consigning cars. We work with new multi-brand cars and hand-picked used cars, with exclusive financing.",
+  "Sí, tenemos financiación exclusiva. Consultanos por WhatsApp las opciones disponibles para el auto que te interesa.":
+    "Yes, we have exclusive financing. Ask us on WhatsApp about the options available for the car you're interested in.",
+  "¿Compran mi auto?": "Do you buy my car?",
+  "Sí. Evaluamos tu auto y te hacemos una propuesta. También podés entregarlo como parte de pago de tu próximo auto.":
+    "Yes. We assess your car and make you an offer. You can also hand it in as part payment for your next car.",
+  "¿Qué es la consignación?": "What is consignment?",
+  "Es una forma de vender tu auto sin ocuparte de todo: lo exhibimos y gestionamos la venta por vos. Consultanos las condiciones.":
+    "It's a way to sell your car without handling everything yourself: we showcase it and manage the sale for you. Ask us about the terms.",
+  "¿Trabajan con 0 km de todas las marcas?": "Do you work with new cars from every brand?",
+  "Trabajamos 0 km multimarcas. Escribinos con la marca y el modelo que buscás y te contamos qué hay disponible.":
+    "We work with new multi-brand cars. Message us with the brand and model you're after and we'll tell you what's available.",
+  "¿Dónde están?": "Where are you?",
+  "En La Cumbre, Córdoba. Estamos preparando un nuevo espacio y, mientras tanto, te atendemos por WhatsApp.":
+    "In La Cumbre, Córdoba. We're getting a new space ready and, in the meantime, we serve you on WhatsApp.",
+  "¿Hacen sorteos?": "Do you run prize draws?",
+  "Sí. Los anunciamos en nuestro Instagram, @barcena.automotores.":
+    "Yes. We announce them on our Instagram, @barcena.automotores.",
+  "¿Cómo reservo una visita?": "How do I book a visit?",
+  "Completá el formulario de esta página o escribinos por WhatsApp al 3548 40-9755 y coordinamos el día.":
+    "Fill in the form on this page or message us on WhatsApp at 3548 40-9755 and we'll arrange the day.",
+  "Dejanos tus datos y coordinamos tu visita para ver y probar el auto. Te respondemos por WhatsApp.":
+    "Leave us your details and we'll arrange your visit to see and try the car. We reply on WhatsApp.",
+  "Para probar un auto hace falta el registro de conducir vigente.":
+    "A valid driving licence is needed to test-drive a car.",
+  "Estamos en La Cumbre, Córdoba.": "We're in La Cumbre, Córdoba.",
+  "Abrimos WhatsApp con tus datos para coordinar el día y el horario de tu visita.":
+    "We open WhatsApp with your details to arrange the day and time of your visit.",
+  "Abrir WhatsApp": "Open WhatsApp",
+  "© Bárcena Automotores. Todos los derechos reservados.":
+    "© Bárcena Automotores. All rights reserved.",
+  "Imágenes ilustrativas. Las unidades están sujetas a disponibilidad; precio y estado se informan por nuestros asesores.":
+    "Images are illustrative. Cars are subject to availability; price and condition are provided by our advisors.",
+  "Precio de referencia": "Reference price",
+  "Vender mi auto": "Sell my car",
+  "Qué te ofrecemos": "What we offer",
+  "Asesoramiento personalizado": "Personal advice",
+  "Financiación exclusiva": "Exclusive financing",
+  "Te ayudamos con la documentación": "We help you with the paperwork",
+  "Tomamos tu usado como parte de pago": "We take your used car as part payment",
+  "Atención directa por WhatsApp": "Direct service on WhatsApp",
+  "Visita y prueba sin compromiso": "Visit and test drive with no obligation",
+  "Coordiná tu visita": "Arrange your visit",
+  "Escribinos o completá el formulario y te respondemos por WhatsApp.":
+    "Message us or fill in the form and we'll reply on WhatsApp.",
+  "Elegí cómo pagar": "Choose how to pay",
+  "Consultá la financiación exclusiva o entregá tu usado como parte de pago.":
+    "Ask about our exclusive financing or hand in your used car as part payment.",
+  "Salí manejando": "Drive away",
+  "Te asesoramos con la documentación para que te lleves el auto con tranquilidad.":
+    "We help you with the paperwork so you can take the car home with peace of mind.",
+  "Ubicación y contacto": "Location & contact",
+
+  "Para todos los días": "For every day",
+  "Aventura clásica": "Classic adventure",
+  "Volkswagen Polo gris visto de frente en tres cuartos":
+    "Grey Volkswagen Polo, front three-quarter view",
+  "Jeep CJ Renegade naranja clásico visto de perfil":
+    "Classic orange Jeep CJ Renegade, side view",
+
   /* --- Footer --- */
   "Catálogo": "Catalogue",
   "Empresa": "Company",
@@ -279,7 +354,7 @@ export const EN: Record<string, string> = {
   "se": "you",
   "maneja": "drive",
   "Acá se maneja": "Here you drive",
-  "© Vértice Automotores. CUIT 30-71000000-4.":
-    "© Vértice Automotores. Tax ID (CUIT) 30-71000000-4.",
+  "© Bárcena Automotores. CUIT 30-71000000-4.":
+    "© Bárcena Automotores. Tax ID (CUIT) 30-71000000-4.",
   "Agencia registrada DNRPA 0000.": "Dealership registered with DNRPA 0000.",
 };

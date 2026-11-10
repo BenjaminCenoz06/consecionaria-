@@ -16,7 +16,7 @@ import { DESTACADOS } from "@/lib/destacados";
 import { autoPorId, formatoUSD } from "@/lib/catalogo";
 import { useIdioma } from "@/lib/idioma";
 
-const WHATSAPP = "https://wa.me/5491150000000";
+const WHATSAPP = "https://wa.me/5493548409755";
 
 /**
  * Selección de la semana.
@@ -101,7 +101,7 @@ export default function Destacados() {
                     onClick={() => setActivo(i)}
                     className={`type-normal shrink-0 border-b px-5 pb-3 text-sm font-medium whitespace-nowrap uppercase transition-colors duration-300 ${
                       enFoco
-                        ? "text-tinta border-brass"
+                        ? "text-tinta border-rojo"
                         : "text-graphite hover:text-tinta border-linea hover:border-graphite"
                     }`}
                   >
@@ -144,7 +144,7 @@ export default function Destacados() {
                       <p className="type-normal text-tinta mt-5 text-2xl font-medium">
                         {formatoUSD(autoPorId(d.id)!.precio, idioma)}
                         <span className="text-graphite ml-3 text-sm font-normal">
-                          {t("Precio final publicado")}
+                          {t("Precio de referencia")}
                         </span>
                       </p>
                     )}
@@ -152,7 +152,7 @@ export default function Destacados() {
                     <div className="mt-8 flex flex-wrap gap-3">
                       <a
                         href="#reservar"
-                        className="type-condensed destello bg-brass text-ink hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                        className="type-condensed destello bg-rojo text-white hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
                         {t("Reservar prueba")}
                         <SteeringWheel size={20} weight="regular" />

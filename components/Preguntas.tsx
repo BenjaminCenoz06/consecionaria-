@@ -8,36 +8,36 @@ import { useIdioma } from "@/lib/idioma";
 
 const PREGUNTAS = [
   {
-    p: "¿Qué cubre la garantía de 12 meses?",
-    r: "Motor, caja y diferencial, sin límite de kilómetros. Se entrega por escrito el día de la transferencia y es válida en cualquier taller de la red, no sólo en el nuestro.",
-  },
-  {
-    p: "¿Puedo llevar el auto a mi mecánico antes de comprarlo?",
-    r: "Sí, y lo recomendamos. Coordinás el día, te damos la unidad y la llevás al taller que elijas dentro de AMBA. Lo único que pedimos es el DNI y una constancia de seguro.",
-  },
-  {
-    p: "¿Cómo funciona la permuta?",
-    r: "Traés tu auto al showroom, lo tasamos en el día y te damos la oferta por escrito con 7 días de validez. No estás obligado a comprar acá para recibir la tasación.",
+    p: "¿Qué servicios ofrecen?",
+    r: "Compra, venta y consignación de autos. Trabajamos 0 km multimarcas y usados seleccionados, con financiación exclusiva.",
   },
   {
     p: "¿Trabajan con financiación?",
-    r: "Sí. Prendarios con Banco Galicia, Santander y Macro, hasta 48 cuotas y hasta el 50% del valor. La preaprobación la gestionamos nosotros y tarda entre 48 y 72 horas.",
+    r: "Sí, tenemos financiación exclusiva. Consultanos por WhatsApp las opciones disponibles para el auto que te interesa.",
   },
   {
-    p: "¿El precio publicado es el precio final?",
-    r: "Sí. Incluye transferencia, verificación policial, informe de dominio y gestoría. Lo único que se suma es el patentamiento si la unidad es 0km.",
+    p: "¿Compran mi auto?",
+    r: "Sí. Evaluamos tu auto y te hacemos una propuesta. También podés entregarlo como parte de pago de tu próximo auto.",
   },
   {
-    p: "¿Envían unidades al interior del país?",
-    r: "Sí, con camión cerrado y seguro contratado. El costo depende del destino y se cotiza aparte. A Córdoba, Rosario y Mendoza el envío está bonificado.",
+    p: "¿Qué es la consignación?",
+    r: "Es una forma de vender tu auto sin ocuparte de todo: lo exhibimos y gestionamos la venta por vos. Consultanos las condiciones.",
   },
   {
-    p: "¿Qué pasa si el auto no era lo que esperaba?",
-    r: "Tenés 7 días corridos o 300 kilómetros, lo que ocurra primero, para devolverlo. Se reintegra el total menos los gastos de transferencia ya realizados.",
+    p: "¿Trabajan con 0 km de todas las marcas?",
+    r: "Trabajamos 0 km multimarcas. Escribinos con la marca y el modelo que buscás y te contamos qué hay disponible.",
   },
   {
-    p: "¿Necesito turno para ir al showroom?",
-    r: "Para recorrer el stock no. Para una prueba de manejo sí, porque preparamos la unidad y la documentación con anticipación.",
+    p: "¿Dónde están?",
+    r: "En La Cumbre, Córdoba. Estamos preparando un nuevo espacio y, mientras tanto, te atendemos por WhatsApp.",
+  },
+  {
+    p: "¿Hacen sorteos?",
+    r: "Sí. Los anunciamos en nuestro Instagram, @barcena.automotores.",
+  },
+  {
+    p: "¿Cómo reservo una visita?",
+    r: "Completá el formulario de esta página o escribinos por WhatsApp al 3548 40-9755 y coordinamos el día.",
   },
 ];
 

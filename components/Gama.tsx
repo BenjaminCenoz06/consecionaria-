@@ -8,7 +8,7 @@ import Tilt3D from "./Tilt3D";
 import { GAMA } from "@/lib/gama";
 import { useIdioma } from "@/lib/idioma";
 
-const WHATSAPP = "https://wa.me/5491150000000";
+const WHATSAPP = "https://wa.me/5493548409755";
 
 /**
  * Grilla grande de la gama.
@@ -57,7 +57,7 @@ export default function Gama() {
                   className="group relative flex aspect-4/3 flex-col rounded-2xl [transform-style:preserve-3d] sm:aspect-square lg:aspect-4/3"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
-                  <div className="border-hairline group-hover:border-brass/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
+                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 bg-[radial-gradient(ellipse_78%_62%_at_50%_42%,#2e2e2e,#121212_74%)]"

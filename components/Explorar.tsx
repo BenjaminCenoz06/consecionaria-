@@ -8,7 +8,7 @@ import Tilt3D from "./Tilt3D";
 import { MODELOS } from "@/lib/modelos";
 import { useIdioma } from "@/lib/idioma";
 
-const WHATSAPP = "https://wa.me/5491150000000";
+const WHATSAPP = "https://wa.me/5493548409755";
 
 /**
  * Qué tres modelos van en la fila. Son ids de `lib/modelos.ts`: se
@@ -64,7 +64,7 @@ export default function Explorar() {
                   className="group relative flex aspect-3/2 flex-col justify-end rounded-2xl [transform-style:preserve-3d]"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
-                  <div className="border-hairline group-hover:border-brass/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
+                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
                     {/* Fondo de estudio: claro arriba del auto, oscuro
                         en los bordes. Es lo que le da volumen al recorte. */}
                     <div

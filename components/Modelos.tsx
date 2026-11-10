@@ -96,7 +96,7 @@ export default function Modelos() {
 
           <a
             href="#destacados"
-            className="group type-condensed text-bone border-bone/70 hover:border-brass hover:text-brass inline-flex items-center gap-4 border-b pt-1 pr-1 pb-3 text-sm font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[17rem] sm:justify-between"
+            className="group type-condensed text-bone border-bone/70 hover:border-rojo hover:text-rojo inline-flex items-center gap-4 border-b pt-1 pr-1 pb-3 text-sm font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[17rem] sm:justify-between"
           >
             <span>
               {t("Descubrir")}
@@ -142,7 +142,7 @@ export default function Modelos() {
                   }`}
                 >
                   <p className="type-normal text-bone -skew-x-12 text-xl font-extrabold tracking-[0.16em] uppercase md:text-3xl">
-                    {m.marca} <span className="text-brass">{m.nombre}</span>
+                    {m.marca} <span className="text-rojo">{m.nombre}</span>
                   </p>
 
                   {/* La línea de tres tramos de la referencia, en
@@ -151,9 +151,9 @@ export default function Modelos() {
                     aria-hidden="true"
                     className="mt-2.5 flex h-[3px] w-full max-w-[240px]"
                   >
-                    <i className="bg-brass flex-1" />
+                    <i className="bg-rojo flex-1" />
                     <i className="bg-bone/80 flex-1" />
-                    <i className="bg-brass/45 flex-1" />
+                    <i className="bg-rojo/45 flex-1" />
                   </span>
 
                   <p className="display-tight mt-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-[4rem]">
@@ -177,7 +177,7 @@ export default function Modelos() {
         {/* Resplandor cálido en el piso, detrás del auto. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-10 h-3/4 bg-[radial-gradient(ellipse_42%_55%_at_50%_100%,rgba(194,160,91,0.16),transparent_72%)]"
+          className="pointer-events-none absolute inset-x-0 bottom-10 h-3/4 bg-[radial-gradient(ellipse_42%_55%_at_50%_100%,rgba(216,31,38,0.16),transparent_72%)]"
         />
 
         <div className="relative overflow-hidden pb-14 [--g:clamp(1.25rem,5vw,3.5rem)] [--w:min(720px,78vw)] 2xl:[--w:min(860px,50vw)]">
@@ -296,7 +296,7 @@ export default function Modelos() {
 
         <p className="text-graphite mt-10 max-w-[1040px] text-xs leading-relaxed">
           {t(
-            "Imágenes ilustrativas. Las unidades están sujetas a disponibilidad; precio, historial y estado se informan por nuestros asesores, con el informe de los 180 puntos de control firmado.",
+            "Imágenes ilustrativas. Las unidades están sujetas a disponibilidad; precio y estado se informan por nuestros asesores.",
           )}
         </p>
 
@@ -329,7 +329,7 @@ function Hexagono({
       aria-label={
         lado === "izq" ? t("Modelo anterior") : t("Modelo siguiente")
       }
-      className={`group text-bone/70 hover:text-brass h-14 w-[50px] items-center justify-center transition-colors duration-300 active:scale-95 ${className}`}
+      className={`group text-bone/70 hover:text-rojo h-14 w-[50px] items-center justify-center transition-colors duration-300 active:scale-95 ${className}`}
     >
       <svg
         viewBox="0 0 50 56"

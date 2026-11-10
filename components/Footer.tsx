@@ -11,7 +11,7 @@ const COLUMNAS = [
     enlaces: [
       { href: "/modelos", texto: "Modelos" },
       { href: "/#reservar", texto: "Reservar prueba" },
-      { href: "/experiencia/showroom", texto: "Showroom" },
+      { href: "/concesionario", texto: "Showroom" },
     ],
   },
   {
@@ -97,18 +97,18 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
               <div className="col-span-2 md:col-span-1">
                 <p className="type-condensed text-bone text-3xl font-bold uppercase">
-                  Vértice
+                  Bárcena
                 </p>
                 <address className="text-graphite mt-4 text-sm not-italic">
-                  Av. del Libertador 4874
+                  La Cumbre, Córdoba
                   <br />
-                  Núñez, Buenos Aires
+                  Argentina
                   <br />
                   <a
-                    href="tel:+541150000000"
+                    href="tel:+5493548409755"
                     className="hover:text-bone transition-colors duration-300"
                   >
-                    11 5000 0000
+                    3548 40-9755
                   </a>
                 </address>
               </div>
@@ -172,8 +172,15 @@ export default function Footer() {
             </p>
 
             <div className="border-hairline text-dim mt-10 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:justify-between">
-              <p>{t("© Vértice Automotores. CUIT 30-71000000-4.")}</p>
-              <p>{t("Agencia registrada DNRPA 0000.")}</p>
+              <p>{t("© Bárcena Automotores. Todos los derechos reservados.")}</p>
+              <a
+                href="https://www.instagram.com/barcena.automotores/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-bone transition-colors duration-300"
+              >
+                Instagram @barcena.automotores
+              </a>
             </div>
           </Container>
         </div>

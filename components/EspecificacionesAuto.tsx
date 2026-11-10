@@ -101,7 +101,7 @@ export default function EspecificacionesAuto({ auto }: { auto: Auto }) {
           <dl className="space-y-12 lg:col-span-5 lg:space-y-14">
             {cifras.map((c, i) => (
               <Reveal key={c.rotulo} delay={i * 0.1}>
-                <dd className="type-normal text-brass text-6xl leading-none font-light md:text-7xl">
+                <dd className="type-normal text-rojo text-6xl leading-none font-light md:text-7xl">
                   {c.grande}
                   <span className="ml-2 text-[0.38em] font-normal">{c.unidad}</span>
                 </dd>

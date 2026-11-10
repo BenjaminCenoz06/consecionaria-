@@ -10,7 +10,7 @@ export default function SaltarAlContenido() {
   return (
     <a
       href="#contenido"
-      className="bg-brass text-ink type-normal sr-only text-sm font-semibold uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-3 focus:py-2"
+      className="bg-rojo text-white type-normal sr-only text-sm font-semibold uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-3 focus:py-2"
     >
       {t("Saltar al contenido")}
     </a>

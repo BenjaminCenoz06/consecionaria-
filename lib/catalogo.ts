@@ -254,6 +254,47 @@ const FICHAS: Record<string, Ficha> = {
     ],
   },
 
+  "vw-polo": {
+    precio: 18500,
+    anio: 2019,
+    clase: T("Hatchback", "Hatchback"),
+    combustible: ["Nafta"],
+    aceleracion: 10.5,
+    kw: 81,
+    cv: 110,
+    vmax: 190,
+    tono: "#2a2d33",
+    descripcion: T(
+      "El hatchback para todos los días: ágil en la ciudad, cómodo en ruta y con la terminación de la marca. Un auto fácil de usar y de mantener.",
+      "The everyday hatchback: nimble in town, comfortable on the road and with the brand's build quality. An easy car to use and maintain.",
+    ),
+    rasgos: [
+      { titulo: T("Fácil de manejar", "Easy to drive"), texto: T("Tamaño ideal para ciudad y para estacionar sin vueltas.", "A size that's ideal for town and for easy parking.") },
+      { titulo: T("Buena terminación", "Solid build"), texto: T("Interior cuidado y pantalla de infoentretenimiento.", "A neat interior and an infotainment screen.") },
+      { titulo: T("Consumo razonable", "Reasonable economy"), texto: T("Un motor pensado para el uso diario.", "An engine designed for daily use.") },
+    ],
+  },
+  "jeep-cj-renegade": {
+    precio: 38000,
+    anio: 1983,
+    clase: T("Clásico 4x4", "Classic 4x4"),
+    combustible: ["Nafta", "Clásico"],
+    aceleracion: 14.0,
+    kw: 82,
+    cv: 112,
+    vmax: 130,
+    tono: "#3a2418",
+    descripcion: T(
+      "Un 4x4 clásico de los de verdad: carrocería abierta, tracción en las cuatro ruedas y una presencia que no pasa desapercibida. Ideal para caminos de sierra.",
+      "A proper classic 4x4: an open body, four-wheel drive and a presence that doesn't go unnoticed. Ideal for mountain tracks.",
+    ),
+    rasgos: [
+      { titulo: T("Tracción 4x4", "4x4 drive"), texto: T("Para salir del asfalto con confianza.", "To leave the tarmac with confidence.") },
+      { titulo: T("Carrocería abierta", "Open body"), texto: T("Manejar al aire libre, como antes.", "Driving in the open air, like it used to be.") },
+      { titulo: T("Pieza de colección", "Collector's piece"), texto: T("Un clásico con mucha demanda.", "A classic in high demand.") },
+    ],
+  },
+
   /* --- Selección de la semana --- */
   "mercedes-amg-gt-r": {
     precio: 168000,

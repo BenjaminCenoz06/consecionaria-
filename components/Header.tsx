@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 import MenuPanel from "./MenuPanel";
 import SelectorIdioma from "./SelectorIdioma";
@@ -91,12 +92,22 @@ export default function Header() {
           </span>
         </button>
 
+        {/* El logo es un PNG con fondo transparente: se apoya directo
+            sobre el velo de la barra, sin caja ni borde. */}
         <Link
           href="/"
-          className="type-condensed text-bone over-media pl-[0.34em] text-[1.45rem] font-bold tracking-[0.34em] uppercase transition-opacity duration-300 hover:opacity-80 lg:text-[1.75rem]"
-          aria-label={t("Vértice, inicio")}
+          className="ease-premium block transition-transform duration-500 hover:scale-[1.04]"
+          aria-label={t("Bárcena, inicio")}
         >
-          Vértice
+          <Image
+            src="/marca/logo-barcena.png"
+            alt="Bárcena Automotores"
+            width={1624}
+            height={440}
+            priority
+            quality={90}
+            className="h-9 w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)] lg:h-11"
+          />
         </Link>
 
         <SelectorIdioma />

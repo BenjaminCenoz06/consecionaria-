@@ -154,7 +154,7 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
               {formatoUSD(auto.precio, idioma)}
             </p>
             <p className="mt-1 text-sm text-[#6b6b72]">
-              {t("Precio final publicado")}
+              {t("Precio de referencia")}
             </p>
           </motion.div>
 

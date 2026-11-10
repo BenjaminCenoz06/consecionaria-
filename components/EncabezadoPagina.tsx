@@ -87,7 +87,7 @@ export default function EncabezadoPagina({
       ) : (
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_70%_at_75%_45%,rgba(194,160,91,0.13),transparent_70%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_60%_70%_at_75%_45%,rgba(216,31,38,0.13),transparent_70%)]"
         />
       )}
 
@@ -123,7 +123,7 @@ export default function EncabezadoPagina({
             {etiqueta && (
               <motion.p
                 {...entrar(0.12, 14)}
-                className="type-normal text-brass mt-8 text-xs font-semibold tracking-wider uppercase"
+                className="type-normal text-rojo mt-8 text-xs font-semibold tracking-wider uppercase"
               >
                 {etiqueta}
               </motion.p>

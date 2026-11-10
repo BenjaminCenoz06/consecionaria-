@@ -6,10 +6,7 @@ import Container from "./Container";
 import Reveal from "./Reveal";
 import Paralaje from "./Paralaje";
 import { useIdioma } from "@/lib/idioma";
-
-/** Misma dirección que el pie y el JSON-LD de la página. */
-const MAPA =
-  "https://www.google.com/maps/search/?api=1&query=Av.+del+Libertador+4874%2C+N%C3%BA%C3%B1ez%2C+Buenos+Aires";
+import { MAPA } from "@/lib/sitio";
 
 /**
  * Franja con foto: título grande y un solo botón.
@@ -59,7 +56,7 @@ export default function Ubicacion() {
             href={MAPA}
             target="_blank"
             rel="noopener noreferrer"
-            className="type-condensed destello text-ink hover:bg-brass group mt-6 inline-flex h-14 items-center gap-6 bg-white px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+            className="type-condensed destello text-ink hover:bg-rojo hover:text-white group mt-6 inline-flex h-14 items-center gap-6 bg-white px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
           >
             {t("Cómo llegar")}
             <ArrowRight

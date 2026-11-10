@@ -14,7 +14,7 @@ import type { Texto } from "./sitio";
 
 export type Idioma = "es" | "en";
 
-const CLAVE = "vertice-idioma";
+const CLAVE = "barcena-idioma";
 
 type Contexto = {
   idioma: Idioma;
@@ -33,8 +33,8 @@ const Ctx = createContext<Contexto>({
 });
 
 const TITULO: Record<Idioma, string> = {
-  es: "Vértice — Concesionaria de autos seleccionados en Buenos Aires",
-  en: "Vértice — Hand-picked car dealership in Buenos Aires",
+  es: "Bárcena Automotores — Compra, venta y consignación de autos en La Cumbre",
+  en: "Bárcena Automotores — Car buying, selling and consignment in La Cumbre",
 };
 
 /**

@@ -21,7 +21,7 @@
   --color-dim: #494949; /* texto apagado sobre oscuro */
   --color-near: #202020; /* texto sobre claro */
 
-  --color-brass: #c2a05b; /* ÚNICO acento */
+  --color-rojo: #d81f26; /* ÚNICO acento */
 
   /* --- Tipografía --------------------------------------------
      Una sola familia variable. El contraste sale del eje wdth. */
@@ -73,7 +73,7 @@
 @property --acento-tema {
   syntax: "<color>";
   inherits: true;
-  initial-value: #c2a05b;
+  initial-value: #d81f26;
 }
 
 /* `inline`: las utilidades usan `var(--lienzo)` directo. Sin eso Tailwind
@@ -192,7 +192,7 @@
     --tinta: #f5f5f5;
     --linea: #272727;
     --tarjeta: #181818;
-    --acento-tema: #c2a05b;
+    --acento-tema: #d81f26;
 
     background-color: var(--lienzo);
     transition:
@@ -213,7 +213,7 @@
     --tinta: #202020;
     --linea: #dcdcdc;
     --tarjeta: #ffffff;
-    --acento-tema: #8a6f33;
+    --acento-tema: #c5161c;
   }
 
   p {
@@ -222,13 +222,13 @@
 
   /* Un solo anillo de foco en todo el sitio. Requisito, no opción. */
   :focus-visible {
-    outline: 2px solid var(--color-brass);
+    outline: 2px solid var(--color-rojo);
     outline-offset: 3px;
   }
 
   ::selection {
-    background-color: var(--color-brass);
-    color: var(--color-ink);
+    background-color: var(--color-rojo);
+    color: #ffffff;
   }
 
   /* El scroll suave lo maneja Lenis; el nativo queda desactivado

@@ -17,34 +17,17 @@ import ZonaClara from "@/components/ZonaClara";
 const SCHEMA = {
   "@context": "https://schema.org",
   "@type": "AutoDealer",
-  name: "Vértice Automotores",
+  name: "Bárcena Automotores",
   description:
-    "Concesionaria de autos seleccionados en Buenos Aires. 180 puntos de control, garantía escrita de 12 meses y prueba de manejo sin vendedor.",
-  url: "https://vertice.com.ar",
-  telephone: "+54-11-5000-0000",
-  priceRange: "$$$",
+    "Concesionaria en La Cumbre, Córdoba: compra, venta y consignación de autos, 0 km multimarcas, usados seleccionados y financiación exclusiva.",
+  telephone: "+54-9-3548-409755",
+  sameAs: ["https://www.instagram.com/barcena.automotores/"],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Av. del Libertador 4874",
-    addressLocality: "Núñez",
-    addressRegion: "Ciudad Autónoma de Buenos Aires",
-    postalCode: "C1426",
+    addressLocality: "La Cumbre",
+    addressRegion: "Córdoba",
     addressCountry: "AR",
   },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "19:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "10:00",
-      closes: "14:00",
-    },
-  ],
 };
 
 export default function Home() {

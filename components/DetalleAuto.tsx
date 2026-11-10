@@ -18,18 +18,18 @@ import { WHATSAPP } from "@/lib/sitio";
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
 const INCLUYE = [
-  "Transferencia de dominio",
-  "Verificación policial",
-  "Informe de dominio y gestoría completa",
-  "Garantía escrita de 12 meses",
-  "Informe de 180 puntos de control",
-  "Devolución en 7 días o 300 km",
+  "Asesoramiento personalizado",
+  "Financiación exclusiva",
+  "Te ayudamos con la documentación",
+  "Tomamos tu usado como parte de pago",
+  "Atención directa por WhatsApp",
+  "Visita y prueba sin compromiso",
 ];
 
 const PASOS = [
-  { n: "01", t: "Reservá una prueba de 40 minutos", d: "Sin vendedor al lado y sin obligación de compra." },
-  { n: "02", t: "Cerrá al precio publicado", d: "Lo que ves es lo que pagás: los trámites ya están incluidos." },
-  { n: "03", t: "Llevátelo en 48 horas", d: "Nos ocupamos de la transferencia y la documentación." },
+  { n: "01", t: "Coordiná tu visita", d: "Escribinos o completá el formulario y te respondemos por WhatsApp." },
+  { n: "02", t: "Elegí cómo pagar", d: "Consultá la financiación exclusiva o entregá tu usado como parte de pago." },
+  { n: "03", t: "Salí manejando", d: "Te asesoramos con la documentación para que te lleves el auto con tranquilidad." },
 ];
 
 /** Barra de compra que acompaña el scroll: precio siempre a la vista,
@@ -68,7 +68,7 @@ function BarraCompra({ auto }: { auto: Auto }) {
             <p className="type-normal text-bone truncate text-sm font-medium">
               {auto.marca} {auto.nombre}
             </p>
-            <p className="text-brass type-normal text-base font-semibold">
+            <p className="text-rojo type-normal text-base font-semibold">
               {formatoUSD(auto.precio, idioma)}
             </p>
           </div>
@@ -115,7 +115,7 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
-              <p className="type-normal text-brass text-xs font-semibold tracking-wider uppercase">
+              <p className="type-normal text-rojo text-xs font-semibold tracking-wider uppercase">
                 {auto.marca} {auto.nombre}
               </p>
               <h2 className="display-tight text-bone mt-4 text-4xl font-bold md:text-6xl">
@@ -136,7 +136,7 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
                         style={{ transformStyle: "preserve-3d" }}
                       >
                         <p
-                          className="type-condensed text-brass text-5xl font-bold"
+                          className="type-condensed text-rojo text-5xl font-bold"
                           style={{ transform: "translateZ(30px)" }}
                         >
                           {String(i + 1).padStart(2, "0")}
@@ -168,10 +168,10 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
               <p className="type-normal mt-8 text-5xl font-light">
                 {formatoUSD(auto.precio, idioma)}
               </p>
-              <p className="mt-2 text-sm text-[#6b6b72]">{t("Precio final publicado")}</p>
+              <p className="mt-2 text-sm text-[#6b6b72]">{t("Precio de referencia")}</p>
 
               <p className="type-normal mt-10 text-sm font-semibold tracking-wide uppercase">
-                {t("Qué incluye el precio")}
+                {t("Qué te ofrecemos")}
               </p>
               <ul className="mt-4 space-y-3">
                 {INCLUYE.map((item) => (
@@ -214,8 +214,8 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
                   <Link href="/compra/financiacion" className={secundario}>
                     {t("Financiar")}
                   </Link>
-                  <Link href="/compra/permuta" className={secundario}>
-                    {t("Tasar mi auto")}
+                  <Link href="/compra/vende-tu-auto" className={secundario}>
+                    {t("Vender mi auto")}
                   </Link>
                 </div>
               </div>

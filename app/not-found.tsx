@@ -7,7 +7,7 @@ export default function NoEncontrada() {
   return (
     <main className="bg-ink flex min-h-svh flex-col justify-center">
       <Container>
-        <p className="type-normal text-brass text-xs font-semibold uppercase">
+        <p className="type-normal text-rojo text-xs font-semibold uppercase">
           Error 404
         </p>
         <h1 className="display-tight text-bone mt-4 text-5xl font-bold sm:text-7xl lg:text-8xl">

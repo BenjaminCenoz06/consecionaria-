@@ -18,36 +18,38 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const SITIO = "https://vertice.com.ar";
+/* El dominio definitivo todavía no está definido. Cuando se publique,
+   cargarlo en la variable de entorno NEXT_PUBLIC_SITE_URL. */
+const SITIO = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITIO),
   title: {
-    default: "Vértice — Concesionaria de autos seleccionados en Buenos Aires",
-    template: "%s | Vértice",
+    default: "Bárcena Automotores — Compra, venta y consignación de autos en La Cumbre",
+    template: "%s | Bárcena Automotores",
   },
   description:
-    "Seleccionamos 1 de cada 9 unidades que evaluamos. 180 puntos de control, garantía escrita de 12 meses y prueba de manejo de 40 minutos sin vendedor.",
+    "Bárcena Automotores, La Cumbre (Córdoba): compra, venta y consignación de autos. 0 km multimarcas, usados seleccionados y financiación exclusiva.",
   keywords: [
-    "concesionaria Buenos Aires",
-    "autos usados seleccionados",
-    "autos 0km",
-    "prueba de manejo",
-    "permuta de autos",
+    "concesionaria La Cumbre",
+    "autos usados Córdoba",
+    "autos 0km multimarcas",
+    "consignación de autos",
+    "financiación de autos",
   ],
   openGraph: {
     type: "website",
     locale: "es_AR",
     url: SITIO,
-    siteName: "Vértice",
-    title: "Vértice — Autos que se manejan antes de comprarse",
+    siteName: "Bárcena Automotores",
+    title: "Bárcena Automotores — Compra, venta y consignación",
     description:
-      "180 puntos de control, informe abierto y 40 minutos de prueba sin acompañamiento.",
+      "0 km multimarcas, usados seleccionados y financiación exclusiva en La Cumbre, Córdoba.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vértice — Autos que se manejan antes de comprarse",
-    description: "180 puntos de control. Precio cerrado. Garantía por escrito.",
+    title: "Bárcena Automotores — Compra, venta y consignación",
+    description: "0 km multimarcas, usados seleccionados y financiación exclusiva.",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: SITIO },

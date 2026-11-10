@@ -130,7 +130,7 @@ export default function MenuPanel({
             >
               <div className="mb-6 flex items-center justify-between px-3 lg:hidden">
                 <span className="type-condensed text-xl font-bold uppercase">
-                  Vértice
+                  Bárcena
                 </span>
                 <button
                   type="button"
@@ -231,7 +231,7 @@ export default function MenuPanel({
                         className="group flex items-center justify-between rounded-xl bg-[#e6e6ea] px-5 py-4 text-[1.05rem] font-medium transition-colors duration-300 hover:bg-[#dcdce1]"
                       >
                         <span className="type-normal">
-                          {t("Ubicación y horarios")}
+                          {t("Ubicación y contacto")}
                         </span>
                         <ArrowRight
                           size={18}
@@ -353,7 +353,7 @@ export default function MenuPanel({
                               <Link
                                 href={e.href}
                                 onClick={onCerrar}
-                                className="group flex items-center justify-between py-3 text-[1.05rem] font-medium transition-colors duration-300 hover:text-[#8a6f33]"
+                                className="group flex items-center justify-between py-3 text-[1.05rem] font-medium transition-colors duration-300 hover:text-[#c5161c]"
                               >
                                 <span className="type-normal">{l(e.etiqueta)}</span>
                                 <ArrowRight

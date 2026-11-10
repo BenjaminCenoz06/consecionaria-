@@ -21,7 +21,7 @@ export default function BandaCta({
 }) {
   const clase = (principal: boolean) =>
     principal
-      ? "type-condensed destello bg-brass text-ink hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+      ? "type-condensed destello bg-rojo text-white hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
       : "type-condensed text-tinta border-tinta/60 hover:bg-tinta hover:text-lienzo hover:border-tinta group inline-flex h-14 items-center justify-center gap-5 border px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300";
 
   return (

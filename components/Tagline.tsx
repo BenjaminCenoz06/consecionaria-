@@ -7,7 +7,7 @@ import Plano3D from "./Plano3D";
 import { useIdioma } from "@/lib/idioma";
 
 const TEXTO =
-  "Cada unidad pasa 180 puntos de control. Si uno solo falla, no entra al showroom.";
+  "Compra, venta y consignación. 0 km multimarcas y usados seleccionados, con financiación exclusiva.";
 
 /**
  * El momento tipográfico de la página.

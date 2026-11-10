@@ -46,3 +46,14 @@ Reemplazalos por fotos propias de las unidades cuando las tengas: el
 recorte tiene que quedar ajustado al borde del auto, con las ruedas
 apoyadas en el borde inferior de la imagen (la sección alinea todos los
 autos sobre esa línea).
+
+## Sumados para Bárcena Automotores
+
+| Archivo | Foto |
+|---|---|
+| `vw-polo.webp` | https://www.pexels.com/photo/16625624/ (patente tapada) |
+| `jeep-cj-renegade.webp` | https://www.pexels.com/photo/13674048/ |
+
+Recortadas con `scripts/recortar-auto.py` (rembg). Para sumar autos reales
+de la concesionaria: `python scripts/recortar-auto.py foto.jpg public/modelos/<id>.webp`,
+agregar la entrada en `lib/modelos.ts` y su ficha en `lib/catalogo.ts`.

@@ -10,10 +10,10 @@ import type { ReactNode } from "react";
  * visible. Sobre el fondo negro, antes del cambio de tema, es invisible.
  */
 const ENTRADA =
-  "radial-gradient(ellipse 55% 90% at 50% 0%, rgba(194,160,91,0.2), transparent 70%), linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)";
+  "radial-gradient(ellipse 55% 90% at 50% 0%, rgba(216,31,38,0.2), transparent 70%), linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)";
 
 const SALIDA =
-  "radial-gradient(ellipse 55% 90% at 50% 100%, rgba(194,160,91,0.2), transparent 70%), linear-gradient(to top, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)";
+  "radial-gradient(ellipse 55% 90% at 50% 100%, rgba(216,31,38,0.2), transparent 70%), linear-gradient(to top, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)";
 
 export default function ZonaClara({ children }: { children: ReactNode }) {
   return (

@@ -103,7 +103,7 @@ export default function Hero() {
       {/* El h1 existe para buscadores y lectores de pantalla.
           No se ve: el hero es imagen pura, como se pidió.         */}
       <h1 className="sr-only">
-        {t("Vértice Automotores — autos seleccionados en Buenos Aires")}
+        {t("Bárcena Automotores — compra, venta y consignación de autos en La Cumbre, Córdoba")}
       </h1>
 
       <motion.div
@@ -164,7 +164,7 @@ export default function Hero() {
       >
         <span
           aria-hidden="true"
-          className="bg-bone/70 group-hover:bg-brass animate-baja block h-8 w-px origin-top transition-colors duration-300"
+          className="bg-bone/70 group-hover:bg-rojo animate-baja block h-8 w-px origin-top transition-colors duration-300"
         />
       </motion.a>
     </section>
