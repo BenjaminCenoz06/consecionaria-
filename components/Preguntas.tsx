@@ -1,7 +1,10 @@
+"use client";
+
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Plano3D from "./Plano3D";
+import { useIdioma } from "@/lib/idioma";
 
 const PREGUNTAS = [
   {
@@ -39,17 +42,20 @@ const PREGUNTAS = [
 ];
 
 export default function Preguntas() {
+  const { t } = useIdioma();
+
   return (
     <section id="preguntas" className="py-20 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
           <Reveal>
             <h2 className="display-tight text-tinta text-4xl font-bold md:text-6xl">
-              Preguntas
+              {t("Preguntas")}
             </h2>
             <p className="text-graphite mt-6 max-w-[34ch] text-base">
-              Si falta la tuya, escribinos por WhatsApp y te contestamos sin
-              pedirte los datos primero.
+              {t(
+                "Si falta la tuya, escribinos por WhatsApp y te contestamos sin pedirte los datos primero.",
+              )}
             </p>
           </Reveal>
 
@@ -64,7 +70,7 @@ export default function Preguntas() {
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
                     <dt className="type-normal text-tinta text-lg font-semibold">
-                      {item.p}
+                      {t(item.p)}
                     </dt>
                     <Plus
                       size={20}
@@ -74,7 +80,7 @@ export default function Preguntas() {
                     />
                   </summary>
                   <dd className="text-graphite max-w-[62ch] pb-6 text-base">
-                    {item.r}
+                    {t(item.r)}
                   </dd>
                 </details>
               ))}

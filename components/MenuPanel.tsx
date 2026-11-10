@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 import { MODELOS } from "@/lib/modelos";
 import { DESTACADOS } from "@/lib/destacados";
+import { useIdioma } from "@/lib/idioma";
 
 /** La curva del sitio. El panel y las tarjetas usan la misma. */
 const CURVA = [0.22, 1, 0.36, 1] as const;
@@ -104,6 +105,7 @@ export default function MenuPanel({
   onCerrar: () => void;
 }) {
   const sinMovimiento = useReducedMotion();
+  const { t } = useIdioma();
   const [activo, setActivo] = useState(SECCIONES[0].id);
   /* En pantallas chicas es un "drill-down": lista → detalle. */
   const [detalleMovil, setDetalleMovil] = useState(false);
@@ -131,7 +133,7 @@ export default function MenuPanel({
           id="panel-menu"
           role="dialog"
           aria-modal="true"
-          aria-label="Menú principal"
+          aria-label={t("Menú principal")}
           className="fixed inset-0 z-[70] flex"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
@@ -141,7 +143,7 @@ export default function MenuPanel({
               clic afuera cierra, como en la referencia. */}
           <motion.button
             type="button"
-            aria-label="Cerrar menú"
+            aria-label={t("Cerrar menú")}
             onClick={onCerrar}
             tabIndex={-1}
             initial={{ opacity: 0 }}
@@ -173,14 +175,14 @@ export default function MenuPanel({
                   type="button"
                   ref={botonCerrar}
                   onClick={onCerrar}
-                  aria-label="Cerrar menú"
+                  aria-label={t("Cerrar menú")}
                   className="flex size-10 items-center justify-center rounded-full bg-black/5"
                 >
                   <X size={18} weight="bold" />
                 </button>
               </div>
 
-              <nav aria-label="Secciones">
+              <nav aria-label={t("Secciones")}>
                 <ul className="flex flex-col gap-1">
                   {SECCIONES.map((s, i) => {
                     const esActivo = s.id === activo;
@@ -208,7 +210,7 @@ export default function MenuPanel({
                             esActivo ? "bg-[#ececef]" : "hover:bg-[#f4f4f6]"
                           }`}
                         >
-                          <span className="type-normal">{s.etiqueta}</span>
+                          <span className="type-normal">{t(s.etiqueta)}</span>
                           <CaretRight
                             size={16}
                             weight="regular"
@@ -231,7 +233,7 @@ export default function MenuPanel({
                 transition={{ duration: 0.6, delay: 0.55, ease: CURVA }}
                 className="bg-near destello type-normal mt-auto rounded-full px-6 py-4 text-center text-sm font-semibold text-white uppercase"
               >
-                Reservar prueba
+                {t("Reservar prueba")}
               </motion.a>
             </div>
 
@@ -246,7 +248,7 @@ export default function MenuPanel({
                 onClick={() => setDetalleMovil(false)}
                 className="mb-6 flex items-center gap-2 text-sm font-medium lg:hidden"
               >
-                <CaretLeft size={16} /> Volver
+                <CaretLeft size={16} /> {t("Volver")}
               </button>
 
               <AnimatePresence mode="wait">
@@ -262,7 +264,7 @@ export default function MenuPanel({
                     onClick={onCerrar}
                     className="group flex items-center justify-between py-3 text-[1.05rem] font-medium"
                   >
-                    <span className="type-normal">Visión general</span>
+                    <span className="type-normal">{t("Visión general")}</span>
                     <ArrowRight
                       size={16}
                       className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
@@ -308,7 +310,7 @@ export default function MenuPanel({
                             onClick={onCerrar}
                             className="hover:text-brass block py-3 text-[1.05rem] font-medium transition-colors duration-300"
                           >
-                            {e.etiqueta}
+                            {t(e.etiqueta)}
                           </a>
                         </motion.li>
                       ))}
@@ -323,7 +325,7 @@ export default function MenuPanel({
             <button
               type="button"
               onClick={onCerrar}
-              aria-label="Cerrar menú"
+              aria-label={t("Cerrar menú")}
               className="absolute top-6 -right-16 hidden size-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition-colors duration-300 hover:bg-white/30 lg:flex"
             >
               <X size={18} weight="bold" />
@@ -348,6 +350,8 @@ function TarjetaMenu({
   tarjeta: Tarjeta;
   onClick: () => void;
 }) {
+  const { t } = useIdioma();
+
   return (
     <a
       href={tarjeta.href}
@@ -363,7 +367,7 @@ function TarjetaMenu({
 
       <Image
         src={tarjeta.imagen}
-        alt={tarjeta.alt}
+        alt={t(tarjeta.alt)}
         fill
         sizes="(min-width: 1024px) 460px, 92vw"
         quality={85}
@@ -383,10 +387,12 @@ function TarjetaMenu({
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
         <div className="min-w-0">
           <p className="type-normal text-bone text-[1.2rem] leading-tight font-medium">
-            {tarjeta.titulo}
+            {t(tarjeta.titulo)}
           </p>
           {tarjeta.subtitulo && (
-            <p className="text-bone/70 mt-0.5 text-sm">{tarjeta.subtitulo}</p>
+            <p className="text-bone/70 mt-0.5 text-sm">
+              {t(tarjeta.subtitulo)}
+            </p>
           )}
         </div>
 

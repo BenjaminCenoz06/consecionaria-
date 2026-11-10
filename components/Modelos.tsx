@@ -13,6 +13,7 @@ import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import { MODELOS } from "@/lib/modelos";
+import { useIdioma } from "@/lib/idioma";
 
 /** Cuánto hay que arrastrar para que cuente como un deslizamiento. */
 const UMBRAL_SWIPE = 48;
@@ -34,6 +35,7 @@ const PRECARGA = 2;
  */
 export default function Modelos() {
   const [activo, setActivo] = useState(0);
+  const { t } = useIdioma();
   const inicioX = useRef<number | null>(null);
   const pestanas = useRef<HTMLDivElement>(null);
   const total = MODELOS.length;
@@ -81,15 +83,15 @@ export default function Modelos() {
   return (
     <section
       id="modelos"
-      aria-roledescription="carrusel"
-      aria-label="Modelos"
+      aria-roledescription={t("carrusel")}
+      aria-label={t("Modelos")}
       onKeyDown={alTeclear}
       className="bg-ink relative overflow-hidden pt-12 pb-14 lg:pt-14 lg:pb-16"
     >
       <Container>
         <Reveal className="flex items-start justify-between gap-6">
           <h2 className="type-normal text-bone text-3xl font-bold uppercase md:text-4xl">
-            Modelos
+            {t("Modelos")}
           </h2>
 
           <a
@@ -97,8 +99,8 @@ export default function Modelos() {
             className="group type-condensed text-bone border-bone/70 hover:border-brass hover:text-brass inline-flex items-center gap-4 border-b pt-1 pr-1 pb-3 text-sm font-bold tracking-wide uppercase transition-colors duration-300 sm:min-w-[17rem] sm:justify-between"
           >
             <span>
-              Descubrir
-              <span className="hidden sm:inline"> todos los modelos</span>
+              {t("Descubrir")}
+              <span className="hidden sm:inline">{t(" todos los modelos")}</span>
             </span>
             <ArrowRight
               size={18}
@@ -155,7 +157,7 @@ export default function Modelos() {
                   </span>
 
                   <p className="display-tight mt-4 bg-gradient-to-b from-white to-white/50 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl lg:text-[4rem]">
-                    {m.lema}
+                    {t(m.lema)}
                   </p>
                 </div>
               );
@@ -211,7 +213,7 @@ export default function Modelos() {
                   >
                     <Image
                       src={m.foto}
-                      alt={m.alt}
+                      alt={t(m.alt)}
                       width={m.ancho}
                       height={m.alto}
                       sizes="(min-width: 1536px) 860px, (min-width: 1024px) 720px, 78vw"
@@ -253,7 +255,7 @@ export default function Modelos() {
           {/* `mx-auto w-max`: centrado si entran, desplazable si no. */}
           <div
             role="tablist"
-            aria-label="Elegir modelo"
+            aria-label={t("Elegir modelo")}
             className="mx-auto flex w-max gap-5 px-6"
           >
             {MODELOS.map((m, i) => {
@@ -293,14 +295,14 @@ export default function Modelos() {
         </div>
 
         <p className="text-graphite mt-10 max-w-[1040px] text-xs leading-relaxed">
-          Imágenes ilustrativas. Las unidades están sujetas a disponibilidad;
-          precio, historial y estado se informan por nuestros asesores, con el
-          informe de los 180 puntos de control firmado.
+          {t(
+            "Imágenes ilustrativas. Las unidades están sujetas a disponibilidad; precio, historial y estado se informan por nuestros asesores, con el informe de los 180 puntos de control firmado.",
+          )}
         </p>
 
         <p className="sr-only" aria-live="polite">
-          Modelo {activo + 1} de {total}: {actual.marca} {actual.nombre}.{" "}
-          {actual.lema}.
+          {t("Modelo")} {activo + 1} {t("de")} {total}: {actual.marca}{" "}
+          {actual.nombre}. {t(actual.lema)}.
         </p>
       </Container>
     </section>
@@ -317,13 +319,16 @@ function Hexagono({
   onClick: () => void;
   className?: string;
 }) {
+  const { t } = useIdioma();
   const Caret = lado === "izq" ? CaretLeft : CaretRight;
 
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={lado === "izq" ? "Modelo anterior" : "Modelo siguiente"}
+      aria-label={
+        lado === "izq" ? t("Modelo anterior") : t("Modelo siguiente")
+      }
       className={`group text-bone/70 hover:text-brass h-14 w-[50px] items-center justify-center transition-colors duration-300 active:scale-95 ${className}`}
     >
       <svg

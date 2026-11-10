@@ -1,6 +1,9 @@
+"use client";
+
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import { useIdioma } from "@/lib/idioma";
 
 const PASOS = [
   {
@@ -24,15 +27,17 @@ const PASOS = [
 ];
 
 export default function ComoFunciona() {
+  const { t } = useIdioma();
+
   return (
     <section id="como-funciona" className="py-20 lg:py-24">
       <Container>
         <Reveal>
           <p className="type-normal text-acento-tema text-xs font-semibold uppercase">
-            Tres pasos
+            {t("Tres pasos")}
           </p>
           <h2 className="display-tight text-tinta mt-3 max-w-[18ch] text-4xl font-bold md:text-6xl lg:text-7xl">
-            Cómo funciona
+            {t("Cómo funciona")}
           </h2>
         </Reveal>
 
@@ -61,13 +66,13 @@ export default function ComoFunciona() {
                     className="type-condensed text-tinta mt-4 text-2xl font-bold uppercase"
                     style={{ transform: "translateZ(40px)" }}
                   >
-                    {paso.titulo}
+                    {t(paso.titulo)}
                   </h3>
                   <p
                     className="text-graphite mt-3 max-w-[42ch] text-base"
                     style={{ transform: "translateZ(26px)" }}
                   >
-                    {paso.texto}
+                    {t(paso.texto)}
                   </p>
                 </div>
               </Tilt3D>

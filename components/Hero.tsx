@@ -7,6 +7,7 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
+import { useIdioma } from "@/lib/idioma";
 
 /* ============================================================
    HERO — sólo material. Sin tipografía encima.
@@ -35,6 +36,7 @@ const CORTE_CELULAR = "(max-width: 767px)";
 export default function Hero() {
   const video = useRef<HTMLVideoElement>(null);
   const seccion = useRef<HTMLElement>(null);
+  const { t } = useIdioma();
 
   /* Paralaje de salida. El material se acerca y se apaga mientras la
      página sube por encima, así el hero se despide en vez de cortarse.
@@ -101,7 +103,7 @@ export default function Hero() {
       {/* El h1 existe para buscadores y lectores de pantalla.
           No se ve: el hero es imagen pura, como se pidió.         */}
       <h1 className="sr-only">
-        Vértice Automotores — autos seleccionados en Buenos Aires
+        {t("Vértice Automotores — autos seleccionados en Buenos Aires")}
       </h1>
 
       <motion.div
@@ -156,7 +158,7 @@ export default function Hero() {
       {/* Señal de scroll. Sin texto: una línea que baja y vuelve.   */}
       <motion.a
         href="#modelos"
-        aria-label="Ir a los modelos"
+        aria-label={t("Ir a los modelos")}
         style={sinMovimientoSistema ? undefined : { opacity: senal }}
         className="group absolute bottom-8 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center"
       >

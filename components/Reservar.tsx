@@ -7,6 +7,7 @@ import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import Plano3D from "./Plano3D";
 import { VEHICULOS } from "@/lib/vehiculos";
+import { useIdioma } from "@/lib/idioma";
 
 type Clave = "nombre" | "email" | "telefono";
 type Errores = Partial<Record<Clave, string>>;
@@ -25,13 +26,15 @@ function Campo({
   etiqueta: string;
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
+  const { t } = useIdioma();
+
   return (
     <div>
       <label
         htmlFor={id}
         className="type-normal text-graphite block text-xs font-semibold uppercase"
       >
-        {etiqueta}
+        {t(etiqueta)}
       </label>
       <input
         id={id}
@@ -43,7 +46,7 @@ function Campo({
       />
       {error && (
         <p id={`err-${id}`} className="text-brass mt-2 text-sm">
-          {error}
+          {t(error)}
         </p>
       )}
     </div>
@@ -51,6 +54,7 @@ function Campo({
 }
 
 export default function Reservar() {
+  const { t } = useIdioma();
   const [errores, setErrores] = useState<Errores>({});
   const [estado, setEstado] = useState<"inicial" | "enviando" | "listo">("inicial");
   const [nombreEnviado, setNombreEnviado] = useState("");
@@ -85,18 +89,19 @@ export default function Reservar() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <h2 className="display-tight text-bone text-4xl font-bold md:text-6xl lg:text-7xl">
-              Reservá tu
+              {t("Reservá tu")}
               <br />
-              prueba
+              {t("prueba")}
             </h2>
             <p className="text-graphite mt-8 max-w-[44ch] text-lg">
-              40 minutos con la unidad, sin acompañamiento. Te confirmamos el
-              turno el mismo día.
+              {t(
+                "40 minutos con la unidad, sin acompañamiento. Te confirmamos el turno el mismo día.",
+              )}
             </p>
             <ul className="text-graphite border-hairline mt-10 space-y-3 border-t pt-8 text-sm">
-              <li>Sin costo y sin obligación de compra.</li>
-              <li>Hace falta registro vigente y DNI.</li>
-              <li>Se puede cancelar hasta 2 horas antes.</li>
+              <li>{t("Sin costo y sin obligación de compra.")}</li>
+              <li>{t("Hace falta registro vigente y DNI.")}</li>
+              <li>{t("Se puede cancelar hasta 2 horas antes.")}</li>
             </ul>
           </Reveal>
 
@@ -115,11 +120,12 @@ export default function Reservar() {
               <div role="status" className="flex h-full flex-col justify-center">
                 <CheckCircle size={32} weight="light" className="text-brass" aria-hidden="true" />
                 <p className="type-condensed text-bone mt-5 text-3xl font-bold uppercase">
-                  Listo, {nombreEnviado}
+                  {t("Listo,")} {nombreEnviado}
                 </p>
                 <p className="text-graphite mt-3 max-w-[40ch] text-base">
-                  Te llamamos dentro de las próximas 2 horas hábiles para cerrar
-                  el día y el horario.
+                  {t(
+                    "Te llamamos dentro de las próximas 2 horas hábiles para cerrar el día y el horario.",
+                  )}
                 </p>
               </div>
             ) : (
@@ -131,10 +137,10 @@ export default function Reservar() {
                 </div>
                 <div>
                   <label htmlFor="unidad" className="type-normal text-graphite block text-xs font-semibold uppercase">
-                    Unidad que querés probar
+                    {t("Unidad que querés probar")}
                   </label>
                   <select id="unidad" name="unidad" defaultValue="" className={CAMPO}>
-                    <option value="">Todavía no sé</option>
+                    <option value="">{t("Todavía no sé")}</option>
                     {VEHICULOS.map((v) => (
                       <option key={v.id} value={v.id}>
                         {v.marca} {v.modelo} {v.version} · {v.anio}
@@ -147,11 +153,11 @@ export default function Reservar() {
                   disabled={estado === "enviando"}
                   className="bg-bone text-ink type-normal destello w-full px-3 py-2 text-base font-semibold uppercase transition-transform duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
                 >
-                  {estado === "enviando" ? "Enviando…" : "Reservar prueba"}
+                  {estado === "enviando" ? t("Enviando…") : t("Reservar prueba")}
                 </button>
                 <p className="text-dim text-sm">
-                  Usamos tus datos sólo para coordinar el turno. Más en la{" "}
-                  <a href="/privacidad" className="text-graphite underline">política de privacidad</a>.
+                  {t("Usamos tus datos sólo para coordinar el turno. Más en la ")}
+                  <a href="/privacidad" className="text-graphite underline">{t("política de privacidad")}</a>.
                 </p>
               </form>
             )}

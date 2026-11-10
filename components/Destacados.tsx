@@ -12,6 +12,7 @@ import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import { DESTACADOS } from "@/lib/destacados";
+import { useIdioma } from "@/lib/idioma";
 
 const WHATSAPP = "https://wa.me/5491150000000";
 
@@ -31,6 +32,7 @@ export default function Destacados() {
   const barra = useRef<HTMLDivElement>(null);
   const pestanas = useRef<(HTMLButtonElement | null)[]>([]);
   const total = DESTACADOS.length;
+  const { t } = useIdioma();
 
   /* En pantallas angostas las pestañas no entran: se desplazan solas
      para dejar la activa centrada. Se mueve el contenedor, no la página. */
@@ -61,10 +63,10 @@ export default function Destacados() {
   return (
     <section
       id="destacados"
-      aria-label="Selección de la semana"
+      aria-label={t("Selección de la semana")}
       className="relative overflow-hidden py-14 lg:py-16"
     >
-      <h2 className="sr-only">Selección de la semana</h2>
+      <h2 className="sr-only">{t("Selección de la semana")}</h2>
 
       <Container>
         <Reveal>
@@ -76,7 +78,7 @@ export default function Destacados() {
           >
             <div
               role="tablist"
-              aria-label="Elegir auto de la selección"
+              aria-label={t("Elegir auto de la selección")}
               onKeyDown={alTeclear}
               className="mx-auto flex w-max gap-5 px-6"
             >
@@ -127,7 +129,7 @@ export default function Destacados() {
                     }`}
                   >
                     <p className="type-normal text-acento-tema text-xs font-semibold tracking-wider uppercase">
-                      Selección de la semana
+                      {t("Selección de la semana")}
                     </p>
                     <p className="type-normal text-tinta mt-3 text-lg font-semibold uppercase md:text-xl">
                       {d.marca}
@@ -141,23 +143,22 @@ export default function Destacados() {
                         href="#reservar"
                         className="type-condensed destello bg-brass text-ink hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
-                        Reservar prueba
+                        {t("Reservar prueba")}
                         <SteeringWheel size={20} weight="regular" />
                       </a>
 
                       <a
                         href={`${WHATSAPP}?text=${encodeURIComponent(
-                          `Hola, quiero información sobre el ${d.marca} ${d.nombre}.`,
+                          `${t("Hola, quiero información sobre el")} ${d.marca} ${d.nombre}.`,
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="type-condensed text-tinta border-tinta/60 hover:bg-tinta hover:text-lienzo hover:border-tinta inline-flex h-14 items-center justify-center gap-5 border px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
-                        Solicitar información
+                        {t("Solicitar información")}
                         <WhatsappLogo size={20} weight="regular" />
                         <span className="sr-only">
-                          {" "}
-                          (se abre en una pestaña nueva)
+                          {t(" (se abre en una pestaña nueva)")}
                         </span>
                       </a>
                     </div>
@@ -207,7 +208,7 @@ export default function Destacados() {
                       <div className="animate-flotar h-full w-full">
                         <Image
                           src={d.foto}
-                          alt={d.alt}
+                          alt={t(d.alt)}
                           fill
                           sizes="(min-width: 1024px) 58vw, 100vw"
                           quality={90}
@@ -224,9 +225,9 @@ export default function Destacados() {
         </Reveal>
 
         <p className="text-graphite mt-12 max-w-[1040px] text-xs leading-relaxed lg:mt-10">
-          La selección cambia cada semana y está sujeta a disponibilidad.
-          Imágenes ilustrativas: precio, historial y estado de cada unidad se
-          informan por nuestros asesores.
+          {t(
+            "La selección cambia cada semana y está sujeta a disponibilidad. Imágenes ilustrativas: precio, historial y estado de cada unidad se informan por nuestros asesores.",
+          )}
         </p>
       </Container>
     </section>

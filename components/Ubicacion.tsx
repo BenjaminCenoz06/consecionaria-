@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Paralaje from "./Paralaje";
+import { useIdioma } from "@/lib/idioma";
 
 /** Misma dirección que el pie y el JSON-LD de la página. */
 const MAPA =
@@ -17,6 +20,8 @@ const MAPA =
  * el sentido lo lleva el título.
  */
 export default function Ubicacion() {
+  const { t } = useIdioma();
+
   return (
     <section
       id="ubicacion"
@@ -47,7 +52,7 @@ export default function Ubicacion() {
             id="titulo-ubicacion"
             className="display-tight over-media text-bone text-4xl font-bold md:text-6xl"
           >
-            Visitá el showroom
+            {t("Visitá el showroom")}
           </h2>
 
           <a
@@ -56,13 +61,13 @@ export default function Ubicacion() {
             rel="noopener noreferrer"
             className="type-condensed destello text-ink hover:bg-brass group mt-6 inline-flex h-14 items-center gap-6 bg-white px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
           >
-            Cómo llegar
+            {t("Cómo llegar")}
             <ArrowRight
               size={18}
               weight="regular"
               className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
             />
-            <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            <span className="sr-only">{t(" (se abre en una pestaña nueva)")}</span>
           </a>
         </Reveal>
       </Container>

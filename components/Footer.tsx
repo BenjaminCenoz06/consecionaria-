@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Container from "./Container";
+import { useIdioma } from "@/lib/idioma";
 
 const COLUMNAS = [
   {
@@ -58,6 +59,7 @@ const ESCALONADO = 0.1;
 export default function Footer() {
   const marcador = useRef<HTMLSpanElement>(null);
   const [juega, setJuega] = useState(false);
+  const { t } = useIdioma();
 
   /* El marcador vive justo donde termina el `<main>`. Mientras el footer
      está pegado debajo del contenido no se lo puede observar a él (está
@@ -111,9 +113,9 @@ export default function Footer() {
               </div>
 
               {COLUMNAS.map((col) => (
-                <nav key={col.titulo} aria-label={col.titulo}>
+                <nav key={col.titulo} aria-label={t(col.titulo)}>
                   <h2 className="type-normal text-dim text-xs font-semibold uppercase">
-                    {col.titulo}
+                    {t(col.titulo)}
                   </h2>
                   <ul className="mt-4 space-y-2">
                     {col.enlaces.map((e) => (
@@ -122,7 +124,7 @@ export default function Footer() {
                           href={e.href}
                           className="text-graphite hover:text-bone text-sm transition-colors duration-300"
                         >
-                          {e.texto}
+                          {t(e.texto)}
                         </a>
                       </li>
                     ))}
@@ -136,7 +138,7 @@ export default function Footer() {
                 se sale de su caja, así el panel y el desplazamiento de
                 50px no se ven fuera de ella. */}
             <p
-              aria-label="Acá se maneja"
+              aria-label={t("Acá se maneja")}
               className="mt-12 flex items-end gap-[0.16em] text-[min(calc((100vw-3rem)/8.6),9.25rem)] leading-[0.9] uppercase lg:mt-14"
             >
               {LEMA.map((palabra, i) => {
@@ -155,7 +157,7 @@ export default function Footer() {
                         juega ? "palabra-entra" : "opacity-0"
                       }`}
                     >
-                      {palabra.texto}
+                      {t(palabra.texto)}
                     </span>
                     <span
                       style={retardo}
@@ -169,8 +171,8 @@ export default function Footer() {
             </p>
 
             <div className="border-hairline text-dim mt-10 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:justify-between">
-              <p>© Vértice Automotores. CUIT 30-71000000-4.</p>
-              <p>Agencia registrada DNRPA 0000.</p>
+              <p>{t("© Vértice Automotores. CUIT 30-71000000-4.")}</p>
+              <p>{t("Agencia registrada DNRPA 0000.")}</p>
             </div>
           </Container>
         </div>

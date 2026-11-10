@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import Container from "./Container";
 import Plano3D from "./Plano3D";
+import { useIdioma } from "@/lib/idioma";
 
 const TEXTO =
   "Cada unidad pasa 180 puntos de control. Si uno solo falla, no entra al showroom.";
@@ -23,7 +24,8 @@ export default function Tagline() {
     offset: ["start 0.85", "end 0.55"],
   });
 
-  const palabras = TEXTO.split(" ");
+  const { t } = useIdioma();
+  const palabras = t(TEXTO).split(" ");
 
   return (
     <section className="bg-ink py-24 lg:py-32">

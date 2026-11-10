@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import MenuPanel from "./MenuPanel";
+import SelectorIdioma from "./SelectorIdioma";
+import { useIdioma } from "@/lib/idioma";
 
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
   const [conFondo, setConFondo] = useState(false);
+  const { t } = useIdioma();
 
   /* Sobre el hero la barra es transparente: flota encima del video.
      Cuando el hero termina de pasar bajo la barra, toma un velo oscuro
@@ -66,7 +69,7 @@ export default function Header() {
           onClick={() => setAbierto((v) => !v)}
           aria-expanded={abierto}
           aria-controls="panel-menu"
-          aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+          aria-label={abierto ? t("Cerrar menú") : t("Abrir menú")}
           className="group flex h-10 items-center gap-3 justify-self-start"
         >
           {/* Las dos líneas se transforman en X, no se reemplazan. */}
@@ -83,24 +86,19 @@ export default function Header() {
             />
           </span>
           <span className="type-normal text-bone over-media text-sm font-semibold transition-opacity duration-300 group-hover:opacity-70">
-            Menú
+            {t("Menú")}
           </span>
         </button>
 
         <a
           href="#top"
           className="type-condensed text-bone over-media pl-[0.34em] text-[1.45rem] font-bold tracking-[0.34em] uppercase transition-opacity duration-300 hover:opacity-80 lg:text-[1.75rem]"
-          aria-label="Vértice, inicio"
+          aria-label={t("Vértice, inicio")}
         >
           Vértice
         </a>
 
-        <a
-          href="#reservar"
-          className="border-bone/70 text-bone over-media type-normal hover:bg-bone hover:text-ink hidden justify-self-end border px-4 py-2 text-xs font-semibold tracking-wide uppercase transition-colors duration-300 sm:inline-block"
-        >
-          Reservar prueba
-        </a>
+        <SelectorIdioma />
       </div>
 
       {/* Panel de navegación: lista de secciones + tarjetas con imagen. */}

@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import { GAMA } from "@/lib/gama";
+import { useIdioma } from "@/lib/idioma";
 
 const WHATSAPP = "https://wa.me/5491150000000";
 
@@ -23,6 +26,8 @@ const WHATSAPP = "https://wa.me/5491150000000";
  * `overflow-hidden` no aplaste el 3D del resto.
  */
 export default function Gama() {
+  const { t } = useIdioma();
+
   return (
     <section
       id="gama"
@@ -35,7 +40,7 @@ export default function Gama() {
             id="titulo-gama"
             className="display-tight text-tinta mx-auto max-w-[18ch] text-center text-4xl font-bold md:text-5xl lg:text-6xl"
           >
-            Tu próximo auto empieza acá.
+            {t("Tu próximo auto empieza acá.")}
           </h2>
         </Reveal>
 
@@ -45,7 +50,7 @@ export default function Gama() {
               <Tilt3D className="rounded-2xl" grados={7}>
                 <a
                   href={`${WHATSAPP}?text=${encodeURIComponent(
-                    `Hola, quiero información sobre el ${g.nombre}.`,
+                    `${t("Hola, quiero información sobre el")} ${g.nombre}.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -60,7 +65,7 @@ export default function Gama() {
 
                     <Image
                       src={g.foto}
-                      alt={g.alt}
+                      alt={t(g.alt)}
                       fill
                       sizes="(min-width: 1024px) 46vw, 92vw"
                       quality={90}
@@ -91,7 +96,7 @@ export default function Gama() {
                       <div className="flex flex-wrap items-center gap-2">
                         {g.aviso ? (
                           <span className="type-normal border-bone/25 text-bone/90 rounded-full border bg-black/45 px-3 py-1 text-[11px] leading-tight backdrop-blur-xs">
-                            {g.aviso}
+                            {t(g.aviso)}
                           </span>
                         ) : (
                           g.etiquetas.map((e) => (
@@ -99,14 +104,14 @@ export default function Gama() {
                               key={e}
                               className="type-normal border-bone/25 text-bone/90 rounded-full border bg-black/45 px-3 py-1 text-[11px] font-medium tracking-wide uppercase backdrop-blur-xs"
                             >
-                              {e}
+                              {t(e)}
                             </span>
                           ))
                         )}
                       </div>
 
                       <p className="type-normal text-bone mt-3 text-sm md:text-base">
-                        {g.descripcion}
+                        {t(g.descripcion)}
                       </p>
                     </div>
 
@@ -123,7 +128,7 @@ export default function Gama() {
                   </div>
 
                   <span className="sr-only">
-                    Consultar por WhatsApp (se abre en una pestaña nueva)
+                    {t("Consultar por WhatsApp (se abre en una pestaña nueva)")}
                   </span>
                 </a>
               </Tilt3D>

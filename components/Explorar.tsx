@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import { MODELOS } from "@/lib/modelos";
+import { useIdioma } from "@/lib/idioma";
 
 const WHATSAPP = "https://wa.me/5491150000000";
 
@@ -31,6 +34,7 @@ const ELEGIDOS = ["porsche-356", "tesla-model-s", "bentley-continental-gt"];
  * en Z, y flotan sobre la foto cuando la tarjeta gira.
  */
 export default function Explorar() {
+  const { t } = useIdioma();
   const tarjetas = ELEGIDOS.flatMap((id) => {
     const modelo = MODELOS.find((m) => m.id === id);
     return modelo ? [modelo] : [];
@@ -43,7 +47,7 @@ export default function Explorar() {
       className="py-14 lg:py-20"
     >
       <h2 id="titulo-explorar" className="sr-only">
-        Seguí explorando
+        {t("Seguí explorando")}
       </h2>
 
       <Container>
@@ -53,7 +57,7 @@ export default function Explorar() {
               <Tilt3D className="rounded-2xl" grados={8}>
                 <a
                   href={`${WHATSAPP}?text=${encodeURIComponent(
-                    `Hola, quiero información sobre el ${m.marca} ${m.nombre}.`,
+                    `${t("Hola, quiero información sobre el")} ${m.marca} ${m.nombre}.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -70,7 +74,7 @@ export default function Explorar() {
 
                     <Image
                       src={m.foto}
-                      alt={m.alt}
+                      alt={t(m.alt)}
                       fill
                       sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw"
                       quality={90}
@@ -111,7 +115,7 @@ export default function Explorar() {
                   </div>
 
                   <span className="sr-only">
-                    Consultar por WhatsApp (se abre en una pestaña nueva)
+                    {t("Consultar por WhatsApp (se abre en una pestaña nueva)")}
                   </span>
                 </a>
               </Tilt3D>

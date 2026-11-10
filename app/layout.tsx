@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Archivo } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import SaltarAlContenido from "@/components/SaltarAlContenido";
+import { IdiomaProvider } from "@/lib/idioma";
 
 /**
  * Una sola familia para todo el sitio.
@@ -55,13 +57,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={`${archivo.variable} h-full antialiased`}>
       <body className="bg-lienzo text-bone flex min-h-full flex-col">
-        <a
-          href="#contenido"
-          className="bg-brass text-ink type-normal sr-only text-sm font-semibold uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-3 focus:py-2"
-        >
-          Saltar al contenido
-        </a>
-        <SmoothScroll>{children}</SmoothScroll>
+        <IdiomaProvider>
+          <SaltarAlContenido />
+          <SmoothScroll>{children}</SmoothScroll>
+        </IdiomaProvider>
       </body>
     </html>
   );
