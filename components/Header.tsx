@@ -6,16 +6,8 @@ import MenuPanel from "./MenuPanel";
 
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
-const ENLACES = [
-  { href: "#modelos", etiqueta: "Modelos" },
-  { href: "#como-funciona", etiqueta: "Cómo funciona" },
-  { href: "#ubicacion", etiqueta: "Showroom" },
-  { href: "#preguntas", etiqueta: "Preguntas" },
-] as const;
-
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
-  const [activo, setActivo] = useState<string>("");
   const [conFondo, setConFondo] = useState(false);
 
   /* Sobre el hero la barra es transparente: flota encima del video.
@@ -42,27 +34,6 @@ export default function Header() {
     return () => observador.disconnect();
   }, []);
 
-  /* Scroll-spy: marca en el menú la sección que se está mirando.
-     IntersectionObserver, nunca un listener de scroll sin throttle. */
-  useEffect(() => {
-    const secciones = ENLACES.map((e) =>
-      document.querySelector(e.href),
-    ).filter((n): n is Element => n !== null);
-
-    const observador = new IntersectionObserver(
-      (entradas) => {
-        const visible = entradas
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActivo("#" + visible.target.id);
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
-    );
-
-    secciones.forEach((s) => observador.observe(s));
-    return () => observador.disconnect();
-  }, []);
-
   /* Bloquea el scroll de fondo mientras el panel está abierto. */
   useEffect(() => {
     document.body.style.overflow = abierto ? "hidden" : "";
@@ -72,85 +43,64 @@ export default function Header() {
   }, [abierto]);
 
   return (
-    <header className="fixed top-4 right-0 left-0 z-50">
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* Barra a todo el ancho, sin caja ni borde: tres columnas (menú,
+          logo centrado, acción). Detrás, un velo que nace del borde
+          superior y se desvanece hacia abajo, así que nunca hay una
+          línea donde "termina" la barra. Siempre hay un velo leve, para
+          que se lea sobre fotos claras; al pasar el hero se refuerza. */}
       <div
-        className={`mx-auto flex w-[calc(100%-2rem)] max-w-[1320px] items-center justify-between border px-4 py-3 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          conFondo
-            ? "border-white/10 bg-black/80 backdrop-blur-lg backdrop-saturate-150"
-            : "border-transparent bg-transparent backdrop-blur-none"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-black/45 to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className={`ease-premium pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-black/90 via-black/55 to-transparent transition-opacity duration-700 ${
+          conFondo ? "opacity-100" : "opacity-0"
         }`}
-      >
+      />
+
+      <div className="relative grid h-[68px] grid-cols-[1fr_auto_1fr] items-center px-5 lg:h-[76px] lg:px-[5vw]">
+        <button
+          type="button"
+          onClick={() => setAbierto((v) => !v)}
+          aria-expanded={abierto}
+          aria-controls="panel-menu"
+          aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+          className="group flex h-10 items-center gap-3 justify-self-start"
+        >
+          {/* Las dos líneas se transforman en X, no se reemplazan. */}
+          <span className="relative block h-4 w-5">
+            <motion.span
+              className="bg-bone absolute left-0 block h-px w-5"
+              animate={abierto ? { top: 8, rotate: 45 } : { top: 3, rotate: 0 }}
+              transition={{ duration: 0.5, ease: CURVA }}
+            />
+            <motion.span
+              className="bg-bone absolute left-0 block h-px w-5"
+              animate={abierto ? { top: 8, rotate: -45 } : { top: 12, rotate: 0 }}
+              transition={{ duration: 0.5, ease: CURVA }}
+            />
+          </span>
+          <span className="type-normal text-bone over-media text-sm font-semibold transition-opacity duration-300 group-hover:opacity-70">
+            Menú
+          </span>
+        </button>
+
         <a
           href="#top"
-          className="type-condensed text-bone over-media text-xl font-bold uppercase"
+          className="type-condensed text-bone over-media pl-[0.34em] text-[1.45rem] font-bold tracking-[0.34em] uppercase transition-opacity duration-300 hover:opacity-80 lg:text-[1.75rem]"
           aria-label="Vértice, inicio"
         >
           Vértice
         </a>
 
-        <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
-          {ENLACES.map((enlace) => {
-            const esActivo = activo === enlace.href;
-            return (
-              <a
-                key={enlace.href}
-                href={enlace.href}
-                aria-current={esActivo ? "true" : undefined}
-                className={`type-normal over-media relative text-sm font-semibold uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  esActivo ? "text-bone" : "text-bone/75 hover:text-bone"
-                }`}
-              >
-                {enlace.etiqueta}
-                {esActivo && (
-                  <motion.span
-                    layoutId="nav-activo"
-                    className="bg-brass absolute -bottom-1.5 left-0 h-px w-full"
-                    transition={{ duration: 0.5, ease: CURVA }}
-                  />
-                )}
-              </a>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <a
-            href="#reservar"
-            className="bg-bone text-ink type-normal destello hidden px-3 py-2 text-sm font-semibold uppercase transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] active:scale-[0.98] sm:inline-block"
-          >
-            Reservar prueba
-          </a>
-
-          <button
-            type="button"
-            onClick={() => setAbierto((v) => !v)}
-            aria-expanded={abierto}
-            aria-controls="panel-menu"
-            aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
-            className="flex h-10 items-center justify-center gap-3 px-2"
-          >
-            <span className="type-normal text-bone over-media hidden text-sm font-semibold uppercase lg:inline">
-              Menú
-            </span>
-            {/* Las dos líneas se transforman en X, no se reemplazan. */}
-            <span className="relative block h-4 w-6">
-              <motion.span
-                className="bg-bone absolute left-0 block h-0.5 w-6"
-                animate={
-                  abierto ? { top: 7, rotate: 45 } : { top: 2, rotate: 0 }
-                }
-                transition={{ duration: 0.5, ease: CURVA }}
-              />
-              <motion.span
-                className="bg-bone absolute left-0 block h-0.5 w-6"
-                animate={
-                  abierto ? { top: 7, rotate: -45 } : { top: 12, rotate: 0 }
-                }
-                transition={{ duration: 0.5, ease: CURVA }}
-              />
-            </span>
-          </button>
-        </div>
+        <a
+          href="#reservar"
+          className="border-bone/70 text-bone over-media type-normal hover:bg-bone hover:text-ink hidden justify-self-end border px-4 py-2 text-xs font-semibold tracking-wide uppercase transition-colors duration-300 sm:inline-block"
+        >
+          Reservar prueba
+        </a>
       </div>
 
       {/* Panel de navegación: lista de secciones + tarjetas con imagen. */}
