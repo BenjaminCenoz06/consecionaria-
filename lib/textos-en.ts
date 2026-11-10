@@ -195,6 +195,24 @@ export const EN: Record<string, string> = {
     "We only use your details to arrange your slot. More in our ",
   "política de privacidad": "privacy policy",
 
+  /* --- Páginas interiores --- */
+  "Inicio": "Home",
+  "Ubicación": "Breadcrumb",
+  "Ubicación y horarios": "Location & hours",
+  "Te esperamos en el showroom.": "We're waiting for you at the showroom.",
+  "Ver los modelos": "See the models",
+  "¿Hablamos?": "Shall we talk?",
+  "¿Cuál te llevó la mirada?": "Which one caught your eye?",
+  "Cómo comprar": "How to buy",
+  "Todos": "All",
+  "Eléctrico": "Electric",
+  "Filtrar por tipo de motor": "Filter by powertrain",
+  "Otros modelos": "Other models",
+  "¿Te gustó el": "Did you like the",
+  "puntos de control": "checkpoints",
+  "meses de garantía": "months of warranty",
+  "de prueba de manejo": "test drive",
+
   /* --- Footer --- */
   "Catálogo": "Catalogue",
   "Empresa": "Company",

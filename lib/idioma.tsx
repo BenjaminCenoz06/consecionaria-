@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { EN } from "./textos-en";
+import type { Texto } from "./sitio";
 
 export type Idioma = "es" | "en";
 
@@ -20,12 +21,15 @@ type Contexto = {
   setIdioma: (idioma: Idioma) => void;
   /** Traduce un texto escrito en español. Si falta el par, devuelve el original. */
   t: (texto: string) => string;
+  /** Elige el idioma de un texto que ya trae su par {es, en}. */
+  l: (texto: Texto) => string;
 };
 
 const Ctx = createContext<Contexto>({
   idioma: "es",
   setIdioma: () => {},
   t: (texto) => texto,
+  l: (texto) => texto.es,
 });
 
 const TITULO: Record<Idioma, string> = {
@@ -58,7 +62,11 @@ export function IdiomaProvider({ children }: { children: ReactNode }) {
      pantalla y traductores del navegador leen el atributo. */
   useEffect(() => {
     document.documentElement.lang = idioma === "en" ? "en" : "es-AR";
-    document.title = TITULO[idioma];
+    /* Sólo la home tiene par de títulos. Las demás páginas traen el suyo
+       del `metadata` de su ruta y no hay que pisarlo. */
+    if (document.title === TITULO.es || document.title === TITULO.en) {
+      document.title = TITULO[idioma];
+    }
   }, [idioma]);
 
   const setIdioma = useCallback((nuevo: Idioma) => {
@@ -75,7 +83,15 @@ export function IdiomaProvider({ children }: { children: ReactNode }) {
     [idioma],
   );
 
-  const valor = useMemo(() => ({ idioma, setIdioma, t }), [idioma, setIdioma, t]);
+  const l = useCallback(
+    (texto: Texto) => (idioma === "en" ? texto.en : texto.es),
+    [idioma],
+  );
+
+  const valor = useMemo(
+    () => ({ idioma, setIdioma, t, l }),
+    [idioma, setIdioma, t, l],
+  );
 
   return <Ctx.Provider value={valor}>{children}</Ctx.Provider>;
 }

@@ -1,101 +1,46 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
+import TarjetaImagen from "./TarjetaImagen";
 import { MODELOS } from "@/lib/modelos";
-import { DESTACADOS } from "@/lib/destacados";
 import { useIdioma } from "@/lib/idioma";
+import {
+  CATEGORIAS,
+  COMBUSTIBLE,
+  paginasDe,
+  type Texto,
+} from "@/lib/sitio";
 
 /** La curva del sitio. El panel y las tarjetas usan la misma. */
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
-type Tarjeta = {
-  titulo: string;
-  subtitulo?: string;
-  imagen: string;
-  alt: string;
-  href: string;
-  /** Recorte con alfa (autos): lleva fondo de estudio. Foto: llena. */
-  recorte: boolean;
+const T = (es: string, en: string): Texto => ({ es, en });
+
+const BASE_MODELO = (id: string) => MODELOS.find((m) => m.id === id) ?? MODELOS[0];
+
+/** Enlaces que se suman a los de las páginas de cada categoría. */
+const EXTRAS: Record<string, { etiqueta: Texto; href: string }[]> = {
+  "electricos-hibridos": [
+    {
+      etiqueta: T("Reservar una prueba de manejo", "Book a test drive"),
+      href: "/experiencia/prueba-de-manejo",
+    },
+  ],
+  compra: [
+    { etiqueta: T("Cómo funciona", "How it works"), href: "/#como-funciona" },
+    { etiqueta: T("Preguntas frecuentes", "FAQ"), href: "/#preguntas" },
+  ],
+  experiencia: [
+    {
+      etiqueta: T("Selección de la semana", "Selection of the week"),
+      href: "/#destacados",
+    },
+  ],
 };
-
-type Enlace = { etiqueta: string; href: string };
-
-type Seccion = {
-  id: string;
-  etiqueta: string;
-  /** Enlace principal de la sección ("Visión general"). */
-  href: string;
-  tarjetas?: Tarjeta[];
-  enlaces?: Enlace[];
-};
-
-const SECCIONES: Seccion[] = [
-  {
-    id: "modelos",
-    etiqueta: "Modelos",
-    href: "#modelos",
-    tarjetas: MODELOS.slice(0, 4).map((m) => ({
-      titulo: `${m.marca} ${m.nombre}.`,
-      subtitulo: m.lema,
-      imagen: m.foto,
-      alt: m.alt,
-      href: "#modelos",
-      recorte: true,
-    })),
-    enlaces: [{ etiqueta: "Reservar una prueba de manejo", href: "#reservar" }],
-  },
-  {
-    id: "destacados",
-    etiqueta: "Selección de la semana",
-    href: "#destacados",
-    tarjetas: DESTACADOS.slice(0, 3).map((d) => ({
-      titulo: `${d.marca} ${d.nombre}.`,
-      imagen: d.foto,
-      alt: d.alt,
-      href: "#destacados",
-      recorte: true,
-    })),
-  },
-  {
-    id: "como-funciona",
-    etiqueta: "Cómo funciona",
-    href: "#como-funciona",
-    enlaces: [
-      { etiqueta: "Elegís la unidad", href: "#como-funciona" },
-      { etiqueta: "La probás 40 minutos", href: "#como-funciona" },
-      { etiqueta: "Te la llevás en 48 horas", href: "#como-funciona" },
-    ],
-  },
-  {
-    id: "showroom",
-    etiqueta: "Showroom",
-    href: "#ubicacion",
-    tarjetas: [
-      {
-        titulo: "Visitá el showroom.",
-        subtitulo: "Núñez, Buenos Aires",
-        imagen: "/showroom/showroom.webp",
-        alt: "Interior del showroom de Vértice Automotores",
-        href: "#ubicacion",
-        recorte: false,
-      },
-    ],
-    enlaces: [{ etiqueta: "Cómo llegar y horarios", href: "#ubicacion" }],
-  },
-  {
-    id: "preguntas",
-    etiqueta: "Preguntas",
-    href: "#preguntas",
-    enlaces: [
-      { etiqueta: "¿Qué cubre la garantía?", href: "#preguntas" },
-      { etiqueta: "Permuta y financiación", href: "#preguntas" },
-      { etiqueta: "¿Necesito turno?", href: "#preguntas" },
-    ],
-  },
-];
 
 export default function MenuPanel({
   abierto,
@@ -105,13 +50,13 @@ export default function MenuPanel({
   onCerrar: () => void;
 }) {
   const sinMovimiento = useReducedMotion();
-  const { t } = useIdioma();
-  const [activo, setActivo] = useState(SECCIONES[0].id);
+  const { l, t } = useIdioma();
+  const [activo, setActivo] = useState(CATEGORIAS[0].id);
   /* En pantallas chicas es un "drill-down": lista → detalle. */
   const [detalleMovil, setDetalleMovil] = useState(false);
   const botonCerrar = useRef<HTMLButtonElement>(null);
 
-  const seccion = SECCIONES.find((s) => s.id === activo) ?? SECCIONES[0];
+  const categoria = CATEGORIAS.find((c) => c.id === activo) ?? CATEGORIAS[0];
 
   useEffect(() => {
     if (!abierto) return;
@@ -125,6 +70,27 @@ export default function MenuPanel({
   }, [abierto, onCerrar]);
 
   const duracion = sinMovimiento ? 0 : 0.6;
+
+  /* Los enlaces de texto de la categoría activa: sus páginas más los
+     extras (anclas de la home, prueba de manejo…). */
+  const enlaces = [
+    ...(categoria.id === "modelos" || categoria.id === "concesionario"
+      ? []
+      : paginasDe(categoria.id)
+          /* "Carga y autonomía" ya tiene su tarjeta de imagen. */
+          .filter((p) => !p.slug.endsWith("carga-y-autonomia"))
+          .map((p) => ({ etiqueta: p.nombre, href: `/${p.slug}` }))),
+    ...(EXTRAS[categoria.id] ?? []),
+  ];
+
+  const entrada = (retardo: number, y = 16) =>
+    sinMovimiento
+      ? { initial: false as const }
+      : {
+          initial: { opacity: 0, y },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.55, delay: retardo, ease: CURVA },
+        };
 
   return (
     <AnimatePresence>
@@ -161,7 +127,7 @@ export default function MenuPanel({
             transition={{ duration: duracion, ease: CURVA }}
             className="text-near relative flex h-dvh w-full max-w-full lg:max-w-[1010px]"
           >
-            {/* Columna 1: secciones. */}
+            {/* Columna 1: categorías. */}
             <div
               className={`flex w-full flex-col bg-white px-3 pt-6 pb-8 lg:w-[420px] lg:shrink-0 lg:px-4 lg:pt-24 ${
                 detalleMovil ? "max-lg:hidden" : ""
@@ -184,11 +150,11 @@ export default function MenuPanel({
 
               <nav aria-label={t("Secciones")}>
                 <ul className="flex flex-col gap-1">
-                  {SECCIONES.map((s, i) => {
-                    const esActivo = s.id === activo;
+                  {CATEGORIAS.map((c, i) => {
+                    const esActivo = c.id === activo;
                     return (
                       <motion.li
-                        key={s.id}
+                        key={c.id}
                         initial={sinMovimiento ? false : { opacity: 0, x: -24 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{
@@ -200,17 +166,17 @@ export default function MenuPanel({
                         <button
                           type="button"
                           onClick={() => {
-                            setActivo(s.id);
+                            setActivo(c.id);
                             setDetalleMovil(true);
                           }}
-                          onMouseEnter={() => setActivo(s.id)}
-                          onFocus={() => setActivo(s.id)}
+                          onMouseEnter={() => setActivo(c.id)}
+                          onFocus={() => setActivo(c.id)}
                           aria-current={esActivo ? "true" : undefined}
                           className={`group flex w-full items-center justify-between rounded-lg px-3 py-3.5 text-left text-[1.05rem] font-medium transition-colors duration-300 ${
                             esActivo ? "bg-[#ececef]" : "hover:bg-[#f4f4f6]"
                           }`}
                         >
-                          <span className="type-normal">{t(s.etiqueta)}</span>
+                          <span className="type-normal">{l(c.etiqueta)}</span>
                           <CaretRight
                             size={16}
                             weight="regular"
@@ -225,19 +191,21 @@ export default function MenuPanel({
                 </ul>
               </nav>
 
-              <motion.a
-                href="#reservar"
-                onClick={onCerrar}
-                initial={sinMovimiento ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.55, ease: CURVA }}
-                className="bg-near destello type-normal mt-auto rounded-full px-6 py-4 text-center text-sm font-semibold text-white uppercase"
+              <motion.div
+                {...entrada(0.55)}
+                className="mt-auto"
               >
-                {t("Reservar prueba")}
-              </motion.a>
+                <Link
+                  href="/#reservar"
+                  onClick={onCerrar}
+                  className="bg-near destello type-normal block rounded-full px-6 py-4 text-center text-sm font-semibold text-white uppercase"
+                >
+                  {t("Reservar prueba")}
+                </Link>
+              </motion.div>
             </div>
 
-            {/* Columna 2: detalle de la sección. */}
+            {/* Columna 2: detalle de la categoría. */}
             <div
               className={`ease-premium w-full overflow-y-auto bg-[#f1f1f4] px-5 pt-6 pb-10 lg:block lg:px-10 lg:pt-24 ${
                 detalleMovil ? "" : "max-lg:hidden"
@@ -253,68 +221,151 @@ export default function MenuPanel({
 
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={seccion.id}
+                  key={categoria.id}
                   initial={sinMovimiento ? false : { opacity: 0, x: 24 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -12 }}
                   transition={{ duration: 0.4, ease: CURVA }}
                 >
-                  <a
-                    href={seccion.href}
-                    onClick={onCerrar}
-                    className="group flex items-center justify-between py-3 text-[1.05rem] font-medium"
-                  >
-                    <span className="type-normal">{t("Visión general")}</span>
-                    <ArrowRight
-                      size={16}
-                      className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
-                    />
-                  </a>
+                  {categoria.id === "concesionario" ? (
+                    /* Un solo botón ancho, como en la referencia. */
+                    <motion.div {...entrada(0.05)}>
+                      <Link
+                        href="/concesionario"
+                        onClick={onCerrar}
+                        className="group flex items-center justify-between rounded-xl bg-[#e6e6ea] px-5 py-4 text-[1.05rem] font-medium transition-colors duration-300 hover:bg-[#dcdce1]"
+                      >
+                        <span className="type-normal">
+                          {t("Ubicación y horarios")}
+                        </span>
+                        <ArrowRight
+                          size={18}
+                          className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
+                        />
+                      </Link>
+                    </motion.div>
+                  ) : (
+                    <>
+                      <Link
+                        href={categoria.href}
+                        onClick={onCerrar}
+                        className="group flex items-center justify-between py-3 text-[1.05rem] font-medium"
+                      >
+                        <span className="type-normal">{t("Visión general")}</span>
+                        <ArrowRight
+                          size={16}
+                          className="ease-premium transition-transform duration-500 group-hover:translate-x-1"
+                        />
+                      </Link>
 
-                  {seccion.tarjetas && (
-                    <ul className="mt-2 flex flex-col gap-3">
-                      {seccion.tarjetas.map((t, i) => (
-                        <motion.li
-                          key={t.titulo}
-                          initial={
-                            sinMovimiento ? false : { opacity: 0, y: 28 }
-                          }
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.7,
-                            delay: sinMovimiento ? 0 : 0.08 + i * 0.07,
-                            ease: CURVA,
-                          }}
-                        >
-                          <TarjetaMenu tarjeta={t} onClick={onCerrar} />
-                        </motion.li>
-                      ))}
-                    </ul>
-                  )}
+                      {/* Modelos: nombre, auto y etiquetas, como la lista
+                          de la referencia. */}
+                      {categoria.id === "modelos" && (
+                        <ul className="mt-2 flex flex-col gap-7">
+                          {MODELOS.map((m, i) => (
+                            <motion.li
+                              key={m.id}
+                              {...entrada(0.06 + Math.min(i, 6) * 0.05, 22)}
+                            >
+                              <Link
+                                href={`/modelos/${m.id}`}
+                                onClick={onCerrar}
+                                className="group block"
+                              >
+                                <p className="type-normal text-[1.1rem] font-medium">
+                                  {m.marca} {m.nombre}
+                                </p>
+                                <span className="relative mt-2 block h-[104px] w-full max-w-[250px]">
+                                  <Image
+                                    src={m.foto}
+                                    alt={t(m.alt)}
+                                    fill
+                                    sizes="250px"
+                                    quality={75}
+                                    draggable={false}
+                                    className="origin-left object-contain object-left transition-transform duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.07]"
+                                  />
+                                </span>
+                                <span className="mt-2 flex flex-wrap gap-2">
+                                  {(COMBUSTIBLE[m.id] ?? []).map((e) => (
+                                    <span
+                                      key={e}
+                                      className="type-normal rounded-full bg-white px-3 py-1 text-[11px] font-medium"
+                                    >
+                                      {t(e)}
+                                    </span>
+                                  ))}
+                                </span>
+                              </Link>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      )}
 
-                  {seccion.enlaces && (
-                    <ul className="mt-4 flex flex-col">
-                      {seccion.enlaces.map((e, i) => (
-                        <motion.li
-                          key={e.etiqueta}
-                          initial={sinMovimiento ? false : { opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: sinMovimiento ? 0 : 0.1 + i * 0.05,
-                            ease: CURVA,
-                          }}
-                        >
-                          <a
-                            href={e.href}
-                            onClick={onCerrar}
-                            className="hover:text-brass block py-3 text-[1.05rem] font-medium transition-colors duration-300"
-                          >
-                            {t(e.etiqueta)}
-                          </a>
-                        </motion.li>
-                      ))}
-                    </ul>
+                      {/* Eléctricos e híbridos: dos tarjetas de imagen. */}
+                      {categoria.id === "electricos-hibridos" && (
+                        <ul className="mt-2 flex flex-col gap-3">
+                          {[
+                            {
+                              titulo: T(
+                                "Modelos eléctricos e híbridos",
+                                "Electric and hybrid models",
+                              ),
+                              href: "/electricos-hibridos",
+                              auto: "tesla-model-s",
+                            },
+                            {
+                              titulo: T("Carga y autonomía", "Charging & range"),
+                              href: "/electricos-hibridos/carga-y-autonomia",
+                              auto: "bmw-i8",
+                            },
+                          ].map((c, i) => {
+                            const auto = BASE_MODELO(c.auto);
+                            return (
+                              <motion.li
+                                key={c.href + c.auto}
+                                {...entrada(0.08 + i * 0.07, 28)}
+                              >
+                                <div onClick={onCerrar}>
+                                  <TarjetaImagen
+                                    href={c.href}
+                                    titulo={l(c.titulo)}
+                                    imagen={auto.foto}
+                                    alt={t(auto.alt)}
+                                    inclinar={false}
+                                    aspecto="aspect-[16/10]"
+                                  />
+                                </div>
+                              </motion.li>
+                            );
+                          })}
+                        </ul>
+                      )}
+
+                      {/* Enlaces de texto. */}
+                      {enlaces.length > 0 && (
+                        <ul className="mt-3 flex flex-col">
+                          {enlaces.map((e, i) => (
+                            <motion.li
+                              key={e.href}
+                              {...entrada(0.08 + i * 0.05, 12)}
+                            >
+                              <Link
+                                href={e.href}
+                                onClick={onCerrar}
+                                className="group flex items-center justify-between py-3 text-[1.05rem] font-medium transition-colors duration-300 hover:text-[#8a6f33]"
+                              >
+                                <span className="type-normal">{l(e.etiqueta)}</span>
+                                <ArrowRight
+                                  size={16}
+                                  className="ease-premium -translate-x-2 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100"
+                                />
+                              </Link>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -334,78 +385,5 @@ export default function MenuPanel({
         </motion.div>
       )}
     </AnimatePresence>
-  );
-}
-
-/**
- * Tarjeta de imagen del menú. Mismo lenguaje que la referencia: 24px de
- * radio, el nombre abajo a la izquierda, botón circular translúcido
- * abajo a la derecha, degradado oscuro bajo el texto y la imagen que se
- * acerca despacio al pasar el puntero (0.4s, curva suave).
- */
-function TarjetaMenu({
-  tarjeta,
-  onClick,
-}: {
-  tarjeta: Tarjeta;
-  onClick: () => void;
-}) {
-  const { t } = useIdioma();
-
-  return (
-    <a
-      href={tarjeta.href}
-      onClick={onClick}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-3xl bg-[#121212] [transform:translateZ(0)]"
-    >
-      {tarjeta.recorte && (
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(ellipse_80%_66%_at_50%_36%,#3a3a3a,#121212_72%)]"
-        />
-      )}
-
-      <Image
-        src={tarjeta.imagen}
-        alt={t(tarjeta.alt)}
-        fill
-        sizes="(min-width: 1024px) 460px, 92vw"
-        quality={85}
-        draggable={false}
-        className={`transition-transform duration-[400ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06] ${
-          tarjeta.recorte
-            ? "object-contain object-center px-6 pt-6 pb-16"
-            : "object-cover object-center"
-        }`}
-      />
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-[55%] bg-linear-to-t from-black/85 via-black/40 to-transparent"
-      />
-
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
-        <div className="min-w-0">
-          <p className="type-normal text-bone text-[1.2rem] leading-tight font-medium">
-            {t(tarjeta.titulo)}
-          </p>
-          {tarjeta.subtitulo && (
-            <p className="text-bone/70 mt-0.5 text-sm">
-              {t(tarjeta.subtitulo)}
-            </p>
-          )}
-        </div>
-
-        <span
-          aria-hidden="true"
-          className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/25 text-white backdrop-blur-md transition-colors duration-300 group-hover:bg-white/45"
-        >
-          <ArrowRight
-            size={16}
-            className="ease-premium transition-transform duration-500 group-hover:translate-x-0.5"
-          />
-        </span>
-      </div>
-    </a>
   );
 }

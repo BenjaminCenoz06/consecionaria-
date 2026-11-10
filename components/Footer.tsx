@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Link from "next/link";
 import Container from "./Container";
 import { useIdioma } from "@/lib/idioma";
 
@@ -8,16 +9,16 @@ const COLUMNAS = [
   {
     titulo: "Catálogo",
     enlaces: [
-      { href: "#modelos", texto: "Modelos" },
-      { href: "#reservar", texto: "Reservar prueba" },
-      { href: "#ubicacion", texto: "Showroom" },
+      { href: "/modelos", texto: "Modelos" },
+      { href: "/#reservar", texto: "Reservar prueba" },
+      { href: "/experiencia/showroom", texto: "Showroom" },
     ],
   },
   {
     titulo: "Empresa",
     enlaces: [
-      { href: "#como-funciona", texto: "Cómo funciona" },
-      { href: "#preguntas", texto: "Preguntas" },
+      { href: "/compra/como-comprar", texto: "Cómo funciona" },
+      { href: "/#preguntas", texto: "Preguntas" },
     ],
   },
   {
@@ -120,12 +121,12 @@ export default function Footer() {
                   <ul className="mt-4 space-y-2">
                     {col.enlaces.map((e) => (
                       <li key={e.href + e.texto}>
-                        <a
+                        <Link
                           href={e.href}
                           className="text-graphite hover:text-bone text-sm transition-colors duration-300"
                         >
                           {t(e.texto)}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

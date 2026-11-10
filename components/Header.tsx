@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import MenuPanel from "./MenuPanel";
 import SelectorIdioma from "./SelectorIdioma";
@@ -90,13 +91,13 @@ export default function Header() {
           </span>
         </button>
 
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="type-condensed text-bone over-media pl-[0.34em] text-[1.45rem] font-bold tracking-[0.34em] uppercase transition-opacity duration-300 hover:opacity-80 lg:text-[1.75rem]"
           aria-label={t("Vértice, inicio")}
         >
           Vértice
-        </a>
+        </Link>
 
         <SelectorIdioma />
       </div>

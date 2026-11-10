@@ -27,9 +27,15 @@ export default function TemaScroll() {
     const zonas = Array.from(
       document.querySelectorAll<HTMLElement>('[data-zona="claro"]'),
     );
-    if (zonas.length === 0) return;
-
     const cuerpo = document.body;
+
+    /* Sin zonas claras (o al volver de una página que las tenía) el
+       tema tiene que ser oscuro: el `data-tema` vive en el <body> y
+       sobrevive a la navegación entre páginas. */
+    if (zonas.length === 0) {
+      cuerpo.dataset.tema = "oscuro";
+      return;
+    }
     const linea = () => window.innerHeight * 0.4;
 
     const aplicar = (claro: boolean) => {
