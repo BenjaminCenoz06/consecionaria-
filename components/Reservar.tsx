@@ -11,7 +11,7 @@ type Errores = Partial<Record<Clave, string>>;
 
 const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const CAMPO =
-  "mt-2 w-full border border-hairline bg-ink px-3 py-2 text-base text-bone placeholder:text-dim transition-colors duration-300 focus:border-brass";
+  "mt-2 w-full border border-hairline bg-elevated px-3 py-2 text-base text-bone placeholder:text-dim transition-colors duration-300 focus:border-brass";
 
 function Campo({
   id,
@@ -78,7 +78,7 @@ export default function Reservar() {
   }
 
   return (
-    <section id="reservar" className="bg-surface py-20 lg:py-24">
+    <section id="reservar" className="bg-ink py-20 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
@@ -133,7 +133,7 @@ export default function Reservar() {
                 <button
                   type="submit"
                   disabled={estado === "enviando"}
-                  className="bg-bone text-ink type-normal w-full px-3 py-2 text-base font-semibold uppercase transition-transform duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
+                  className="bg-bone text-ink type-normal destello w-full px-3 py-2 text-base font-semibold uppercase transition-transform duration-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-50"
                 >
                   {estado === "enviando" ? "Enviando…" : "Reservar prueba"}
                 </button>

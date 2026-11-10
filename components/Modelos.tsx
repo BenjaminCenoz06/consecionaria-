@@ -11,6 +11,7 @@ import Image from "next/image";
 import { ArrowRight, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import Tilt3D from "./Tilt3D";
 import { MODELOS } from "@/lib/modelos";
 
 /** Cuánto hay que arrastrar para que cuente como un deslizamiento. */
@@ -51,8 +52,7 @@ export default function Modelos() {
   useEffect(() => {
     const barra = pestanas.current;
     const pestana = barra?.firstElementChild?.children[activo] as
-      | HTMLElement
-      | undefined;
+      HTMLElement | undefined;
     if (!barra || !pestana) return;
     barra.scrollTo({
       left: pestana.offsetLeft - (barra.clientWidth - pestana.offsetWidth) / 2,
@@ -199,27 +199,38 @@ export default function Modelos() {
                       : "scale-[0.88] opacity-[0.16]"
                   }`}
                 >
-                  <Image
-                    src={m.foto}
-                    alt={m.alt}
-                    width={m.ancho}
-                    height={m.alto}
-                    sizes="(min-width: 1536px) 860px, (min-width: 1024px) 720px, 78vw"
-                    quality={90}
-                    /* Los vecinos se bajan antes de hacer falta; el resto
+                  {/* Sólo el auto en foco se inclina: los vecinos
+                      están apagados al 16% y girarlos sería movimiento
+                      que nadie pidió ni puede ver. */}
+                  <Tilt3D
+                    className="h-full w-full"
+                    grados={6}
+                    escala={1.02}
+                    brillo={false}
+                    activo={enFoco}
+                  >
+                    <Image
+                      src={m.foto}
+                      alt={m.alt}
+                      width={m.ancho}
+                      height={m.alto}
+                      sizes="(min-width: 1536px) 860px, (min-width: 1024px) 720px, 78vw"
+                      quality={90}
+                      /* Los vecinos se bajan antes de hacer falta; el resto
                        espera. Pasar de "lazy" a "eager" dispara la descarga
                        al instante, así el deslizamiento nunca muestra un
                        hueco. */
-                    loading={distancia(i) <= PRECARGA ? "eager" : "lazy"}
-                    draggable={false}
-                    className="h-full w-full object-contain object-bottom"
-                    /* Reflejo en el piso. Chromium y Safari lo dibujan;
+                      loading={distancia(i) <= PRECARGA ? "eager" : "lazy"}
+                      draggable={false}
+                      className="h-full w-full object-contain object-bottom"
+                      /* Reflejo en el piso. Chromium y Safari lo dibujan;
                        Firefox lo ignora y el auto queda igual de bien. */
-                    style={{
-                      WebkitBoxReflect:
-                        "below 2px linear-gradient(transparent 58%, rgba(255,255,255,0.16))",
-                    }}
-                  />
+                      style={{
+                        WebkitBoxReflect:
+                          "below 2px linear-gradient(transparent 58%, rgba(255,255,255,0.16))",
+                      }}
+                    />
+                  </Tilt3D>
                 </li>
               );
             })}

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import Paralaje from "./Paralaje";
 
 /** Misma dirección que el pie y el JSON-LD de la página. */
 const MAPA =
@@ -22,14 +23,16 @@ export default function Ubicacion() {
       aria-labelledby="titulo-ubicacion"
       className="bg-ink relative isolate overflow-hidden"
     >
-      <Image
-        src="/showroom/showroom.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        quality={90}
-        className="-z-20 object-cover object-center"
-      />
+      <Paralaje className="-z-20" distancia={56}>
+        <Image
+          src="/showroom/showroom.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={90}
+          className="object-cover object-center"
+        />
+      </Paralaje>
 
       {/* Velo parejo + degradado a la izquierda, donde va el texto. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/45" />
@@ -51,7 +54,7 @@ export default function Ubicacion() {
             href={MAPA}
             target="_blank"
             rel="noopener noreferrer"
-            className="type-condensed text-ink hover:bg-brass group mt-6 inline-flex h-14 items-center gap-6 bg-white px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+            className="type-condensed destello text-ink hover:bg-brass group mt-6 inline-flex h-14 items-center gap-6 bg-white px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
           >
             Cómo llegar
             <ArrowRight

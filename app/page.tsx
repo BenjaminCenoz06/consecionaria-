@@ -4,8 +4,9 @@ import Modelos from "@/components/Modelos";
 import Ubicacion from "@/components/Ubicacion";
 import Tagline from "@/components/Tagline";
 import Destacados from "@/components/Destacados";
+import Explorar from "@/components/Explorar";
+import Gama from "@/components/Gama";
 import ComoFunciona from "@/components/ComoFunciona";
-import Beneficios from "@/components/Beneficios";
 import Preguntas from "@/components/Preguntas";
 import Reservar from "@/components/Reservar";
 import Footer from "@/components/Footer";
@@ -56,8 +57,9 @@ export default function Home() {
         <Ubicacion />
         <Tagline />
         <Destacados />
+        <Explorar />
+        <Gama />
         <ComoFunciona />
-        <Beneficios />
         <Preguntas />
         <Reservar />
       </main>

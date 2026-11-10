@@ -116,7 +116,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <a
             href="#reservar"
-            className="bg-bone text-ink type-normal hidden px-3 py-2 text-sm font-semibold uppercase transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] active:scale-[0.98] sm:inline-block"
+            className="bg-bone text-ink type-normal destello hidden px-3 py-2 text-sm font-semibold uppercase transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] active:scale-[0.98] sm:inline-block"
           >
             Reservar prueba
           </a>

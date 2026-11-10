@@ -29,8 +29,15 @@ export default function Reveal({
   return (
     <Etiqueta
       className={className}
-      initial={sinMovimiento ? { opacity: 0 } : { opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      /* El desenfoque es lo que separa un "aparece" de un "entra en
+         foco". Son 6px, no 20: a partir de ahí se lee como pantalla
+         sucia y el texto se vuelve ilegible mientras dura. */
+      initial={
+        sinMovimiento
+          ? { opacity: 0 }
+          : { opacity: 0, y: 32, filter: "blur(6px)" }
+      }
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.7, delay, ease: CURVA }}
     >

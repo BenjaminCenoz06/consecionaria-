@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 /* ============================================================
    HERO — sólo material. Sin tipografía encima.
@@ -28,11 +34,26 @@ const CORTE_CELULAR = "(max-width: 767px)";
 
 export default function Hero() {
   const video = useRef<HTMLVideoElement>(null);
+  const seccion = useRef<HTMLElement>(null);
+
+  /* Paralaje de salida. El material se acerca y se apaga mientras la
+     página sube por encima, así el hero se despide en vez de cortarse.
+     Va sobre `useScroll`, que corre en requestAnimationFrame y entra en
+     el mismo cuadro que la inercia de Lenis. */
+  const { scrollYProgress } = useScroll({
+    target: seccion,
+    offset: ["start start", "end start"],
+  });
+  const acercar = useTransform(scrollYProgress, [0, 1], [1, 1.16]);
+  const correr = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+  const apagar = useTransform(scrollYProgress, [0, 1], [1, 0.35]);
+  const senal = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
 
   /* `null` hasta que el cliente mide la pantalla. Evita que el celular
      empiece a bajar 4K por una suposición hecha en el servidor.      */
   const [esCelular, setEsCelular] = useState<boolean | null>(null);
   const [sinMovimiento, setSinMovimiento] = useState(false);
+  const sinMovimientoSistema = useReducedMotion();
 
   useEffect(() => {
     const pantalla = window.matchMedia(CORTE_CELULAR);
@@ -73,6 +94,7 @@ export default function Hero() {
 
   return (
     <section
+      ref={seccion}
       id="top"
       className="bg-ink relative h-svh min-h-[560px] w-full overflow-hidden"
     >
@@ -82,38 +104,47 @@ export default function Hero() {
         Vértice Automotores — autos seleccionados en Buenos Aires
       </h1>
 
-      {reproducir ? (
-        /* El atributo `poster` tapa el elemento hasta que llega el
+      <motion.div
+        className="absolute inset-0"
+        style={
+          sinMovimientoSistema
+            ? undefined
+            : { scale: acercar, y: correr, opacity: apagar }
+        }
+      >
+        {reproducir ? (
+          /* El atributo `poster` tapa el elemento hasta que llega el
            primer cuadro, y vuelve a taparlo si el navegador bloquea
            el autoplay. Por eso acá no hay ningún fundido: encimar el
            poster con un cuadro posterior dejaba un doble auto.      */
-        <video
-          key={fuente}
-          ref={video}
-          className="absolute inset-0 h-full w-full object-cover"
-          poster={poster}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          aria-hidden="true"
-          tabIndex={-1}
-        >
-          {!esCelular && (
-            <source src={FUENTE_ESCRITORIO_WEBM} type="video/webm" />
-          )}
-          <source src={fuente} type="video/mp4" />
-        </video>
-      ) : (
-        /* Render del servidor y modo sin movimiento: sólo el cuadro. */
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-black bg-cover bg-center"
-          style={{ backgroundImage: `url(${poster})` }}
-        />
-      )}
+          <video
+            key={fuente}
+            ref={video}
+            className="absolute inset-0 h-full w-full object-cover"
+            poster={poster}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            {!esCelular && (
+              <source src={FUENTE_ESCRITORIO_WEBM} type="video/webm" />
+            )}
+            <source src={fuente} type="video/mp4" />
+          </video>
+        ) : (
+          /* Render del servidor y modo sin movimiento: sólo el cuadro. */
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-black bg-cover bg-center"
+            style={{ backgroundImage: `url(${poster})` }}
+          />
+        )}
+      </motion.div>
 
       {/* Arriba: apenas lo necesario para que la barra fija se lea.
           Abajo: funde el material con la sección siguiente.        */}
@@ -123,16 +154,17 @@ export default function Hero() {
       />
 
       {/* Señal de scroll. Sin texto: una línea que baja y vuelve.   */}
-      <a
+      <motion.a
         href="#modelos"
         aria-label="Ir a los modelos"
+        style={sinMovimientoSistema ? undefined : { opacity: senal }}
         className="group absolute bottom-8 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center"
       >
         <span
           aria-hidden="true"
           className="bg-bone/70 group-hover:bg-brass animate-baja block h-8 w-px origin-top transition-colors duration-300"
         />
-      </a>
+      </motion.a>
     </section>
   );
 }

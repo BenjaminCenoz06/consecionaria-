@@ -10,6 +10,7 @@ import Image from "next/image";
 import { SteeringWheel, WhatsappLogo } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
+import Tilt3D from "./Tilt3D";
 import { DESTACADOS } from "@/lib/destacados";
 
 const WHATSAPP = "https://wa.me/5491150000000";
@@ -61,7 +62,7 @@ export default function Destacados() {
     <section
       id="destacados"
       aria-label="Selección de la semana"
-      className="bg-surface relative overflow-hidden py-14 lg:py-16"
+      className="bg-ink relative overflow-hidden py-14 lg:py-16"
     >
       <h2 className="sr-only">Selección de la semana</h2>
 
@@ -138,7 +139,7 @@ export default function Destacados() {
                     <div className="mt-8 flex flex-wrap gap-3">
                       <a
                         href="#reservar"
-                        className="type-condensed bg-brass text-ink hover:bg-bone group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                        className="type-condensed destello bg-brass text-ink hover:bg-bone group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
                         Reservar prueba
                         <SteeringWheel size={20} weight="regular" />
@@ -154,7 +155,10 @@ export default function Destacados() {
                       >
                         Solicitar información
                         <WhatsappLogo size={20} weight="regular" />
-                        <span className="sr-only"> (se abre en una pestaña nueva)</span>
+                        <span className="sr-only">
+                          {" "}
+                          (se abre en una pestaña nueva)
+                        </span>
                       </a>
                     </div>
                   </div>
@@ -187,15 +191,31 @@ export default function Destacados() {
                         : "pointer-events-none translate-x-10 scale-[0.96] opacity-0 duration-300"
                     }`}
                   >
-                    <Image
-                      src={d.foto}
-                      alt={d.alt}
-                      fill
-                      sizes="(min-width: 1024px) 58vw, 100vw"
-                      quality={90}
-                      draggable={false}
-                      className="object-contain object-bottom"
-                    />
+                    {/* `brillo={false}`: el recorte no es una
+                        superficie, es el auto. Un reflejo rectangular
+                        encima lo delataría como foto pegada. */}
+                    <Tilt3D
+                      className="h-full w-full"
+                      grados={10}
+                      escala={1.03}
+                      brillo={false}
+                      activo={enFoco}
+                    >
+                      {/* La flotación va en su propia capa: si
+                          compartiera transformación con el giro, una
+                          le pisaría la otra. */}
+                      <div className="animate-flotar h-full w-full">
+                        <Image
+                          src={d.foto}
+                          alt={d.alt}
+                          fill
+                          sizes="(min-width: 1024px) 58vw, 100vw"
+                          quality={90}
+                          draggable={false}
+                          className="object-contain object-bottom"
+                        />
+                      </div>
+                    </Tilt3D>
                   </div>
                 );
               })}

@@ -34,6 +34,20 @@
 
   /* Señal de scroll del hero: una línea que cae y vuelve.      */
   --animate-baja: baja 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+
+  /* Los autos sueltos sobre el escenario respiran. Muy lento y muy
+     poco: si se nota el ciclo, está mal.                        */
+  --animate-flotar: flotar 7s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
 }
 
 @keyframes baja {
@@ -87,6 +101,35 @@
    Nada de scrim negro encima del material.                    */
 @utility over-media {
   text-shadow: 0 0 3px rgb(0 0 0 / 0.7);
+}
+
+/* Barrido de luz sobre los botones principales. Una sola pasada al
+   entrar el puntero, nunca en bucle: en bucle es un banner, una sola
+   vez es un material que devuelve la luz.                      */
+@utility destello {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      100deg,
+      transparent 38%,
+      rgb(255 255 255 / 0.42) 50%,
+      transparent 62%
+    );
+    transform: translateX(-130%);
+    transition: transform 0.9s var(--ease-premium);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: translateX(130%);
+  }
 }
 
 /* ============================================================
