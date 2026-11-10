@@ -40,7 +40,7 @@ export default function Explorar() {
     <section
       id="explorar"
       aria-labelledby="titulo-explorar"
-      className="bg-ink py-14 lg:py-20"
+      className="py-14 lg:py-20"
     >
       <h2 id="titulo-explorar" className="sr-only">
         Seguí explorando

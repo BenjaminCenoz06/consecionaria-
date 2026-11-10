@@ -62,7 +62,7 @@ export default function Destacados() {
     <section
       id="destacados"
       aria-label="Selección de la semana"
-      className="bg-ink relative overflow-hidden py-14 lg:py-16"
+      className="relative overflow-hidden py-14 lg:py-16"
     >
       <h2 className="sr-only">Selección de la semana</h2>
 
@@ -97,8 +97,8 @@ export default function Destacados() {
                     onClick={() => setActivo(i)}
                     className={`type-normal shrink-0 border-b px-5 pb-3 text-sm font-medium whitespace-nowrap uppercase transition-colors duration-300 ${
                       enFoco
-                        ? "text-bone border-brass"
-                        : "text-graphite hover:text-bone border-white/30 hover:border-white/60"
+                        ? "text-tinta border-brass"
+                        : "text-graphite hover:text-tinta border-linea hover:border-graphite"
                     }`}
                   >
                     {d.marca} {d.nombre}
@@ -126,20 +126,20 @@ export default function Destacados() {
                         : "pointer-events-none translate-y-4 opacity-0 duration-300"
                     }`}
                   >
-                    <p className="type-normal text-brass text-xs font-semibold tracking-wider uppercase">
+                    <p className="type-normal text-acento-tema text-xs font-semibold tracking-wider uppercase">
                       Selección de la semana
                     </p>
-                    <p className="type-normal text-bone mt-3 text-lg font-semibold uppercase md:text-xl">
+                    <p className="type-normal text-tinta mt-3 text-lg font-semibold uppercase md:text-xl">
                       {d.marca}
                     </p>
-                    <p className="display-tight text-bone mt-2 text-6xl font-bold md:text-7xl lg:text-[5.25rem]">
+                    <p className="display-tight text-tinta mt-2 text-6xl font-bold md:text-7xl lg:text-[5.25rem]">
                       {d.nombre}
                     </p>
 
                     <div className="mt-8 flex flex-wrap gap-3">
                       <a
                         href="#reservar"
-                        className="type-condensed destello bg-brass text-ink hover:bg-bone group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                        className="type-condensed destello bg-brass text-ink hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
                         Reservar prueba
                         <SteeringWheel size={20} weight="regular" />
@@ -151,7 +151,7 @@ export default function Destacados() {
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="type-condensed text-bone border-bone/60 hover:bg-bone hover:text-ink hover:border-bone inline-flex h-14 items-center justify-center gap-5 border px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                        className="type-condensed text-tinta border-tinta/60 hover:bg-tinta hover:text-lienzo hover:border-tinta inline-flex h-14 items-center justify-center gap-5 border px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
                       >
                         Solicitar información
                         <WhatsappLogo size={20} weight="regular" />

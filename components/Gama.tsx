@@ -27,13 +27,13 @@ export default function Gama() {
     <section
       id="gama"
       aria-labelledby="titulo-gama"
-      className="bg-ink pt-4 pb-16 lg:pt-6 lg:pb-24"
+      className="pt-4 pb-16 lg:pt-6 lg:pb-24"
     >
       <Container>
         <Reveal>
           <h2
             id="titulo-gama"
-            className="display-tight text-bone mx-auto max-w-[18ch] text-center text-4xl font-bold md:text-5xl lg:text-6xl"
+            className="display-tight text-tinta mx-auto max-w-[18ch] text-center text-4xl font-bold md:text-5xl lg:text-6xl"
           >
             Tu próximo auto empieza acá.
           </h2>

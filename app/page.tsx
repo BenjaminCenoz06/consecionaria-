@@ -58,12 +58,13 @@ export default function Home() {
         <Modelos />
         <Ubicacion />
         <Tagline />
-        <Destacados />
-        <Explorar />
-        <Gama />
-        {/* Zona clara: mientras esta franja cruza el 40% de la pantalla,
-            todo el sitio pasa de negro a blanco. Ver TemaScroll.tsx. */}
+        {/* Zona clara: arranca en "Selección de la semana". Mientras esta
+            franja cruza el 40% de la pantalla, todo el sitio pasa de
+            negro a blanco. Ver TemaScroll.tsx. */}
         <div data-zona="claro">
+          <Destacados />
+          <Explorar />
+          <Gama />
           <ComoFunciona />
           <Preguntas />
         </div>

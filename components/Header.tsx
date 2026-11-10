@@ -76,7 +76,7 @@ export default function Header() {
       <div
         className={`mx-auto flex w-[calc(100%-2rem)] max-w-[1320px] items-center justify-between border px-4 py-3 transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           conFondo
-            ? "border-white/10 bg-black/55 backdrop-blur-lg backdrop-saturate-150"
+            ? "border-white/10 bg-black/80 backdrop-blur-lg backdrop-saturate-150"
             : "border-transparent bg-transparent backdrop-blur-none"
         }`}
       >
