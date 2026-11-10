@@ -10,6 +10,7 @@ import ComoFunciona from "@/components/ComoFunciona";
 import Preguntas from "@/components/Preguntas";
 import Reservar from "@/components/Reservar";
 import Footer from "@/components/Footer";
+import TemaScroll from "@/components/TemaScroll";
 
 /** Datos estructurados para búsqueda local. */
 const SCHEMA = {
@@ -51,7 +52,8 @@ export default function Home() {
       <Header />
       {/* `relative z-10` + fondo sólido: es la cortina que tapa al footer
           (sticky, z-0) hasta que se llega al final. Ver Footer.tsx. */}
-      <main id="contenido" className="bg-ink relative z-10 flex-1">
+      <main id="contenido" className="bg-lienzo relative z-10 flex-1">
+        <TemaScroll />
         <Hero />
         <Modelos />
         <Ubicacion />
@@ -59,8 +61,12 @@ export default function Home() {
         <Destacados />
         <Explorar />
         <Gama />
-        <ComoFunciona />
-        <Preguntas />
+        {/* Zona clara: mientras esta franja cruza el 40% de la pantalla,
+            todo el sitio pasa de negro a blanco. Ver TemaScroll.tsx. */}
+        <div data-zona="claro">
+          <ComoFunciona />
+          <Preguntas />
+        </div>
         <Reservar />
       </main>
       <Footer />

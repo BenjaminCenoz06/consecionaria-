@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import MenuPanel from "./MenuPanel";
 
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
@@ -16,7 +17,6 @@ export default function Header() {
   const [abierto, setAbierto] = useState(false);
   const [activo, setActivo] = useState<string>("");
   const [conFondo, setConFondo] = useState(false);
-  const sinMovimiento = useReducedMotion();
 
   /* Sobre el hero la barra es transparente: flota encima del video.
      Cuando el hero termina de pasar bajo la barra, toma un velo oscuro
@@ -127,8 +127,11 @@ export default function Header() {
             aria-expanded={abierto}
             aria-controls="panel-menu"
             aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
-            className="flex h-10 w-10 items-center justify-center lg:hidden"
+            className="flex h-10 items-center justify-center gap-3 px-2"
           >
+            <span className="type-normal text-bone over-media hidden text-sm font-semibold uppercase lg:inline">
+              Menú
+            </span>
             {/* Las dos líneas se transforman en X, no se reemplazan. */}
             <span className="relative block h-4 w-6">
               <motion.span
@@ -150,43 +153,8 @@ export default function Header() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {abierto && (
-          <motion.div
-            id="panel-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: CURVA }}
-            className="fixed inset-0 -z-10 h-dvh bg-black/95 px-6 pt-28 backdrop-blur-2xl lg:hidden"
-          >
-            <nav aria-label="Menú móvil" className="flex flex-col">
-              {[...ENLACES, { href: "#reservar", etiqueta: "Reservar prueba" }].map(
-                (enlace, i) => (
-                  <motion.a
-                    key={enlace.href}
-                    href={enlace.href}
-                    onClick={() => setAbierto(false)}
-                    initial={
-                      sinMovimiento ? { opacity: 0 } : { opacity: 0, y: 24 }
-                    }
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      /* 60ms por ítem, tope de 400ms en total. */
-                      delay: Math.min(i * 0.06, 0.4),
-                      ease: CURVA,
-                    }}
-                    className="display-tight text-bone border-hairline border-b py-5 text-4xl"
-                  >
-                    {enlace.etiqueta}
-                  </motion.a>
-                ),
-              )}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Panel de navegación: lista de secciones + tarjetas con imagen. */}
+      <MenuPanel abierto={abierto} onCerrar={() => setAbierto(false)} />
     </header>
   );
 }

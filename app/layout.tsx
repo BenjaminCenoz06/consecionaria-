@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={`${archivo.variable} h-full antialiased`}>
-      <body className="bg-ink text-bone flex min-h-full flex-col">
+      <body className="bg-lienzo text-bone flex min-h-full flex-col">
         <a
           href="#contenido"
           className="bg-brass text-ink type-normal sr-only text-sm font-semibold uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-3 focus:py-2"

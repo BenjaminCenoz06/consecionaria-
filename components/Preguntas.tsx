@@ -40,11 +40,11 @@ const PREGUNTAS = [
 
 export default function Preguntas() {
   return (
-    <section id="preguntas" className="bg-paper py-20 lg:py-24">
+    <section id="preguntas" className="py-20 lg:py-24">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
           <Reveal>
-            <h2 className="display-tight text-near text-4xl font-bold md:text-6xl">
+            <h2 className="display-tight text-tinta text-4xl font-bold md:text-6xl">
               Preguntas
             </h2>
             <p className="text-graphite mt-6 max-w-[34ch] text-base">
@@ -55,15 +55,15 @@ export default function Preguntas() {
 
           <Reveal delay={0.08}>
             <Plano3D inclinacion={8}>
-            <dl className="border-ash border-t">
+            <dl className="border-linea border-t">
               {PREGUNTAS.map((item) => (
                 <details
                   key={item.p}
                   name="preguntas"
-                  className="group border-ash border-b"
+                  className="group border-linea border-b"
                 >
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
-                    <dt className="type-normal text-near text-lg font-semibold">
+                    <dt className="type-normal text-tinta text-lg font-semibold">
                       {item.p}
                     </dt>
                     <Plus

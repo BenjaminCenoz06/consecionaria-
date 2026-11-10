@@ -25,13 +25,13 @@ const PASOS = [
 
 export default function ComoFunciona() {
   return (
-    <section id="como-funciona" className="bg-paper py-20 lg:py-24">
+    <section id="como-funciona" className="py-20 lg:py-24">
       <Container>
         <Reveal>
-          <p className="type-normal text-xs font-semibold text-[#8a6f33] uppercase">
+          <p className="type-normal text-acento-tema text-xs font-semibold uppercase">
             Tres pasos
           </p>
-          <h2 className="display-tight text-near mt-3 max-w-[18ch] text-4xl font-bold md:text-6xl lg:text-7xl">
+          <h2 className="display-tight text-tinta mt-3 max-w-[18ch] text-4xl font-bold md:text-6xl lg:text-7xl">
             Cómo funciona
           </h2>
         </Reveal>
@@ -48,17 +48,17 @@ export default function ComoFunciona() {
                 className="h-full rounded-sm"
               >
                 <div
-                  className="border-ash h-full rounded-sm border bg-white p-8 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
+                  className="border-linea bg-tarjeta h-full rounded-sm border p-8 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <p
-                    className="type-condensed text-ash text-7xl font-bold"
+                    className="type-condensed text-linea text-7xl font-bold"
                     style={{ transform: "translateZ(18px)" }}
                   >
                     {paso.n}
                   </p>
                   <h3
-                    className="type-condensed text-near mt-4 text-2xl font-bold uppercase"
+                    className="type-condensed text-tinta mt-4 text-2xl font-bold uppercase"
                     style={{ transform: "translateZ(40px)" }}
                   >
                     {paso.titulo}
