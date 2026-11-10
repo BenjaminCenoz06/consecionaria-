@@ -23,7 +23,7 @@ export default function BloquesPagina({
     bloques.length === 4 ? "md:grid-cols-2" : "md:grid-cols-2 lg:grid-cols-3";
 
   return (
-    <section className="py-12 lg:py-16">
+    <section className="py-6 lg:py-16">
       <Container>
         {titulo && (
           <Reveal>
@@ -33,12 +33,12 @@ export default function BloquesPagina({
           </Reveal>
         )}
 
-        <ol className={`grid grid-cols-1 gap-6 ${titulo ? "mt-12" : ""} ${columnas}`}>
+        <ol className={`carrusel-movil sm:grid sm:grid-cols-1 sm:gap-6 ${titulo ? "mt-8 lg:mt-12" : ""} ${columnas}`}>
           {bloques.map((b, i) => (
             <Reveal as="li" key={b.titulo} delay={(i % 3) * 0.08}>
               <Tilt3D grados={6} escala={1.025} className="h-full rounded-sm">
                 <div
-                  className="border-linea bg-tarjeta h-full rounded-sm border p-8 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
+                  className="border-linea bg-tarjeta h-full rounded-sm border p-6 shadow sm:p-8-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <p

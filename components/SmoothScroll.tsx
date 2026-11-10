@@ -17,6 +17,11 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     );
     if (prefiereMenosMovimiento.matches) return;
 
+    /* En pantallas táctiles el scroll nativo ya tiene inercia propia y es
+       el más fluido que existe: encima, un bucle de JavaScript que corre
+       en cada cuadro sólo gasta batería. Lenis queda para mouse. */
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       // Exponencial de salida: arranca rápido y frena largo.

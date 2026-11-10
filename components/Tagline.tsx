@@ -28,7 +28,7 @@ export default function Tagline() {
   const palabras = t(TEXTO).split(" ");
 
   return (
-    <section className="bg-ink py-24 lg:py-32">
+    <section className="bg-ink py-10 lg:py-32">
       <Container>
         <Plano3D inclinacion={9}>
           <p

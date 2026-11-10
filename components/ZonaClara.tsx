@@ -20,13 +20,13 @@ export default function ZonaClara({ children }: { children: ReactNode }) {
     <div data-zona="claro">
       <div
         aria-hidden="true"
-        className="h-36 lg:h-52"
+        className="h-16 sm:h-36 lg:h-52"
         style={{ backgroundImage: ENTRADA }}
       />
       {children}
       <div
         aria-hidden="true"
-        className="h-36 lg:h-52"
+        className="h-16 sm:h-36 lg:h-52"
         style={{ backgroundImage: SALIDA }}
       />
     </div>

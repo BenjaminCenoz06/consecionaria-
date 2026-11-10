@@ -89,7 +89,7 @@ export default function EspecificacionesAuto({ auto }: { auto: Auto }) {
   return (
     <section
       style={{ backgroundColor: auto.tono }}
-      className="relative overflow-hidden py-20 lg:py-28"
+      className="relative overflow-hidden py-9 lg:py-28"
     >
       <div
         aria-hidden="true"
@@ -97,11 +97,11 @@ export default function EspecificacionesAuto({ auto }: { auto: Auto }) {
       />
 
       <Container className="relative">
-        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-8">
-          <dl className="space-y-12 lg:col-span-5 lg:space-y-14">
+        <div className="grid items-center gap-7 lg:grid-cols-12 lg:gap-8">
+          <dl className="space-y-6 lg:col-span-5 lg:space-y-14">
             {cifras.map((c, i) => (
               <Reveal key={c.rotulo} delay={i * 0.1}>
-                <dd className="type-normal text-rojo text-6xl leading-none font-light md:text-7xl">
+                <dd className="type-normal text-rojo text-5xl leading-none font-light md:text-7xl">
                   {c.grande}
                   <span className="ml-2 text-[0.38em] font-normal">{c.unidad}</span>
                 </dd>
@@ -119,7 +119,7 @@ export default function EspecificacionesAuto({ auto }: { auto: Auto }) {
           </dl>
 
           <motion.div
-            className="relative h-[260px] sm:h-[360px] lg:col-span-7 lg:h-[480px]"
+            className="relative h-[180px] sm:h-[360px] lg:col-span-7 lg:h-[480px]"
             initial={{ opacity: 0, scale: 0.9, rotateY: -18 }}
             whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -144,7 +144,7 @@ export default function EspecificacionesAuto({ auto }: { auto: Auto }) {
           </motion.div>
         </div>
 
-        <p className="text-bone/50 mt-14 max-w-[70ch] text-xs leading-relaxed">
+        <p className="text-bone/50 mt-6 lg:mt-14 max-w-[70ch] text-xs leading-relaxed">
           {t(
             "Cifras de fábrica de referencia para este modelo. La versión exacta de la unidad se informa por nuestros asesores.",
           )}

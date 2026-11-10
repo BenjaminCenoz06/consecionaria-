@@ -66,7 +66,7 @@ export default function Destacados() {
     <section
       id="destacados"
       aria-label={t("Selección de la semana")}
-      className="relative overflow-hidden py-14 lg:py-16"
+      className="relative overflow-hidden py-6 lg:py-16"
     >
       <h2 className="sr-only">{t("Selección de la semana")}</h2>
 
@@ -112,7 +112,7 @@ export default function Destacados() {
             </div>
           </div>
 
-          <div className="mt-10 grid items-center gap-6 lg:mt-4 lg:grid-cols-12 lg:gap-0">
+          <div className="mt-6 grid items-center gap-4 lg:mt-4 lg:grid-cols-12 lg:gap-0">
             {/* Texto y botones. En celular van debajo del auto. */}
             <div className="order-2 grid lg:order-1 lg:col-span-5">
               {DESTACADOS.map((d, i) => {
@@ -242,7 +242,7 @@ export default function Destacados() {
           </div>
         </Reveal>
 
-        <p className="text-graphite mt-12 max-w-[1040px] text-xs leading-relaxed lg:mt-10">
+        <p className="text-graphite mt-6 max-w-[1040px] text-xs leading-relaxed lg:mt-10">
           {t(
             "La selección cambia cada semana y está sujeta a disponibilidad. Imágenes ilustrativas: precio, historial y estado de cada unidad se informan por nuestros asesores.",
           )}

@@ -89,14 +89,14 @@ export default function PaginaInfo({ pagina }: { pagina: Pagina }) {
           }))}
         />
 
-        <section className="pt-4 pb-12 lg:pb-16">
+        <section className="pt-2 pb-6 lg:pt-4 lg:pb-16">
           <Container>
             <Reveal>
               <h2 className="display-tight text-tinta text-3xl font-bold md:text-5xl">
                 {t("Seguí explorando")}
               </h2>
             </Reveal>
-            <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="carrusel-movil mt-6 sm:mt-10 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {tarjetas.map((c, i) => (
                 <Reveal as="li" key={c.href} delay={i * 0.08}>
                   <TarjetaImagen {...c} />

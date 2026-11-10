@@ -111,9 +111,9 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
       <EspecificacionesAuto auto={auto} />
 
       {/* Por qué lo recomendamos. */}
-      <section className="bg-black py-20 lg:py-28">
+      <section className="bg-black py-9 lg:py-28">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="grid gap-7 lg:grid-cols-12 lg:gap-16">
             <Reveal className="lg:col-span-5">
               <p className="type-normal text-rojo text-xs font-semibold tracking-wider uppercase">
                 {auto.marca} {auto.nombre}
@@ -158,9 +158,9 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
       </section>
 
       {/* Compra: precio, qué incluye y pasos. */}
-      <section id="comprar" className="scroll-mt-20 bg-white py-20 text-[#202020] lg:py-28">
+      <section id="comprar" className="scroll-mt-20 bg-white py-9 text-[#202020] lg:py-28">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-20">
             <Reveal>
               <h2 className="display-tight text-4xl font-bold md:text-6xl">
                 {t("Comprá tu")} {auto.marca} {auto.nombre}
@@ -186,7 +186,7 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-3xl bg-[#f4f4f6] p-8 lg:p-10">
+              <div className="rounded-3xl bg-[#f4f4f6] p-5 lg:p-10">
                 <p className="type-normal text-sm font-semibold tracking-wide uppercase">
                   {t("Cómo seguimos")}
                 </p>
@@ -225,14 +225,14 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
       </section>
 
       {/* Otros autos. */}
-      <section className="bg-black py-20 lg:py-24">
+      <section className="bg-black py-9 lg:py-24">
         <Container>
           <Reveal>
             <h2 className="display-tight text-bone text-3xl font-bold md:text-5xl">
               {t("Otros autos que te pueden gustar")}
             </h2>
           </Reveal>
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="carrusel-movil mt-6 sm:mt-10 sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {otros.map((o, i) => (
               <Reveal as="li" key={o.id} delay={i * 0.08}>
                 <TarjetaImagen

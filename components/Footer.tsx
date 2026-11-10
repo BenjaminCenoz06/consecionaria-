@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Container from "./Container";
 import { useIdioma } from "@/lib/idioma";
 
@@ -93,13 +94,18 @@ export default function Footer() {
 
       <footer className="cortina text-bone">
         <div className="bg-ink">
-          <Container className="pt-14 pb-8 lg:pt-16">
-            <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
-              <div className="col-span-2 md:col-span-1">
-                <p className="type-condensed text-bone text-3xl font-bold uppercase">
-                  Bárcena
-                </p>
-                <address className="text-graphite mt-4 text-sm not-italic">
+          <Container className="pt-8 pb-5 lg:pt-16 lg:pb-8">
+            <div className="grid grid-cols-3 gap-x-4 gap-y-5 md:grid-cols-4 md:gap-10">
+              <div className="col-span-3 md:col-span-1">
+                <Image
+                  src="/marca/logo-barcena.png"
+                  alt="Bárcena Automotores"
+                  width={1624}
+                  height={440}
+                  quality={90}
+                  className="h-9 w-auto lg:h-11"
+                />
+                <address className="text-graphite mt-3 text-sm not-italic lg:mt-4">
                   La Cumbre, Córdoba
                   <br />
                   Argentina
@@ -118,7 +124,7 @@ export default function Footer() {
                   <h2 className="type-normal text-dim text-xs font-semibold uppercase">
                     {t(col.titulo)}
                   </h2>
-                  <ul className="mt-4 space-y-2">
+                  <ul className="mt-2.5 space-y-1.5 lg:mt-4 lg:space-y-2">
                     {col.enlaces.map((e) => (
                       <li key={e.href + e.texto}>
                         <Link
@@ -140,7 +146,7 @@ export default function Footer() {
                 50px no se ven fuera de ella. */}
             <p
               aria-label={t("Acá se maneja")}
-              className="mt-12 flex items-end gap-[0.16em] text-[min(calc((100vw-3rem)/8.6),9.25rem)] leading-[0.9] uppercase lg:mt-14"
+              className="mt-6 flex items-end gap-[0.16em] text-[min(calc((100vw-3rem)/8.6),9.25rem)] leading-[0.9] uppercase lg:mt-14"
             >
               {LEMA.map((palabra, i) => {
                 const retardo = {
@@ -171,7 +177,7 @@ export default function Footer() {
               })}
             </p>
 
-            <div className="border-hairline text-dim mt-10 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:justify-between">
+            <div className="border-hairline text-dim mt-5 flex flex-col gap-1 border-t pt-4 text-[11px] sm:flex-row sm:justify-between lg:mt-10 lg:gap-2 lg:pt-6 lg:text-xs">
               <p>{t("© Bárcena Automotores. Todos los derechos reservados.")}</p>
               <a
                 href="https://www.instagram.com/barcena.automotores/"

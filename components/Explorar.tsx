@@ -44,14 +44,14 @@ export default function Explorar() {
     <section
       id="explorar"
       aria-labelledby="titulo-explorar"
-      className="py-14 lg:py-20"
+      className="py-6 lg:py-20"
     >
       <h2 id="titulo-explorar" className="sr-only">
         {t("Seguí explorando")}
       </h2>
 
       <Container>
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="carrusel-movil sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {tarjetas.map((m, i) => (
             <Reveal as="li" key={m.id} delay={i * 0.1}>
               <Tilt3D className="rounded-2xl" grados={8}>

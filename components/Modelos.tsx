@@ -86,7 +86,7 @@ export default function Modelos() {
       aria-roledescription={t("carrusel")}
       aria-label={t("Modelos")}
       onKeyDown={alTeclear}
-      className="bg-ink relative overflow-hidden pt-12 pb-14 lg:pt-14 lg:pb-16"
+      className="bg-ink relative overflow-hidden pt-8 pb-6 lg:pt-14 lg:pb-16"
     >
       <Container>
         <Reveal className="flex items-start justify-between gap-6">
@@ -294,7 +294,7 @@ export default function Modelos() {
           <Hexagono lado="der" onClick={() => ir(activo + 1)} />
         </div>
 
-        <p className="text-graphite mt-10 max-w-[1040px] text-xs leading-relaxed">
+        <p className="text-graphite mt-5 max-w-[1040px] text-xs leading-relaxed lg:mt-10">
           {t(
             "Imágenes ilustrativas. Las unidades están sujetas a disponibilidad; precio y estado se informan por nuestros asesores.",
           )}

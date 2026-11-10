@@ -60,7 +60,7 @@ export default function EncabezadoPagina({
         };
 
   return (
-    <section className="relative isolate overflow-hidden pt-28 pb-14 lg:pt-40 lg:pb-20">
+    <section className="relative isolate overflow-hidden pt-24 pb-7 lg:pt-40 lg:pb-20">
       {fondo ? (
         <>
           <Paralaje className="-z-20" distancia={48}>
@@ -93,7 +93,7 @@ export default function EncabezadoPagina({
 
       <Container>
         <div
-          className={`grid items-center gap-10 ${
+          className={`grid items-center gap-5 lg:gap-10 ${
             mostrarAuto ? "lg:grid-cols-12 lg:gap-6" : ""
           }`}
         >
@@ -187,7 +187,7 @@ export default function EncabezadoPagina({
 
           {mostrarAuto && modelo && (
             <motion.div
-              className="relative h-[240px] sm:h-[320px] lg:col-span-5 lg:h-[420px] lg:-mr-10"
+              className="relative h-[190px] sm:h-[320px] lg:col-span-5 lg:h-[420px] lg:-mr-10"
               initial={
                 sinMovimiento
                   ? { opacity: 0 }

@@ -32,7 +32,7 @@ export default function Gama() {
     <section
       id="gama"
       aria-labelledby="titulo-gama"
-      className="pt-4 pb-16 lg:pt-6 lg:pb-24"
+      className="pt-2 pb-8 lg:pt-6 lg:pb-24"
     >
       <Container>
         <Reveal>
@@ -44,7 +44,7 @@ export default function Gama() {
           </h2>
         </Reveal>
 
-        <ul className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-2">
+        <ul className="carrusel-movil mt-5 sm:mt-12 sm:grid sm:gap-6 lg:mt-16 lg:grid-cols-2">
           {GAMA.map((g, i) => (
             <Reveal as="li" key={g.id} delay={(i % 2) * 0.1}>
               <Tilt3D className="rounded-2xl" grados={7}>
@@ -54,7 +54,7 @@ export default function Gama() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex aspect-4/3 flex-col rounded-2xl [transform-style:preserve-3d] sm:aspect-square lg:aspect-4/3"
+                  className="group relative flex aspect-[4/5] flex-col rounded-2xl [transform-style:preserve-3d] sm:aspect-square lg:aspect-4/3"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
                   <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">

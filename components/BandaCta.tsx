@@ -25,13 +25,13 @@ export default function BandaCta({
       : "type-condensed text-tinta border-tinta/60 hover:bg-tinta hover:text-lienzo hover:border-tinta group inline-flex h-14 items-center justify-center gap-5 border px-6 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300";
 
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-8 lg:py-24">
       <Container>
         <Reveal>
           <h2 className="display-tight text-tinta max-w-[22ch] text-4xl font-bold md:text-6xl lg:text-7xl">
             {titulo}
           </h2>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-6 flex flex-wrap gap-3 lg:mt-10">
             {botones.map((b, i) => {
               const contenido = (
                 <>

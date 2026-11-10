@@ -45,9 +45,9 @@ export default function Preguntas() {
   const { t } = useIdioma();
 
   return (
-    <section id="preguntas" className="py-20 lg:py-24">
+    <section id="preguntas" className="py-8 lg:py-24">
       <Container>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+        <div className="grid grid-cols-1 gap-6 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
           <Reveal>
             <h2 className="display-tight text-tinta text-4xl font-bold md:text-6xl">
               {t("Preguntas")}
@@ -68,7 +68,7 @@ export default function Preguntas() {
                   name="preguntas"
                   className="group border-linea border-b"
                 >
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-3.5 lg:py-5 [&::-webkit-details-marker]:hidden">
                     <dt className="type-normal text-tinta text-lg font-semibold">
                       {t(item.p)}
                     </dt>

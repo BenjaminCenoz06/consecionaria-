@@ -96,9 +96,9 @@ export default function Reservar() {
   }
 
   return (
-    <section id="reservar" className="bg-ink py-20 lg:py-24">
+    <section id="reservar" className="bg-ink py-8 lg:py-24">
       <Container>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <h2 className="display-tight text-bone text-4xl font-bold md:text-6xl lg:text-7xl">
               {t("Reservá tu")}

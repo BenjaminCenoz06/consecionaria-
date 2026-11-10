@@ -63,9 +63,9 @@ export default function IndiceCategoria({ categoriaId }: { categoriaId: string }
       />
 
       <ZonaClara>
-        <section className="py-12 lg:py-16">
+        <section className="py-6 lg:py-16">
           <Container>
-            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="carrusel-movil sm:grid sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {tarjetas.map((c, i) => (
                 <Reveal as="li" key={c.href} delay={(i % 3) * 0.08}>
                   <TarjetaImagen {...c} />

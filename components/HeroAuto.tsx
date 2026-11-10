@@ -59,7 +59,7 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
   return (
     <section ref={seccion} className="relative isolate">
       {/* Estudio oscuro. No es `overflow-hidden`: el auto lo desborda. */}
-      <div className="relative bg-black pt-24 lg:pt-28">
+      <div className="relative bg-black pt-20 lg:pt-28">
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
           <div
             className="absolute inset-0"
@@ -117,7 +117,7 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
       </div>
 
       {/* Franja blanca: producto, precio y compra. */}
-      <div className="bg-white pt-36 pb-16 text-[#202020] sm:pt-44 lg:pt-52 lg:pb-24">
+      <div className="bg-white pt-24 pb-10 text-[#202020] sm:pt-44 lg:pt-52 lg:pb-24">
         <div className="mx-auto flex max-w-[900px] flex-col items-center px-6 text-center">
           <motion.div {...entrar(0.5)} className="flex flex-wrap justify-center gap-2">
             <span className="type-normal rounded-full bg-[#e4e4e8] px-4 py-1.5 text-xs font-medium">
@@ -128,7 +128,7 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
             </span>
           </motion.div>
 
-          <h1 className="type-normal mt-5 text-5xl font-light tracking-tight md:text-6xl lg:text-7xl">
+          <h1 className="type-normal mt-4 text-4xl font-light tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             {auto.marca} {auto.nombre}
           </h1>
 
@@ -160,7 +160,7 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
 
           <motion.div
             {...entrar(0.8)}
-            className="mt-9 flex flex-wrap justify-center gap-3"
+            className="mt-6 flex flex-wrap justify-center gap-2.5 lg:mt-9 lg:gap-3"
           >
             <a href="#comprar" className={primario}>
               {t("Comprar este auto")}

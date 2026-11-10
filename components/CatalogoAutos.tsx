@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { X } from "@phosphor-icons/react";
+import { CaretDown, X } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
@@ -51,13 +51,13 @@ function CartaProducto({
   return (
     <Tilt3D grados={5} escala={1.015} brillo={false} className="h-full rounded-3xl">
       <article
-        className="relative h-full pt-16"
+        className="relative h-full pt-9 md:pt-16"
         style={{ transformStyle: "preserve-3d" }}
       >
         <Link
           href={`/modelos/${auto.id}`}
           aria-label={`${auto.marca} ${auto.nombre}`}
-          className="group absolute inset-x-0 top-0 z-10 block h-[150px]"
+          className="group absolute inset-x-0 top-0 z-10 block h-[84px] md:h-[150px]"
           style={{ transform: "translateZ(70px)" }}
         >
           {/* Sombra de apoyo barata (un degradé), no `drop-shadow`: con 16
@@ -77,15 +77,15 @@ function CartaProducto({
           />
         </Link>
 
-        <div className="border-linea bg-tarjeta text-tinta flex h-full flex-col rounded-3xl border px-6 pt-24 pb-6 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_14px_28px_-12px_rgb(0_0_0/0.14),0_36px_60px_-30px_rgb(0_0_0/0.22)]">
-          <h3 className="type-normal text-2xl font-light">
+        <div className="border-linea bg-tarjeta text-tinta flex h-full flex-col rounded-3xl border px-3 pt-14 pb-3 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_14px_28px_-12px_rgb(0_0_0/0.14),0_36px_60px_-30px_rgb(0_0_0/0.22)]">
+          <h3 className="type-normal text-[0.95rem] leading-tight font-normal md:text-2xl md:font-light">
             {auto.marca} {auto.nombre}
           </h3>
-          <p className="type-normal mt-1 text-sm text-[#6b6b72]">
+          <p className="type-normal mt-1 text-xs text-[#6b6b72] md:text-sm">
             {formatoUSD(auto.precio, idioma)}
           </p>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-2.5 flex flex-wrap gap-1.5 md:mt-4 md:gap-2">
             <span className="type-normal bg-linea text-tinta rounded-full px-3 py-1 text-[11px] font-medium">
               {auto.anio}
             </span>
@@ -102,7 +102,7 @@ function CartaProducto({
             ))}
           </div>
 
-          <dl className="mt-6 space-y-4">
+          <dl className="mt-6 hidden space-y-4 md:block">
             {cifras.map((c) => (
               <div key={c.rotulo}>
                 <dd className="type-normal text-lg font-normal">{c.valor}</dd>
@@ -113,28 +113,28 @@ function CartaProducto({
 
           <Link
             href={`/modelos/${auto.id}`}
-            className="mt-6 text-sm underline underline-offset-4 transition-opacity duration-300 hover:opacity-70"
+            className="mt-6 hidden text-sm underline underline-offset-4 transition-opacity duration-300 hover:opacity-70 md:block"
           >
             {t("Datos técnicos y equipamiento")}
           </Link>
 
-          <div className="mt-auto flex flex-wrap gap-2 pt-6">
+          <div className="mt-auto flex flex-wrap gap-2 pt-3 md:pt-6">
             <Link
               href={`/modelos/${auto.id}`}
-              className="type-normal inline-flex h-11 flex-1 items-center justify-center rounded-xl bg-[#010205] px-4 text-sm font-medium whitespace-nowrap text-white transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]"
+              className="type-normal inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-[#010205] px-4 text-sm font-medium whitespace-nowrap text-white transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98] md:h-11"
             >
               {t("Ver detalle")}
             </Link>
             <Link
               href="/#reservar"
-              className="type-normal inline-flex h-11 flex-1 items-center justify-center rounded-xl bg-[#e4e4e8] px-4 text-sm font-medium whitespace-nowrap text-[#202020] transition-colors duration-300 hover:bg-[#d4d4da]"
+              className="type-normal hidden h-11 flex-1 items-center justify-center rounded-xl bg-[#e4e4e8] px-4 text-sm font-medium whitespace-nowrap text-[#202020] transition-colors duration-300 hover:bg-[#d4d4da] md:inline-flex"
             >
               {t("Reservar prueba")}
             </Link>
           </div>
 
           <label
-            className={`type-normal mt-4 flex w-fit items-center gap-2 text-sm ${
+            className={`type-normal mt-2.5 flex w-fit items-center gap-2 text-xs md:mt-4 md:text-sm ${
               puedeElegir || elegido ? "cursor-pointer" : "cursor-not-allowed opacity-50"
             }`}
           >
@@ -277,6 +277,9 @@ export default function CatalogoAutos() {
   const [orden, setOrden] = useState<Orden>("precio-asc");
   const [elegidos, setElegidos] = useState<string[]>([]);
   const [comparando, setComparando] = useState(false);
+  /* En celular los filtros van plegados: la lista de marcas ocupa una
+     pantalla entera y el visitante vino a ver autos. */
+  const [filtrosAbiertos, setFiltrosAbiertos] = useState(false);
 
   const visibles = useMemo(() => {
     const lista = AUTOS.filter(
@@ -325,6 +328,30 @@ export default function CatalogoAutos() {
             <div className="grid gap-10 lg:grid-cols-[250px_1fr] lg:gap-12">
               {/* Filtros. */}
               <aside className="lg:sticky lg:top-28 lg:self-start">
+                <button
+                  type="button"
+                  aria-expanded={filtrosAbiertos}
+                  onClick={() => setFiltrosAbiertos((v) => !v)}
+                  className="border-linea bg-tarjeta text-tinta type-normal flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-medium lg:hidden"
+                >
+                  <span>
+                    {t("Filtros")}
+                    {hayFiltros
+                      ? ` (${(marca !== "Todas" ? 1 : 0) + motores.length})`
+                      : ""}
+                  </span>
+                  <CaretDown
+                    size={16}
+                    weight="bold"
+                    className={`ease-premium transition-transform duration-500 ${
+                      filtrosAbiertos ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <div
+                  className={`${filtrosAbiertos ? "mt-5 block" : "hidden"} lg:mt-0 lg:block`}
+                >
                 <fieldset>
                   <legend className="type-normal text-tinta text-lg font-semibold">
                     {t("Marca")}
@@ -412,6 +439,7 @@ export default function CatalogoAutos() {
                     {t("Limpiar filtros")}
                   </button>
                 )}
+                </div>
               </aside>
 
               {/* Resultados. */}
@@ -427,7 +455,7 @@ export default function CatalogoAutos() {
                 ) : (
                   <ul
                     key={`${marca}-${motores.join()}-${orden}`}
-                    className="mt-8 grid gap-x-6 gap-y-10 md:grid-cols-2 xl:grid-cols-3"
+                    className="mt-5 grid grid-cols-2 gap-x-3 gap-y-8 md:mt-8 md:gap-x-6 md:gap-y-10 xl:grid-cols-3"
                   >
                     {visibles.map((a, i) => (
                       <Reveal as="li" key={a.id} delay={(i % 3) * 0.08}>

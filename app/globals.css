@@ -233,6 +233,12 @@
 
   /* El scroll suave lo maneja Lenis; el nativo queda desactivado
      para que no peleen entre sí.                                */
+  /* Sin Lenis (celular y táctiles) los enlaces internos se deslizan con
+     el scroll suave nativo. */
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+
   html.lenis,
   html.lenis body {
     height: auto;
@@ -297,9 +303,39 @@
   position: relative;
   z-index: 0;
 
-  @media (min-width: 768px) and (min-height: 720px) {
+  /* También en celular: el footer es lo bastante compacto para entrar
+     entero en la pantalla. Si la pantalla es muy baja (celular
+     apaisado) no se pega, porque no entraría y quedaría cortado. */
+  @media (min-height: 560px) {
     position: sticky;
     bottom: 0;
+  }
+}
+
+/* Fila que en celular se desliza de costado, con imán en cada tarjeta, y
+   en pantallas más grandes vuelve a ser la grilla de siempre. Evita tener
+   que bajar una pantalla entera por cada tarjeta. Los hijos directos son
+   las tarjetas. */
+@utility carrusel-movil {
+  @media (max-width: 639px) {
+    display: flex;
+    gap: 0.875rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > * {
+      flex: 0 0 80%;
+      scroll-snap-align: center;
+    }
   }
 }
 

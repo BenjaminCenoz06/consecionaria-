@@ -8,6 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
+import { usarMovil } from "@/lib/usarMovil";
 
 /**
  * Plano que se endereza con el scroll.
@@ -35,6 +36,9 @@ export default function Plano3D({
 }) {
   const caja = useRef<HTMLDivElement>(null);
   const sinMovimiento = useReducedMotion();
+  /* En celular el giro de bloques enteros con el scroll es lo que más
+     tironea: se apaga y el bloque queda quieto y de frente. */
+  const movil = usarMovil();
 
   const { scrollYProgress } = useScroll({
     target: caja,
@@ -58,7 +62,7 @@ export default function Plano3D({
     <div ref={caja} className={className}>
       <motion.div
         style={
-          sinMovimiento
+          sinMovimiento || movil
             ? undefined
             : {
                 rotateX: girar,

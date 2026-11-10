@@ -128,7 +128,7 @@ export default function Hero() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload={esCelular ? "metadata" : "auto"}
             disablePictureInPicture
             aria-hidden="true"
             tabIndex={-1}

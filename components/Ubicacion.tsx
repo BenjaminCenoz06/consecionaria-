@@ -43,7 +43,7 @@ export default function Ubicacion() {
         className="absolute inset-0 -z-10 bg-gradient-to-r from-black/70 via-black/20 to-transparent"
       />
 
-      <Container className="py-12 md:py-14">
+      <Container className="py-8 md:py-14">
         <Reveal>
           <h2
             id="titulo-ubicacion"
