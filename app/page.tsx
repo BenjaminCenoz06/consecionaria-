@@ -62,11 +62,32 @@ export default function Home() {
             franja cruza el 40% de la pantalla, todo el sitio pasa de
             negro a blanco. Ver TemaScroll.tsx. */}
         <div data-zona="claro">
+          {/* Borde de entrada: en vez de un corte seco entre el negro de
+              Tagline y el blanco, un degradé de varias paradas (curva
+              suave, no lineal) con un halo latón apenas visible. Sobre
+              el fondo negro, antes del cambio de tema, es invisible. */}
+          <div
+            aria-hidden="true"
+            className="h-36 lg:h-52"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 55% 90% at 50% 0%, rgba(194,160,91,0.2), transparent 70%), linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)",
+            }}
+          />
           <Destacados />
           <Explorar />
           <Gama />
           <ComoFunciona />
           <Preguntas />
+          {/* Borde de salida: el mismo degradé, al revés, hacia Reservar. */}
+          <div
+            aria-hidden="true"
+            className="h-36 lg:h-52"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse 55% 90% at 50% 100%, rgba(194,160,91,0.2), transparent 70%), linear-gradient(to top, #000 0%, rgba(0,0,0,0.88) 16%, rgba(0,0,0,0.66) 38%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.14) 82%, rgba(0,0,0,0) 100%)",
+            }}
+          />
         </div>
         <Reservar />
       </main>
