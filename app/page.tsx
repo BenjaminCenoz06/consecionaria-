@@ -2,6 +2,7 @@ import Header from "@/components/Header";import Hero from "@/components/Hero";
 import Modelos from "@/components/Modelos";
 import Ubicacion from "@/components/Ubicacion";
 import Tagline from "@/components/Tagline";
+import Marquesina from "@/components/Marquesina";
 import Destacados from "@/components/Destacados";
 import Explorar from "@/components/Explorar";
 import Gama from "@/components/Gama";
@@ -41,6 +42,7 @@ export default function Home() {
         <Modelos />
         <Ubicacion />
         <Tagline />
+        <Marquesina />
         {/* Zona clara: arranca en "Selección de la semana". Mientras esta
             franja cruza el 40% de la pantalla, todo el sitio pasa de
             negro a blanco. Ver TemaScroll.tsx. */}

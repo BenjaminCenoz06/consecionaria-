@@ -1,6 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
 import Container from "./Container";
+import TituloAnimado from "./TituloAnimado";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import { useIdioma } from "@/lib/idioma";
@@ -36,12 +38,30 @@ export default function ComoFunciona() {
           <p className="type-normal text-acento-tema text-xs font-semibold uppercase">
             {t("Tres pasos")}
           </p>
-          <h2 className="display-tight text-tinta mt-3 max-w-[18ch] text-4xl font-bold md:text-6xl lg:text-7xl">
-            {t("Cómo funciona")}
-          </h2>
         </Reveal>
+        <TituloAnimado
+          texto="Cómo funciona"
+          retardo={0.1}
+          className="display-tight text-tinta mt-3 max-w-[18ch] text-4xl font-bold md:text-6xl lg:text-7xl"
+        />
 
-        <ol className="carrusel-movil mt-6 sm:grid sm:grid-cols-1 sm:gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-12 lg:mt-16">
+        {/* Hilo que une los tres pasos: se dibuja de izquierda a derecha
+            al entrar en pantalla. Sólo en pantallas donde los pasos van
+            en fila. */}
+        <div
+          aria-hidden="true"
+          className="bg-linea relative mt-10 hidden h-px w-full md:block lg:mt-16"
+        >
+          <motion.span
+            className="bg-rojo absolute inset-0 origin-left shadow-[0_0_10px_rgb(216_31_38/0.6)]"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </div>
+
+        <ol className="carrusel-movil mt-6 sm:grid sm:grid-cols-1 sm:gap-y-8 md:mt-8 md:grid-cols-3 md:gap-x-6 md:gap-y-12">
           {PASOS.map((paso, i) => (
             <Reveal as="li" key={paso.n} delay={i * 0.08}>
               {/* Tarjeta con profundidad: el número queda al fondo, el

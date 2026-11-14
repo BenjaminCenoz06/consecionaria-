@@ -39,6 +39,18 @@
   /* Los autos sueltos sobre el escenario respiran. Muy lento y muy
      poco: si se nota el ciclo, está mal.                        */
   --animate-flotar: flotar 7s ease-in-out infinite;
+
+  /* Cinta de marcas: desplaza la mitad de la pista, sin salto. */
+  --animate-marquesina: marquesina 55s linear infinite;
+}
+
+@keyframes marquesina {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* ============================================================

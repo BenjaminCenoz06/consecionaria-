@@ -4,6 +4,7 @@ import { Plus } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Plano3D from "./Plano3D";
+import TituloAnimado from "./TituloAnimado";
 import { useIdioma } from "@/lib/idioma";
 
 const PREGUNTAS = [
@@ -49,9 +50,10 @@ export default function Preguntas() {
       <Container>
         <div className="grid grid-cols-1 gap-6 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
           <Reveal>
-            <h2 className="display-tight text-tinta text-4xl font-bold md:text-6xl">
-              {t("Preguntas")}
-            </h2>
+            <TituloAnimado
+              texto="Preguntas"
+              className="display-tight text-tinta text-4xl font-bold md:text-6xl"
+            />
             <p className="text-graphite mt-6 max-w-[34ch] text-base">
               {t(
                 "Si falta la tuya, escribinos por WhatsApp y te contestamos sin pedirte los datos primero.",

@@ -6,6 +6,7 @@ import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import VideoAuto from "./VideoAuto";
+import TituloAnimado from "./TituloAnimado";
 import { videoDe } from "@/lib/videos";
 import { GAMA } from "@/lib/gama";
 import { useIdioma } from "@/lib/idioma";
@@ -37,14 +38,11 @@ export default function Gama() {
       className="pt-2 pb-8 lg:pt-6 lg:pb-24"
     >
       <Container>
-        <Reveal>
-          <h2
-            id="titulo-gama"
-            className="display-tight text-tinta mx-auto max-w-[18ch] text-center text-4xl font-bold md:text-5xl lg:text-6xl"
-          >
-            {t("Tu próximo auto empieza acá.")}
-          </h2>
-        </Reveal>
+        <TituloAnimado
+          id="titulo-gama"
+          texto="Tu próximo auto empieza acá."
+          className="display-tight text-tinta mx-auto max-w-[18ch] text-center text-4xl font-bold md:text-5xl lg:text-6xl"
+        />
 
         <ul className="carrusel-movil mt-5 sm:mt-12 sm:grid sm:gap-6 lg:mt-16 lg:grid-cols-2">
           {GAMA.map((g, i) => (

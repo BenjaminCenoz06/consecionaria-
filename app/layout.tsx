@@ -3,6 +3,7 @@ import { Barlow_Semi_Condensed } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import SaltarAlContenido from "@/components/SaltarAlContenido";
+import BarraProgreso from "@/components/BarraProgreso";
 import { IdiomaProvider } from "@/lib/idioma";
 
 /**
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="bg-lienzo text-bone flex min-h-full flex-col">
         <IdiomaProvider>
           <SaltarAlContenido />
+          <BarraProgreso />
           <SmoothScroll>{children}</SmoothScroll>
         </IdiomaProvider>
       </body>

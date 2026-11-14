@@ -5,6 +5,7 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Paralaje from "./Paralaje";
+import TituloAnimado from "./TituloAnimado";
 import { useIdioma } from "@/lib/idioma";
 import { MAPA } from "@/lib/sitio";
 
@@ -44,14 +45,12 @@ export default function Ubicacion() {
       />
 
       <Container className="py-8 md:py-14">
-        <Reveal>
-          <h2
-            id="titulo-ubicacion"
-            className="display-tight over-media text-bone text-4xl font-bold md:text-6xl"
-          >
-            {t("Visitá el showroom")}
-          </h2>
-
+        <TituloAnimado
+          id="titulo-ubicacion"
+          texto="Visitá el showroom"
+          className="display-tight over-media text-bone text-4xl font-bold md:text-6xl"
+        />
+        <Reveal delay={0.25}>
           <a
             href={MAPA}
             target="_blank"

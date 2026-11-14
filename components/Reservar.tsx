@@ -6,6 +6,7 @@ import { CheckCircle } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import TituloAnimado from "./TituloAnimado";
 import Plano3D from "./Plano3D";
 import { AUTOS } from "@/lib/catalogo";
 import { WHATSAPP } from "@/lib/sitio";
@@ -101,11 +102,10 @@ export default function Reservar() {
       <Container>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <h2 className="display-tight text-bone text-4xl font-bold md:text-6xl lg:text-7xl">
-              {t("Reservá tu")}
-              <br />
-              {t("prueba")}
-            </h2>
+            <TituloAnimado
+              texto={"Reservá tu\nprueba"}
+              className="display-tight text-bone text-4xl font-bold md:text-6xl lg:text-7xl"
+            />
             <p className="text-graphite mt-8 max-w-[44ch] text-lg">
               {t(
                 "Dejanos tus datos y coordinamos tu visita para ver y probar el auto. Te respondemos por WhatsApp.",
