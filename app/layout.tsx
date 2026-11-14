@@ -40,7 +40,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_AR",
-    url: SITIO,
     siteName: "Bárcena Automotores",
     title: "Bárcena Automotores — Compra, venta y consignación",
     description:
@@ -52,7 +51,9 @@ export const metadata: Metadata = {
     description: "0 km multimarcas, usados seleccionados y financiación exclusiva.",
   },
   robots: { index: true, follow: true },
-  alternates: { canonical: SITIO },
+  /* "./" se resuelve contra la URL de cada página: con SITIO fijo, todas
+     las páginas declararían a la home como canónica. */
+  alternates: { canonical: "./" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

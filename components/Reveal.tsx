@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useSinMovimiento } from "@/lib/sinMovimiento";
+import { motion } from "motion/react";
 import type { ReactNode } from "react";
-import { usarMovil } from "@/lib/usarMovil";
+import { useMovil } from "@/lib/usarMovil";
 
 const CURVA = [0.22, 1, 0.36, 1] as const;
 
@@ -24,8 +25,8 @@ export default function Reveal({
   className?: string;
   as?: "div" | "section" | "li" | "article";
 }) {
-  const sinMovimiento = useReducedMotion();
-  const movil = usarMovil();
+  const sinMovimiento = useSinMovimiento();
+  const movil = useMovil();
   const Etiqueta = motion[as];
 
   /* En celular la entrada es más simple: sube y aparece. Sin desenfoque

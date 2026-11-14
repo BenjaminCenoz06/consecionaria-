@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { CheckCircle } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
@@ -176,7 +177,7 @@ export default function Reservar() {
                 </button>
                 <p className="text-dim text-sm">
                   {t("Usamos tus datos sólo para coordinar el turno. Más en la ")}
-                  <a href="/privacidad" className="text-graphite underline">{t("política de privacidad")}</a>.
+                  <Link href="/privacidad" className="text-graphite underline">{t("política de privacidad")}</Link>.
                 </p>
               </form>
             )}

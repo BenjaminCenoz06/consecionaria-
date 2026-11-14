@@ -1,11 +1,11 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "motion/react";
@@ -29,7 +29,7 @@ const CURVA = [0.22, 1, 0.36, 1] as const;
  */
 export default function HeroAuto({ auto }: { auto: Auto }) {
   const { idioma, l, t } = useIdioma();
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   const seccion = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({

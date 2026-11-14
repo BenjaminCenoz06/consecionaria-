@@ -1,9 +1,9 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useRef, type ReactNode } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "motion/react";
@@ -30,7 +30,7 @@ export default function Paralaje({
   className?: string;
 }) {
   const caja = useRef<HTMLDivElement>(null);
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
 
   const { scrollYProgress } = useScroll({
     target: caja,

@@ -1,8 +1,9 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import Container from "./Container";
 import Paralaje from "./Paralaje";
 import Tilt3D from "./Tilt3D";
@@ -44,7 +45,7 @@ export default function EncabezadoPagina({
   datos?: DatoPlano[];
   etiquetas?: string[];
 }) {
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   const { t } = useIdioma();
   const modelo = auto ? MODELOS.find((m) => m.id === auto) : undefined;
   const mostrarAuto = Boolean(modelo) && !fondo;

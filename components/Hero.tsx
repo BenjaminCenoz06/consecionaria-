@@ -1,9 +1,9 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "motion/react";
@@ -55,7 +55,7 @@ export default function Hero() {
      empiece a bajar 4K por una suposición hecha en el servidor.      */
   const [esCelular, setEsCelular] = useState<boolean | null>(null);
   const [sinMovimiento, setSinMovimiento] = useState(false);
-  const sinMovimientoSistema = useReducedMotion();
+  const sinMovimientoSistema = useSinMovimiento();
 
   useEffect(() => {
     const pantalla = window.matchMedia(CORTE_CELULAR);

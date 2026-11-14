@@ -12,7 +12,7 @@ const CONSULTA = "(max-width: 767px)";
  * devuelve `false` (se renderiza como escritorio) y se corrige al montar,
  * sin parpadeos porque las animaciones de entrada arrancan después.
  */
-export function usarMovil() {
+export function useMovil() {
   return useSyncExternalStore(
     (avisar) => {
       const m = window.matchMedia(CONSULTA);

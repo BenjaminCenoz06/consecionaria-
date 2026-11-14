@@ -1,9 +1,10 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, CaretLeft, CaretRight, X } from "@phosphor-icons/react";
 import TarjetaImagen from "./TarjetaImagen";
 import { AUTOS, formatoUSD } from "@/lib/catalogo";
@@ -44,7 +45,7 @@ export default function MenuPanel({
   abierto: boolean;
   onCerrar: () => void;
 }) {
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   const { idioma, l, t } = useIdioma();
   const [activo, setActivo] = useState(CATEGORIAS[0].id);
   /* En pantallas chicas es un "drill-down": lista → detalle. */
@@ -53,9 +54,16 @@ export default function MenuPanel({
 
   const categoria = CATEGORIAS.find((c) => c.id === activo) ?? CATEGORIAS[0];
 
+  /* Al abrir el panel se vuelve a la lista. Se ajusta durante el render
+     (patrón recomendado por React) en vez de en un efecto. */
+  const [abiertoPrevio, setAbiertoPrevio] = useState(abierto);
+  if (abierto !== abiertoPrevio) {
+    setAbiertoPrevio(abierto);
+    if (abierto) setDetalleMovil(false);
+  }
+
   useEffect(() => {
     if (!abierto) return;
-    setDetalleMovil(false);
     botonCerrar.current?.focus();
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") onCerrar();

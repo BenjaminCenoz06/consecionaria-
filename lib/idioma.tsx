@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import { EN } from "./textos-en";
@@ -24,6 +24,37 @@ type Contexto = {
   /** Elige el idioma de un texto que ya trae su par {es, en}. */
   l: (texto: Texto) => string;
 };
+
+/* Almacén externo del idioma: localStorage + una copia en memoria por si
+   el almacenamiento no está disponible. */
+let memoria: Idioma | null = null;
+const oyentes = new Set<() => void>();
+
+function leerIdioma(): Idioma {
+  if (memoria) return memoria;
+  try {
+    const guardado = localStorage.getItem(CLAVE);
+    if (guardado === "en" || guardado === "es") return guardado;
+  } catch {
+    /* Sin almacenamiento: queda el español. */
+  }
+  return "es";
+}
+
+function suscribir(avisar: () => void) {
+  oyentes.add(avisar);
+  const alCambiar = (e: StorageEvent) => {
+    if (e.key === CLAVE) {
+      memoria = null;
+      avisar();
+    }
+  };
+  window.addEventListener("storage", alCambiar);
+  return () => {
+    oyentes.delete(avisar);
+    window.removeEventListener("storage", alCambiar);
+  };
+}
 
 const Ctx = createContext<Contexto>({
   idioma: "es",
@@ -47,16 +78,9 @@ const TITULO: Record<Idioma, string> = {
  * en el lugar.
  */
 export function IdiomaProvider({ children }: { children: ReactNode }) {
-  const [idioma, setIdiomaEstado] = useState<Idioma>("es");
-
-  useEffect(() => {
-    try {
-      const guardado = localStorage.getItem(CLAVE);
-      if (guardado === "en" || guardado === "es") setIdiomaEstado(guardado);
-    } catch {
-      /* Sin almacenamiento (ventana privada): queda el español. */
-    }
-  }, []);
+  /* `useSyncExternalStore` lee la elección guardada: el servidor y la
+     hidratación usan "es" y el cliente se corrige después, sin efectos. */
+  const idioma = useSyncExternalStore(suscribir, leerIdioma, () => "es" as Idioma);
 
   /* El <html lang> y el título tienen que acompañar al texto: lectores de
      pantalla y traductores del navegador leen el atributo. */
@@ -70,12 +94,13 @@ export function IdiomaProvider({ children }: { children: ReactNode }) {
   }, [idioma]);
 
   const setIdioma = useCallback((nuevo: Idioma) => {
-    setIdiomaEstado(nuevo);
+    memoria = nuevo; /* Se aplica igual en esta visita aunque no se pueda guardar. */
     try {
       localStorage.setItem(CLAVE, nuevo);
     } catch {
-      /* Se aplica igual en esta visita. */
+      /* Sin almacenamiento (ventana privada). */
     }
+    oyentes.forEach((avisar) => avisar());
   }, []);
 
   const t = useCallback(

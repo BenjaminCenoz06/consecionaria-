@@ -1,12 +1,12 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   animate,
   motion,
   useInView,
-  useReducedMotion,
 } from "motion/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
@@ -29,7 +29,7 @@ function Contador({
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const visible = useInView(ref, { once: true, amount: 0.6 });
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   const [actual, setActual] = useState(sinMovimiento ? valor : 0);
 
   useEffect(() => {

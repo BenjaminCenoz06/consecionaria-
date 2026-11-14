@@ -1,14 +1,14 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import { useRef, type ReactNode } from "react";
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
 } from "motion/react";
-import { usarMovil } from "@/lib/usarMovil";
+import { useMovil } from "@/lib/usarMovil";
 
 /**
  * Plano que se endereza con el scroll.
@@ -35,10 +35,10 @@ export default function Plano3D({
   perspectiva?: number;
 }) {
   const caja = useRef<HTMLDivElement>(null);
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   /* En celular el giro de bloques enteros con el scroll es lo que más
      tironea: se apaga y el bloque queda quieto y de frente. */
-  const movil = usarMovil();
+  const movil = useMovil();
 
   const { scrollYProgress } = useScroll({
     target: caja,

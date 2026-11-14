@@ -1,5 +1,4 @@
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import Header from "@/components/Header";import Hero from "@/components/Hero";
 import Modelos from "@/components/Modelos";
 import Ubicacion from "@/components/Ubicacion";
 import Tagline from "@/components/Tagline";

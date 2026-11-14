@@ -1,5 +1,6 @@
 "use client";
 
+import { useSinMovimiento } from "@/lib/sinMovimiento";
 import {
   useRef,
   type PointerEvent as PunteroReact,
@@ -9,7 +10,6 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
 } from "motion/react";
@@ -61,7 +61,7 @@ export default function Tilt3D({
   activo?: boolean;
   perspectiva?: number;
 }) {
-  const sinMovimiento = useReducedMotion();
+  const sinMovimiento = useSinMovimiento();
   const caja = useRef<HTMLDivElement>(null);
 
   /* Posición del puntero dentro de la caja, de -0.5 a 0.5. */
