@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo } from "next/font/google";
+import { Barlow_Semi_Condensed } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import SaltarAlContenido from "@/components/SaltarAlContenido";
@@ -7,14 +7,15 @@ import { IdiomaProvider } from "@/lib/idioma";
 
 /**
  * Una sola familia para todo el sitio.
- * `axes: ["wdth"]` es lo que habilita el eje de ancho: sin esto Next
- * sólo trae el eje de peso y `font-variation-settings: "wdth" 70` no
- * haría absolutamente nada.
+ * La referencia (Porsche) usa Porsche Next, una fuente propietaria que no
+ * se puede licenciar para este sitio. Barlow Semi Condensed es la
+ * alternativa libre más cercana: grotesca angosta, de trazo limpio y
+ * esquinas apenas redondeadas, con pesos de light a extrabold.
  */
-const archivo = Archivo({
+const principal = Barlow_Semi_Condensed({
   subsets: ["latin"],
-  axes: ["wdth"],
-  variable: "--font-archivo",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-principal",
   display: "swap",
 });
 
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-AR" className={`${archivo.variable} h-full antialiased`}>
+    <html lang="es-AR" className={`${principal.variable} h-full antialiased`}>
       <body className="bg-lienzo text-bone flex min-h-full flex-col">
         <IdiomaProvider>
           <SaltarAlContenido />

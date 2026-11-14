@@ -5,6 +5,8 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import VideoAuto from "./VideoAuto";
+import { videoDe } from "@/lib/videos";
 import { GAMA } from "@/lib/gama";
 import { useIdioma } from "@/lib/idioma";
 
@@ -47,17 +49,17 @@ export default function Gama() {
         <ul className="carrusel-movil mt-5 sm:mt-12 sm:grid sm:gap-6 lg:mt-16 lg:grid-cols-2">
           {GAMA.map((g, i) => (
             <Reveal as="li" key={g.id} delay={(i % 2) * 0.1}>
-              <Tilt3D className="rounded-2xl" grados={7}>
+              <Tilt3D className="rounded-[2rem]" grados={7}>
                 <a
                   href={`${WHATSAPP}?text=${encodeURIComponent(
                     `${t("Hola, quiero información sobre el")} ${g.nombre}.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex aspect-[4/5] flex-col rounded-2xl [transform-style:preserve-3d] sm:aspect-square lg:aspect-4/3"
+                  className="group relative flex aspect-[4/5] flex-col rounded-[2rem] [transform-style:preserve-3d] sm:aspect-square lg:aspect-4/3"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
-                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
+                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-[2rem] border transition-colors duration-500">
                     <div
                       aria-hidden="true"
                       className="absolute inset-0 bg-[radial-gradient(ellipse_78%_62%_at_50%_42%,#2e2e2e,#121212_74%)]"
@@ -72,6 +74,9 @@ export default function Gama() {
                       draggable={false}
                       className="ease-premium object-contain object-center px-5 pt-20 pb-32 transition-transform duration-700 group-hover:scale-[1.05]"
                     />
+
+                    {/* Con scroll, la foto se funde con el auto andando. */}
+                    <VideoAuto src={videoDe(g.id)} />
 
                     <div
                       aria-hidden="true"

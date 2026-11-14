@@ -24,9 +24,10 @@
   --color-rojo: #d81f26; /* ÚNICO acento */
 
   /* --- Tipografía --------------------------------------------
-     Una sola familia variable. El contraste sale del eje wdth. */
-  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+     Una sola familia para todo. El contraste sale del peso y del
+     tamaño, no de mezclar fuentes. */
+  --font-display: var(--font-principal), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-principal), ui-sans-serif, system-ui, sans-serif;
 
   /* --- Movimiento ---------------------------------------------
      Una curva para todo. Cuatro duraciones, ni una más.        */
@@ -125,18 +126,19 @@
    mezclar familias, viene de mover el ancho de una sola.
    ============================================================ */
 
+/* Ya no hay eje de ancho: la familia es una sola y siempre semi
+   condensada. Las clases se conservan porque los componentes las usan. */
 @utility type-condensed {
-  font-variation-settings: "wdth" 70;
+  font-stretch: normal;
 }
 
 @utility type-normal {
-  font-variation-settings: "wdth" 100;
+  font-stretch: normal;
 }
 
 /* Leading negativo: 120px de cuerpo sobre 110px de línea = 0.92.
    Es lo que le da peso de cartel a los títulos grandes.        */
 @utility display-tight {
-  font-variation-settings: "wdth" 70;
   line-height: 0.92;
   letter-spacing: -0.005em;
   text-transform: uppercase;
@@ -203,7 +205,6 @@
       --acento-tema 1.2s cubic-bezier(0.4, 0, 0.5, 1);
     color: var(--color-bone);
     font-family: var(--font-sans);
-    font-variation-settings: "wdth" 100;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

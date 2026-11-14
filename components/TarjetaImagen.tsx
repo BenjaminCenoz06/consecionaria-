@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "@phosphor-icons/react";
 import Tilt3D from "./Tilt3D";
+import VideoAuto from "./VideoAuto";
 import { useIdioma } from "@/lib/idioma";
 
 /**
@@ -24,7 +25,10 @@ export default function TarjetaImagen({
   externo = false,
   inclinar = true,
   aspecto = "aspect-[4/3]",
+  video,
 }: {
+  /** Video del auto andando: aparece mientras se hace scroll. */
+  video?: string;
   href: string;
   titulo: string;
   subtitulo?: string;
@@ -61,6 +65,8 @@ export default function TarjetaImagen({
             : "object-cover object-center"
         }`}
       />
+
+      <VideoAuto src={video} />
 
       <div
         aria-hidden="true"
@@ -103,7 +109,7 @@ export default function TarjetaImagen({
     </>
   );
 
-  const clases = `group relative block ${aspecto} overflow-hidden rounded-3xl bg-[#121212] [transform:translateZ(0)]`;
+  const clases = `group relative block ${aspecto} overflow-hidden rounded-[2rem] bg-[#121212] [transform:translateZ(0)]`;
 
   const enlace = externo ? (
     <a href={href} target="_blank" rel="noopener noreferrer" className={clases}>
@@ -118,7 +124,7 @@ export default function TarjetaImagen({
   if (!inclinar) return enlace;
 
   return (
-    <Tilt3D className="rounded-3xl" grados={6} escala={1.015} brillo={false}>
+    <Tilt3D className="rounded-[2rem]" grados={6} escala={1.015} brillo={false}>
       {enlace}
     </Tilt3D>
   );

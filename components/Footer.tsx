@@ -40,7 +40,7 @@ const LEMA = [
   { texto: "se", clase: "type-condensed font-bold" },
   {
     texto: "maneja",
-    clase: "font-extrabold [font-variation-settings:'wdth'_125]",
+    clase: "font-extrabold",
   },
 ] as const;
 

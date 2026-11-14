@@ -5,6 +5,8 @@ import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import VideoAuto from "./VideoAuto";
+import { videoDe } from "@/lib/videos";
 import { MODELOS } from "@/lib/modelos";
 import { useIdioma } from "@/lib/idioma";
 
@@ -54,17 +56,17 @@ export default function Explorar() {
         <ul className="carrusel-movil sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {tarjetas.map((m, i) => (
             <Reveal as="li" key={m.id} delay={i * 0.1}>
-              <Tilt3D className="rounded-2xl" grados={8}>
+              <Tilt3D className="rounded-[2rem]" grados={8}>
                 <a
                   href={`${WHATSAPP}?text=${encodeURIComponent(
                     `${t("Hola, quiero información sobre el")} ${m.marca} ${m.nombre}.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex aspect-3/2 flex-col justify-end rounded-2xl [transform-style:preserve-3d]"
+                  className="group relative flex aspect-3/2 flex-col justify-end rounded-[2rem] [transform-style:preserve-3d]"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
-                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-2xl border transition-colors duration-500">
+                  <div className="border-hairline group-hover:border-rojo/60 absolute inset-0 overflow-hidden rounded-[2rem] border transition-colors duration-500">
                     {/* Fondo de estudio: claro arriba del auto, oscuro
                         en los bordes. Es lo que le da volumen al recorte. */}
                     <div
@@ -81,6 +83,9 @@ export default function Explorar() {
                       draggable={false}
                       className="ease-premium object-contain object-center px-5 pt-8 pb-24 transition-transform duration-700 group-hover:scale-[1.05]"
                     />
+
+                    {/* Con scroll, la foto se funde con el auto andando. */}
+                    <VideoAuto src={videoDe(m.id)} />
 
                     {/* Sombra de apoyo: sin esto el auto flota en el aire. */}
                     <div

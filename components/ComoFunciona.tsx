@@ -50,10 +50,10 @@ export default function ComoFunciona() {
               <Tilt3D
                 grados={7}
                 escala={1.03}
-                className="h-full rounded-sm"
+                className="h-full rounded-2xl"
               >
                 <div
-                  className="border-linea bg-tarjeta h-full rounded-sm border p-6 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
+                  className="border-linea bg-tarjeta h-full rounded-2xl border p-6 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_8px_16px_-6px_rgb(0_0_0/0.08),0_28px_48px_-20px_rgb(0_0_0/0.18)]"
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <p

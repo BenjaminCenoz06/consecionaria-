@@ -124,9 +124,9 @@ export default function Reservar() {
                 un borde de luz arriba y sombra profunda abajo. Giro
                 mínimo (3°): es un formulario, tiene que quedarse quieto
                 para poder escribir. */}
-            <Tilt3D grados={3} escala={1.005} brillo={false} className="rounded-sm">
+            <Tilt3D grados={3} escala={1.005} brillo={false} className="rounded-3xl">
             <div
-              className="bg-surface border-hairline rounded-sm border p-6 shadow-[inset_0_1px_0_rgb(255_255_255/0.07),0_30px_60px_-24px_rgb(0_0_0/0.9)] md:p-10"
+              className="bg-surface border-hairline rounded-3xl border p-6 shadow-[inset_0_1px_0_rgb(255_255_255/0.07),0_30px_60px_-24px_rgb(0_0_0/0.9)] md:p-10"
               style={{ transformStyle: "preserve-3d" }}
             >
             {estado === "listo" ? (

@@ -186,7 +186,7 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-3xl bg-[#f4f4f6] p-5 lg:p-10">
+              <div className="rounded-[2rem] bg-[#f4f4f6] p-5 lg:p-10">
                 <p className="type-normal text-sm font-semibold tracking-wide uppercase">
                   {t("Cómo seguimos")}
                 </p>

@@ -49,7 +49,7 @@ function CartaProducto({
   ];
 
   return (
-    <Tilt3D grados={5} escala={1.015} brillo={false} className="h-full rounded-3xl">
+    <Tilt3D grados={5} escala={1.015} brillo={false} className="h-full rounded-[2rem]">
       <article
         className="relative h-full pt-9 md:pt-16"
         style={{ transformStyle: "preserve-3d" }}
@@ -77,7 +77,7 @@ function CartaProducto({
           />
         </Link>
 
-        <div className="border-linea bg-tarjeta text-tinta flex h-full flex-col rounded-3xl border px-3 pt-14 pb-3 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_14px_28px_-12px_rgb(0_0_0/0.14),0_36px_60px_-30px_rgb(0_0_0/0.22)]">
+        <div className="border-linea bg-tarjeta text-tinta flex h-full flex-col rounded-[2rem] border px-3 pt-14 pb-3 shadow-[0_1px_1px_rgb(0_0_0/0.04),0_14px_28px_-12px_rgb(0_0_0/0.14),0_36px_60px_-30px_rgb(0_0_0/0.22)]">
           <h3 className="type-normal text-[0.95rem] leading-tight font-normal md:text-2xl md:font-light">
             {auto.marca} {auto.nombre}
           </h3>
@@ -190,7 +190,7 @@ function Comparador({
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.97 }}
         transition={{ duration: 0.45, ease: CURVA }}
-        className="max-h-[92dvh] w-full max-w-[1000px] overflow-auto rounded-t-3xl bg-white p-6 text-[#202020] sm:rounded-3xl sm:p-10"
+        className="max-h-[92dvh] w-full max-w-[1000px] overflow-auto rounded-t-3xl bg-white p-6 text-[#202020] sm:rounded-[2rem] sm:p-10"
       >
         <div className="flex items-start justify-between gap-4">
           <h2 className="type-normal text-3xl font-light">{t("Comparar")}</h2>
