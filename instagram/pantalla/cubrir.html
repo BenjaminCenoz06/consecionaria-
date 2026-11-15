@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Composición a pantalla completa</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #f4f3ef; overflow: hidden; }
+  .lienzo { position: relative; width: 100%; height: 100%; overflow: hidden; background: #f4f3ef; }
+  /* La imagen se amplía hasta cubrir todo el alto y se centra en el celular. */
+  .sujeto { position: absolute; top: 0; display: block; filter: drop-shadow(0 16px 26px rgba(20,19,15,.13)); }
+  /* Logo en la esquina superior derecha. La sombra oscura asegura la lectura sobre cualquier fondo. */
+  .logo { position: absolute; right: 44px; top: 70px; width: 330px; height: auto;
+    filter: drop-shadow(0 2px 14px rgba(0,0,0,.65)); }
+</style>
+</head>
+<body>
+<div class="lienzo"><img class="sujeto" id="s" src="sujeto.png" alt=""><img class="logo" src="logo-esquina.png" alt="Enfoque Studio"></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const W = 1080, H = +q.get('h') || 1350;
+  document.body.style.width = W + 'px'; document.body.style.height = H + 'px';
+  // El sujeto es cuadrado (1254). Se escala para cubrir el alto y se centra el celular + mano.
+  const lado = H * (+q.get('zoom') || 1);
+  const cx = +q.get('cx') || 610;             // centro horizontal del celular, en px del sujeto original (1254)
+  const cy = +q.get('cy') || 627;             // centro vertical que debe quedar en el medio
+  const s = document.getElementById('s');
+  s.style.width = lado + 'px'; s.style.height = lado + 'px';
+  s.style.left = (W / 2 - cx / 1254 * lado) + 'px';
+  s.style.top  = (H / 2 - cy / 1254 * lado) + 'px';
+</script>
+</body>
+</html>

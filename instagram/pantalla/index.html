@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Publicación reclutamiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --tinta: #ffffff; --gris: #b9b7b1; --rojo: #ff2b36; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1254px; height: 1254px; background: #000; overflow: hidden; }
+  #c { position: relative; width: 1254px; height: 1254px; overflow: hidden; }
+  #c > img { position: absolute; inset: 0; width: 1254px; height: 1254px; }
+
+  /* La pantalla se dibuja plana (470×980) y se proyecta sobre el celular. */
+  #pantalla { position: absolute; left: 0; top: 0; width: 470px; height: 980px; transform-origin: 0 0;
+    border-radius: 54px 170px 66px 54px / 54px 150px 66px 54px; overflow: hidden; color: var(--tinta); font-family: "Inter Tight", "Inter", sans-serif;
+    background: radial-gradient(90% 38% at 85% 8%, rgba(255,43,54,.16), rgba(255,43,54,0) 70%),
+                linear-gradient(180deg, #000000 0%, #050505 60%, #0b0b0b 100%); }
+
+  .barra { position: absolute; left: 38px; right: 38px; top: 56px; display: flex; justify-content: space-between; align-items: center; }
+  .barra .marca { font-weight: 600; font-size: 17px; letter-spacing: -.01em; display: flex; align-items: center; gap: 8px; }
+  .barra .marca b { width: 8px; height: 8px; border-radius: 50%; background: var(--rojo); display: block; }
+  .barra .menu i { display: block; width: 26px; height: 2.5px; background: var(--tinta); margin-bottom: 6px; border-radius: 2px; }
+  .barra .menu i:last-child { width: 18px; margin-left: 8px; }
+
+  h1 { position: absolute; left: 36px; right: 28px; top: 150px; font-weight: 600; font-size: 52px; line-height: 1.02;
+    letter-spacing: -.045em; color: var(--tinta); text-shadow: 0 0 28px rgba(255,255,255,.12); }
+  h1 span { color: var(--gris); font-weight: 500; }
+
+  .roles { position: absolute; left: 38px; top: 436px; display: flex; gap: 10px; }
+  .rol { display: inline-flex; align-items: center; gap: 9px; padding: 11px 17px 11px 14px; border: 1.5px solid rgba(255,255,255,.7);
+    border-radius: 999px; font-weight: 600; font-size: 17px; letter-spacing: -.01em; color: #fff; background: rgba(255,255,255,.1); white-space: nowrap; }
+  .rol b { width: 8px; height: 8px; border-radius: 50%; background: var(--rojo); display: block; }
+
+  .sumate { position: absolute; right: 38px; top: 506px; text-align: right; font-weight: 500; font-size: 22px;
+    letter-spacing: -.02em; color: var(--gris); }
+  .sumate em { font-style: normal; color: var(--tinta); }
+
+  .codigo { position: absolute; right: 22px; top: 640px; font-weight: 600; font-size: 170px; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.12); letter-spacing: -.06em; }
+
+  .cta { position: absolute; right: 44px; top: 760px; display: flex; align-items: center; gap: 16px;
+    padding: 12px 12px 12px 28px; border-radius: 999px; background: #fff; color: #0a0a0a;
+    font-weight: 600; font-size: 20px; letter-spacing: -.01em; box-shadow: 0 0 34px rgba(255,255,255,.22); }
+  .cta span { width: 40px; height: 40px; border-radius: 50%; background: var(--rojo); color: #fff; display: grid; place-items: center; font-size: 20px; }
+  /* Teléfono y web: grandes, blancos y con una marca roja, para que se lean de un vistazo. */
+  .contacto { position: absolute; right: 56px; top: 846px; text-align: right; color: #fff; line-height: 1.3; }
+  .contacto .tel { display: block; font-weight: 600; font-size: 27px; letter-spacing: -.02em; }
+  .contacto .web { display: inline-block; margin-top: 6px; padding-top: 7px; border-top: 2px solid var(--rojo);
+    font-weight: 600; font-size: 21px; letter-spacing: -.01em; }
+
+  /* Pulgar y palma por delante de la pantalla (copia recortada de la foto original). */
+  #pulgar { clip-path: polygon(300px 860px, 335px 862px, 372px 872px, 405px 888px, 432px 930px, 448px 985px,
+    458px 1040px, 466px 1085px, 485px 1115px, 500px 1140px, 540px 1158px, 575px 1175px, 605px 1198px,
+    625px 1225px, 640px 1254px, 300px 1254px); }
+</style>
+</head>
+<body>
+<div id="c">
+  <img src="orig.png" alt="">
+  <div id="pantalla">
+    <div class="barra"><div class="marca">Enfoque<b></b></div><div class="menu"><i></i><i></i></div></div>
+    <h1>Estamos buscando talento: <span>developers web y automatizadores.</span></h1>
+    <div class="roles">
+      <div class="rol"><b></b>Developers web</div>
+      <div class="rol"><b></b>Automatizadores</div>
+    </div>
+    <div class="sumate">Sumate a <em>nuestro equipo.</em></div>
+    <div class="codigo">&lt;/&gt;</div>
+    <div class="cta">Postulate ahora <span>→</span></div>
+    <div class="contacto"><span class="tel">+54 351 219 3405</span><span class="web">enfoquestudio.org</span></div>
+  </div>
+  <img id="pulgar" src="orig.png" alt="">
+</div>
+<script>
+  // Proyección plana → cuadrilátero (esquinas de la pantalla en la foto).
+  function adj(m){return [m[4]*m[8]-m[5]*m[7],m[2]*m[7]-m[1]*m[8],m[1]*m[5]-m[2]*m[4],m[5]*m[6]-m[3]*m[8],m[0]*m[8]-m[2]*m[6],m[2]*m[3]-m[0]*m[5],m[3]*m[7]-m[4]*m[6],m[1]*m[6]-m[0]*m[7],m[0]*m[4]-m[1]*m[3]];}
+  function mm(a,b){const c=Array(9);for(let i=0;i<3;i++)for(let j=0;j<3;j++){let s=0;for(let k=0;k<3;k++)s+=a[3*i+k]*b[3*k+j];c[3*i+j]=s;}return c;}
+  function mv(m,v){return [m[0]*v[0]+m[1]*v[1]+m[2]*v[2],m[3]*v[0]+m[4]*v[1]+m[5]*v[2],m[6]*v[0]+m[7]*v[1]+m[8]*v[2]];}
+  function basis(p){const m=[p[0][0],p[1][0],p[2][0],p[0][1],p[1][1],p[2][1],1,1,1];const v=mv(adj(m),[p[3][0],p[3][1],1]);return mm(m,[v[0],0,0,0,v[1],0,0,0,v[2]]);}
+  function proy(w,h,d){const s=basis([[0,0],[w,0],[0,h],[w,h]]);const t=mm(basis(d),adj(s));for(let i=0;i<9;i++)t[i]/=t[8];
+    return `matrix3d(${t[0]},${t[3]},0,${t[6]},${t[1]},${t[4]},0,${t[7]},0,0,1,0,${t[2]},${t[5]},0,${t[8]})`;}
+  // TL, TR, BL, BR en píxeles de la foto original (1254×1254)
+  const ESQ = [[175,465],[600,397],[511,1262],[1042,1171]];
+  document.getElementById('pantalla').style.transform = proy(470,980,ESQ);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Composición final</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #f4f3ef; overflow: hidden; }
+  body.f45 { width: 1080px; height: 1350px; }
+  body.f916 { width: 1080px; height: 1920px; }
+  .lienzo { position: relative; width: 100%; height: 100%; overflow: hidden; background: #f4f3ef; }
+  /* El recorte se desvanece hacia el fondo arriba y abajo: las capturas no terminan en un corte seco. */
+  .velo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
+  .f45 .velo { width: 1190px; height: 1190px; }
+  .f916 .velo { width: 1150px; height: 1150px; }
+  .velo img { width: 100%; height: 100%; display: block; filter: drop-shadow(0 16px 26px rgba(20,19,15,.13)); }
+</style>
+</head>
+<body>
+<div class="lienzo"><div class="velo"><img src="sujeto.png" alt=""></div></div>
+<script>document.body.className = location.search.includes('916') ? 'f916' : 'f45';</script>
+</body>
+</html>

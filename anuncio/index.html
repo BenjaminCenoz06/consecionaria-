@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Aviso Enfoque Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --rojo: #e11d2a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 941px; height: 1672px; background: #000; overflow: hidden; }
+  body { font-family: "Inter", "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .lienzo { position: relative; width: 941px; height: 1672px; overflow: hidden; }
+  .foto { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* Velos: unifican la foto, dan lectura al texto y tapan los retoques. */
+  .velo-arriba { position: absolute; inset: 0 0 auto 0; height: 700px;
+    background: linear-gradient(180deg, rgba(10,0,2,.55) 0%, rgba(10,0,2,.25) 55%, rgba(10,0,2,0) 100%); }
+  .velo-abajo { position: absolute; inset: auto 0 0 0; height: 520px;
+    background: linear-gradient(0deg, rgba(12,5,2,.92) 0%, rgba(12,5,2,.78) 30%, rgba(12,5,2,.5) 58%, rgba(12,5,2,.18) 82%, rgba(12,5,2,0) 100%); }
+  .viñeta { position: absolute; inset: 0;
+    background: radial-gradient(120% 85% at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,.42) 100%); }
+  .grano { position: absolute; inset: 0; opacity: .09; mix-blend-mode: overlay; }
+
+  .logo { position: absolute; left: 50%; top: 168px; width: 500px; transform: translateX(-50%);
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.45)); }
+
+  .titular { position: absolute; left: 0; right: 0; top: 316px; text-align: center; color: #fff;
+    font-weight: 700; font-size: 56px; line-height: 1.06; letter-spacing: -.022em; text-transform: uppercase;
+    text-shadow: 0 2px 28px rgba(0,0,0,.55); }
+  .bajada { position: absolute; left: 50%; top: 478px; width: 600px; transform: translateX(-50%);
+    text-align: center; color: rgba(255,255,255,.86); font-weight: 400; font-size: 22px; line-height: 1.45;
+    letter-spacing: -.005em; text-shadow: 0 1px 14px rgba(0,0,0,.6); }
+  .etiquetas { position: absolute; left: 0; right: 0; top: 598px; display: flex; justify-content: center;
+    align-items: center; gap: 22px; color: rgba(255,255,255,.92); font-weight: 600; font-size: 13.5px;
+    letter-spacing: .3em; text-transform: uppercase; text-shadow: 0 1px 10px rgba(0,0,0,.7); }
+  .etiquetas i { width: 6px; height: 6px; border-radius: 50%; background: var(--rojo); display: block;
+    box-shadow: 0 0 10px rgba(225,29,42,.9); }
+
+  /* Navbar dentro del cuadro de la ventana. */
+  .nav { position: absolute; left: 124px; top: 727px; width: 693px; height: 62px; padding: 0 22px;
+    display: flex; align-items: center; justify-content: space-between; color: #fff;
+    background: linear-gradient(180deg, rgba(8,8,10,.86) 0%, rgba(8,8,10,.55) 70%, rgba(8,8,10,0) 100%); }
+  .nav::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: 12px; height: 1px;
+    background: rgba(255,255,255,.28); }
+  .nav .marca { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px;
+    letter-spacing: .24em; }
+  .nav .marca b { width: 7px; height: 7px; border-radius: 50%; background: var(--rojo); display: block; }
+  .nav ul { display: flex; align-items: center; gap: 26px; list-style: none; font-weight: 500;
+    font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; }
+  .nav li.cta { border: 1px solid rgba(255,255,255,.75); border-radius: 999px; padding: 7px 14px; }
+
+  /* Llamado a la acción. */
+  .boton { position: absolute; left: 50%; top: 1440px; transform: translateX(-50%); display: flex;
+    align-items: center; gap: 18px; background: #fff; color: #14090a; border-radius: 999px;
+    padding: 12px 14px 12px 34px; font-weight: 700; font-size: 21px; letter-spacing: .05em;
+    text-transform: uppercase; white-space: nowrap;
+    box-shadow: 0 18px 50px -12px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.4); }
+  .boton span { width: 48px; height: 48px; border-radius: 50%; background: var(--rojo); color: #fff;
+    display: grid; place-items: center; font-size: 24px; line-height: 1; }
+  .web { position: absolute; left: 0; right: 0; top: 1536px; text-align: center; color: rgba(255,255,255,.92);
+    font-weight: 500; font-size: 19px; letter-spacing: .2em; text-shadow: 0 1px 12px rgba(0,0,0,.7); }
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <img class="foto" src="base-2x.png" alt="">
+  <div class="velo-arriba"></div>
+  <div class="velo-abajo"></div>
+  <div class="viñeta"></div>
+
+  <img class="logo" src="logo-enfoque.png" alt="Enfoque Studio">
+
+  <h1 class="titular">Tu negocio merece<br>estar en internet.</h1>
+  <p class="bajada">Creamos sitios web profesionales y sistemas inteligentes para hacer crecer tu negocio.</p>
+  <div class="etiquetas"><span>Diseño web</span><i></i><span>Automatizaciones</span><i></i><span>Bots IA</span></div>
+
+  <nav class="nav">
+    <div class="marca"><span>ENFOQUE</span><b></b></div>
+    <ul><li>Inicio</li><li>Servicios</li><li>Proyectos</li><li class="cta">Contacto</li></ul>
+  </nav>
+
+  <div class="boton">Hablemos de tu proyecto <span>→</span></div>
+  <p class="web">enfoquestudio.org</p>
+
+  <svg class="grano" width="941" height="1672" xmlns="http://www.w3.org/2000/svg">
+    <filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#r)"/>
+  </svg>
+</div>
+</body>
+</html>

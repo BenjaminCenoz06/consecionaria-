@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Aviso Enfoque Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --rojo: #e11d2a; --serif: "Cormorant Garamond", "Times New Roman", serif; --sans: "Montserrat", "Segoe UI", sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 941px; height: 1672px; background: #000; overflow: hidden; }
+  body { font-family: var(--sans); -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision; }
+
+  .lienzo { position: relative; width: 941px; height: 1672px; overflow: hidden; }
+  .capa { position: absolute; inset: 0; overflow: hidden; }
+  .capa img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* Profundidad de campo: lejos muy desenfocado, zona media suave y,
+     en el centro, el vaso nítido y con más contraste. */
+  .lejos img { filter: blur(15px) brightness(.9) saturate(1.05); transform: scale(1.08); }
+  .media { -webkit-mask-image: radial-gradient(ellipse 340px 480px at 473px 1090px, #000 30%, transparent 100%);
+           mask-image: radial-gradient(ellipse 340px 480px at 473px 1090px, #000 30%, transparent 100%); }
+  .media img { filter: blur(5.5px); transform: scale(1.02); }
+  .nitida { -webkit-mask-image: radial-gradient(ellipse 262px 350px at 473px 1092px, #000 88%, transparent 118%);
+            mask-image: radial-gradient(ellipse 262px 350px at 473px 1092px, #000 88%, transparent 118%); }
+  .nitida img { filter: contrast(1.07) saturate(1.1) brightness(1.03); }
+
+  .velo-arriba { position: absolute; inset: 0 0 auto 0; height: 760px;
+    background: linear-gradient(180deg, rgba(10,0,2,.58) 0%, rgba(10,0,2,.32) 55%, rgba(10,0,2,0) 100%); }
+  .velo-abajo { position: absolute; inset: auto 0 0 0; height: 560px;
+    background: linear-gradient(0deg, rgba(12,5,2,.94) 0%, rgba(12,5,2,.8) 30%, rgba(12,5,2,.5) 58%, rgba(12,5,2,.18) 82%, rgba(12,5,2,0) 100%); }
+  .viñeta { position: absolute; inset: 0;
+    background: radial-gradient(120% 85% at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,.45) 100%); }
+  .grano { position: absolute; inset: 0; opacity: .08; mix-blend-mode: overlay; }
+
+  /* Marco de ventana redibujado en vector, encima de todo. */
+  .marco { position: absolute; left: 120px; top: 723px; width: 701px; height: 498px;
+    border: 4.5px solid #fff; box-shadow: 0 0 22px rgba(255,255,255,.18); }
+  .puntos { position: absolute; left: 124px; top: 700px; display: flex; gap: 11px; }
+  .puntos i { width: 14px; height: 14px; border-radius: 50%; background: #fff; display: block; }
+
+  .logo { position: absolute; left: 50%; top: 168px; width: 500px; transform: translateX(-50%);
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.45)); }
+
+  .titular { position: absolute; left: 0; right: 0; top: 312px; text-align: center; color: #fff;
+    font-family: var(--serif); font-weight: 500; font-size: 70px; line-height: 1.0; letter-spacing: .035em;
+    text-transform: uppercase; text-shadow: 0 2px 30px rgba(0,0,0,.6); }
+  .filete { position: absolute; left: 50%; top: 466px; width: 54px; height: 1px; transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent); }
+  .bajada { position: absolute; left: 50%; top: 490px; width: 580px; transform: translateX(-50%);
+    text-align: center; color: rgba(255,255,255,.88); font-weight: 300; font-size: 19.5px; line-height: 1.62;
+    letter-spacing: .012em; text-shadow: 0 1px 16px rgba(0,0,0,.65); }
+  .etiquetas { position: absolute; left: 0; right: 0; top: 600px; display: flex; justify-content: center;
+    align-items: center; gap: 24px; color: rgba(255,255,255,.92); font-weight: 400; font-size: 12px;
+    letter-spacing: .38em; text-transform: uppercase; text-shadow: 0 1px 10px rgba(0,0,0,.75); }
+  .etiquetas i { width: 5px; height: 5px; background: var(--rojo); transform: rotate(45deg); display: block;
+    box-shadow: 0 0 10px rgba(225,29,42,.9); }
+
+  /* Navbar dentro del cuadro. */
+  .nav { position: absolute; left: 125px; top: 728px; width: 691px; height: 60px; padding: 0 22px;
+    display: flex; align-items: center; justify-content: space-between; color: #fff;
+    background: linear-gradient(180deg, rgba(8,8,10,.88) 0%, rgba(8,8,10,.55) 70%, rgba(8,8,10,0) 100%); }
+  .nav::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: 11px; height: 1px;
+    background: rgba(255,255,255,.26); }
+  .nav .marca { display: flex; align-items: center; gap: 9px; font-weight: 500; font-size: 14.5px; letter-spacing: .32em; }
+  .nav .marca b { width: 6px; height: 6px; border-radius: 50%; background: var(--rojo); display: block; }
+  .nav ul { display: flex; align-items: center; gap: 24px; list-style: none; font-weight: 400;
+    font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; }
+  .nav li.cta { border: 1px solid rgba(255,255,255,.7); border-radius: 999px; padding: 7px 15px; }
+
+  /* Llamado a la acción, teléfono y web. */
+  .boton { position: absolute; left: 50%; top: 1412px; transform: translateX(-50%); display: flex;
+    align-items: center; gap: 20px; background: #fff; color: #14090a; border-radius: 999px;
+    padding: 10px 12px 10px 36px; font-weight: 500; font-size: 16px; letter-spacing: .17em;
+    text-transform: uppercase; white-space: nowrap;
+    box-shadow: 0 18px 50px -12px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.45); }
+  .boton span { width: 46px; height: 46px; border-radius: 50%; background: var(--rojo); color: #fff;
+    display: grid; place-items: center; font-size: 22px; line-height: 1; font-weight: 300; }
+  .telefono { position: absolute; left: 0; right: 0; top: 1508px; display: flex; justify-content: center;
+    align-items: center; gap: 14px; color: #fff; font-family: var(--serif); font-weight: 500; font-size: 36px;
+    letter-spacing: .06em; font-feature-settings: "lnum" 1, "tnum" 0; font-variant-numeric: lining-nums;
+    text-shadow: 0 2px 16px rgba(0,0,0,.7); }
+  .telefono svg { width: 26px; height: 26px; stroke: var(--rojo); fill: none; stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 8px rgba(225,29,42,.5)); }
+  .web { position: absolute; left: 0; right: 0; top: 1572px; text-align: center; color: rgba(255,255,255,.82);
+    font-weight: 300; font-size: 14px; letter-spacing: .36em; text-shadow: 0 1px 12px rgba(0,0,0,.7); }
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <div class="capa lejos"><img src="base-4x.png" alt=""></div>
+  <div class="capa media"><img src="base-4x.png" alt=""></div>
+  <div class="capa nitida"><img src="base-4x-nitida.png" alt=""></div>
+  <div class="velo-arriba"></div>
+  <div class="velo-abajo"></div>
+  <div class="viñeta"></div>
+
+  <div class="marco"></div>
+  <div class="puntos"><i></i><i></i><i></i></div>
+
+  <img class="logo" src="logo-enfoque.png" alt="Enfoque Studio">
+
+  <h1 class="titular">Tu negocio merece<br>estar en internet.</h1>
+  <div class="filete"></div>
+  <p class="bajada">Creamos sitios web profesionales y sistemas inteligentes para hacer crecer tu negocio.</p>
+  <div class="etiquetas"><span>Diseño web</span><i></i><span>Automatizaciones</span><i></i><span>Bots IA</span></div>
+
+  <nav class="nav">
+    <div class="marca"><span>ENFOQUE</span><b></b></div>
+    <ul><li>Inicio</li><li>Servicios</li><li>Proyectos</li><li class="cta">Contacto</li></ul>
+  </nav>
+
+  <div class="boton">Hablemos de tu proyecto <span>→</span></div>
+  <div class="telefono">
+    <svg viewBox="0 0 24 24"><path d="M5 4h3.5l1.8 4.6-2.3 1.5a11 11 0 0 0 5.9 5.9l1.5-2.3L20 15.5V19a1.5 1.5 0 0 1-1.6 1.5C10.6 20 4 13.4 3.5 5.6A1.5 1.5 0 0 1 5 4z"/></svg>
+    <span>+54 351 219 3405</span>
+  </div>
+  <p class="web">enfoquestudio.org</p>
+
+  <svg class="grano" width="941" height="1672" xmlns="http://www.w3.org/2000/svg">
+    <filter id="r"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#r)"/>
+  </svg>
+</div>
+</body>
+</html>
