@@ -11,9 +11,10 @@ import { SteeringWheel, WhatsappLogo } from "@phosphor-icons/react";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
+import Magnetico from "./Magnetico";
 import Link from "next/link";
 import { DESTACADOS } from "@/lib/destacados";
-import { autoPorId, formatoUSD } from "@/lib/catalogo";
+import { autoPorId, formatoUSD, hrefCompra } from "@/lib/catalogo";
 import { useIdioma } from "@/lib/idioma";
 
 const WHATSAPP = "https://wa.me/5493548409755";
@@ -150,13 +151,15 @@ export default function Destacados() {
                     )}
 
                     <div className="mt-8 flex flex-wrap gap-3">
-                      <a
-                        href="#reservar"
-                        className="type-condensed destello bg-rojo text-white hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
-                      >
-                        {t("Reservar prueba")}
-                        <SteeringWheel size={20} weight="regular" />
-                      </a>
+                      <Magnetico>
+                        <Link
+                          href={hrefCompra(d.id)}
+                          className="type-condensed destello bg-rojo text-white hover:bg-tinta hover:text-lienzo group inline-flex h-14 items-center justify-center gap-5 px-5 text-[15px] font-bold tracking-wide uppercase transition-colors duration-300"
+                        >
+                          {t("Comprar este auto")}
+                          <SteeringWheel size={20} weight="regular" />
+                        </Link>
+                      </Magnetico>
 
                       <a
                         href={`${WHATSAPP}?text=${encodeURIComponent(

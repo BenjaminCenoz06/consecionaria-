@@ -27,7 +27,7 @@ export default function IndiceCategoria({ categoriaId }: { categoriaId: string }
       ? AUTOS.filter((m) =>
           m.combustible.some((c) => c === "Eléctrico" || c === "Híbrido"),
         ).map((m) => ({
-          href: `/modelos/${m.id}`,
+          href: `/modelos/${m.id}#comprar`,
           titulo: `${m.marca} ${m.nombre}`,
           subtitulo: formatoUSD(m.precio, idioma),
           imagen: m.foto,

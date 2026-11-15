@@ -11,6 +11,9 @@ import Plano3D from "./Plano3D";
 import HeroAuto from "./HeroAuto";
 import EspecificacionesAuto from "./EspecificacionesAuto";
 import TarjetaImagen from "./TarjetaImagen";
+import FondoCompra from "./FondoCompra";
+import TituloAnimado from "./TituloAnimado";
+import Magnetico from "./Magnetico";
 import { useIdioma } from "@/lib/idioma";
 import { AUTOS, formatoUSD, type Auto } from "@/lib/catalogo";
 import { WHATSAPP } from "@/lib/sitio";
@@ -98,11 +101,16 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
   const wa = `${WHATSAPP}?text=${encodeURIComponent(
     `${t("Hola, quiero información sobre el")} ${auto.marca} ${auto.nombre}.`,
   )}`;
+  const waCompra = `${WHATSAPP}?text=${encodeURIComponent(
+    `${t("Hola, quiero comprar el")} ${auto.marca} ${auto.nombre}.`,
+  )}`;
 
+  /* Botones sobre el fondo de video: el principal es blanco macizo; los
+     demás, de vidrio. */
   const primario =
-    "type-normal inline-flex h-12 items-center justify-center rounded-xl bg-[#010205] px-6 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98]";
+    "type-normal destello inline-flex h-12 items-center justify-center rounded-full bg-white px-7 text-sm font-semibold text-[#010205] shadow-[0_0_40px_rgb(255_255_255/0.25)] transition-transform duration-300 hover:scale-[1.04] active:scale-[0.98]";
   const secundario =
-    "type-normal inline-flex h-12 items-center justify-center rounded-xl bg-[#e4e4e8] px-6 text-sm font-medium text-[#202020] transition-colors duration-300 hover:bg-[#d4d4da]";
+    "type-normal inline-flex h-12 items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 text-sm font-medium text-white backdrop-blur-md transition-colors duration-300 hover:bg-white/20";
 
   return (
     <>
@@ -118,9 +126,10 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
               <p className="type-normal text-rojo text-xs font-semibold tracking-wider uppercase">
                 {auto.marca} {auto.nombre}
               </p>
-              <h2 className="display-tight text-bone mt-4 text-4xl font-bold md:text-6xl">
-                {t("Por qué te lo recomendamos")}
-              </h2>
+              <TituloAnimado
+                texto="Por qué te lo recomendamos"
+                className="display-tight text-bone mt-4 text-4xl font-bold md:text-6xl"
+              />
               <p className="text-bone/75 mt-6 max-w-[48ch] text-lg leading-relaxed">
                 {l(auto.descripcion)}
               </p>
@@ -157,68 +166,99 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
         </Container>
       </section>
 
-      {/* Compra: precio, qué incluye y pasos. */}
-      <section id="comprar" className="scroll-mt-20 bg-white py-9 text-[#202020] lg:py-28">
+      {/* Compra: de fondo, el auto andando en video (vertical en celular,
+          horizontal en PC); encima, precio, qué incluye y pasos. */}
+      <section
+        id="comprar"
+        className="relative isolate scroll-mt-20 overflow-hidden bg-black py-14 text-white lg:py-32"
+      >
+        <FondoCompra id={auto.id} />
         <Container>
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-20">
+          <div className="grid items-center gap-9 lg:grid-cols-2 lg:gap-20">
             <Reveal>
-              <h2 className="display-tight text-4xl font-bold md:text-6xl">
-                {t("Comprá tu")} {auto.marca} {auto.nombre}
-              </h2>
+              <p className="type-normal text-rojo text-xs font-semibold tracking-[0.25em] uppercase">
+                {t("Hablemos de tu compra")}
+              </p>
+              <TituloAnimado
+                texto={`${t("Comprá tu")} ${auto.marca} ${auto.nombre}`}
+                className="display-tight mt-4 text-4xl font-bold md:text-6xl"
+              />
               <p className="type-normal mt-8 text-5xl font-light">
                 {formatoUSD(auto.precio, idioma)}
               </p>
-              <p className="mt-2 text-sm text-[#6b6b72]">{t("Precio de referencia")}</p>
+              <p className="mt-2 text-sm text-white/60">{t("Precio de referencia")}</p>
 
               <p className="type-normal mt-10 text-sm font-semibold tracking-wide uppercase">
                 {t("Qué te ofrecemos")}
               </p>
               <ul className="mt-4 space-y-3">
-                {INCLUYE.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-base">
-                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-[#010205] text-white">
+                {INCLUYE.map((item, i) => (
+                  <Reveal as="li" key={item} delay={0.15 + i * 0.06} className="flex items-start gap-3 text-base text-white/90">
+                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-white text-[#010205]">
                       <Check size={12} weight="bold" />
                     </span>
                     {t(item)}
-                  </li>
+                  </Reveal>
                 ))}
               </ul>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="rounded-[2rem] bg-[#f4f4f6] p-5 lg:p-10">
-                <p className="type-normal text-sm font-semibold tracking-wide uppercase">
-                  {t("Cómo seguimos")}
-                </p>
-                <ol className="mt-6 space-y-6">
-                  {PASOS.map((p) => (
-                    <li key={p.n} className="flex gap-5">
-                      <span className="type-condensed text-4xl font-bold text-[#c9c9cf]">
-                        {p.n}
-                      </span>
-                      <div>
-                        <p className="type-normal text-lg font-semibold">{t(p.t)}</p>
-                        <p className="mt-1 text-[#6b6b72]">{t(p.d)}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+              <Tilt3D grados={4} escala={1.01} className="rounded-[2rem]">
+                <div
+                  className="rounded-[2rem] border border-white/15 bg-white/[0.08] p-5 shadow-[inset_0_1px_0_rgb(255_255_255/0.18),0_40px_80px_-30px_rgb(0_0_0/0.8)] backdrop-blur-2xl lg:p-10"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <p
+                    className="type-normal text-sm font-semibold tracking-wide uppercase"
+                    style={{ transform: "translateZ(24px)" }}
+                  >
+                    {t("Cómo seguimos")}
+                  </p>
+                  <ol className="mt-6 space-y-6" style={{ transform: "translateZ(16px)" }}>
+                    {PASOS.map((p) => (
+                      <li key={p.n} className="flex gap-5">
+                        <span className="type-condensed text-4xl font-bold text-white/30">
+                          {p.n}
+                        </span>
+                        <div>
+                          <p className="type-normal text-lg font-semibold">{t(p.t)}</p>
+                          <p className="mt-1 text-white/65">{t(p.d)}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
 
-                <div className="mt-9 flex flex-wrap gap-3">
-                  <Link href="/#reservar" className={primario}>
-                    {t("Reservar prueba")}
-                  </Link>
-                  <a href={wa} target="_blank" rel="noopener noreferrer" className={secundario}>
-                    {t("Consultar por WhatsApp")}
-                  </a>
-                  <Link href="/compra/financiacion" className={secundario}>
-                    {t("Financiar")}
-                  </Link>
-                  <Link href="/compra/vende-tu-auto" className={secundario}>
-                    {t("Vender mi auto")}
-                  </Link>
+                  <div
+                    className="mt-9 flex flex-wrap gap-3"
+                    style={{ transform: "translateZ(34px)" }}
+                  >
+                    <Magnetico>
+                      <a
+                        href={waCompra}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={primario}
+                      >
+                        {t("Comprar por WhatsApp")}
+                        <span className="sr-only">{t(" (se abre en una pestaña nueva)")}</span>
+                      </a>
+                    </Magnetico>
+                    <Link href="/#reservar" className={secundario}>
+                      {t("Reservar prueba")}
+                    </Link>
+                    <a href={wa} target="_blank" rel="noopener noreferrer" className={secundario}>
+                      {t("Consultar por WhatsApp")}
+                    </a>
+                    <Link href="/compra/financiacion" className={secundario}>
+                      {t("Financiar")}
+                    </Link>
+                    <Link href="/compra/vende-tu-auto" className={secundario}>
+                      {t("Vender mi auto")}
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </Tilt3D>
             </Reveal>
           </div>
         </Container>
@@ -236,7 +276,7 @@ export default function DetalleAuto({ auto }: { auto: Auto }) {
             {otros.map((o, i) => (
               <Reveal as="li" key={o.id} delay={i * 0.08}>
                 <TarjetaImagen
-                  href={`/modelos/${o.id}`}
+                  href={`/modelos/${o.id}#comprar`}
                   titulo={`${o.marca} ${o.nombre}`}
                   subtitulo={formatoUSD(o.precio, idioma)}
                   imagen={o.foto}

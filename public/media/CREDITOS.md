@@ -18,8 +18,10 @@ deriva, el sol revienta el plano y el auto se va de cuadro.
 |---|---|---|---|
 | `hero-4k.webm` | 3840×2160 AV1 | — | escritorio, primera opción |
 | `hero-4k.mp4` | 3840×2160 H.264 | — | escritorio, respaldo |
-| `hero-mobile.mp4` | 1080×1920 H.264 | — | celular (≤767 px) |
-| `hero-poster.jpg` | 1920 px de ancho | — | primera pintura y modo sin movimiento |
+| `hero-movil-4k.webm` | 2160×3840 AV1 | 10,7 MB | celular (≤767 px), primera opción — ver «Hero del celular» abajo |
+| `hero-movil-1080.mp4` | 1080×1920 H.264 | 10,2 MB | celular, respaldo |
+| `hero-movil-4k-poster.jpg` | 1080 px de ancho | 0,4 MB | primera pintura en celular |
+| `hero-poster.jpg` | 1920 px de ancho | — | primera pintura y modo sin movimiento (escritorio) |
 
 ## Cómo cierra el loop
 
@@ -69,16 +71,38 @@ ffmpeg -i master.mp4 -an -c:v libsvtav1 -preset 6 -crf 40 -g 48 -pix_fmt yuv420p
 ```
 
 ```bash
-ffmpeg -i master.mp4 -an -vf "crop=1215:2160:600:0,scale=1080:1920:flags=lanczos" -c:v libx264 -preset slow -crf 30 -profile:v high -level 4.1 -g 48 -keyint_min 48 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart hero-mobile.mp4 -y
-```
-
-```bash
 ffmpeg -ss 0.1 -i master.mp4 -frames:v 1 -vf "scale=1920:-2:flags=lanczos" -q:v 5 hero-poster.jpg -y
 ```
 
+---
+
+# Hero del celular
+
+El celular **no usa el video de escritorio recortado**: tiene su propia toma
+vertical, filmada en 9:16.
+
+| | |
+|---|---|
+| Fuente | Pexels — video `32391975`, «Luxury car driving along scenic coastline road» |
+| URL | https://www.pexels.com/video/luxury-car-driving-along-scenic-coastline-road-32391975/ |
+| Archivo original | `13817163_2160_3840_25fps.mp4` — 2160×3840, 25 fps, 33,2 s, 220 MB |
+| Licencia | [Pexels License](https://www.pexels.com/license/) — uso comercial libre, sin atribución obligatoria |
+| Tramo usado | segundos 0 a 12 (el auto cruza, se acerca de frente y vuelve a salir) |
+
+El material tiene mucho detalle (roca, asfalto) y pesa mucho: se baja el ruido
+con `hqdn3d` antes de comprimir, lo que permite mantener el 4K real en ~10 MB.
+
 ```bash
-ffmpeg -ss 0.1 -i master.mp4 -frames:v 1 -vf "crop=1215:2160:600:0,scale=1080:-2:flags=lanczos" -q:v 5 hero-poster-mov.jpg -y
+ffmpeg -ss 0 -t 12 -i original.mp4 -an -vf "hqdn3d=5:4:8:7,fps=24,format=yuv420p" -c:v libsvtav1 -preset 6 -crf 54 -g 48 hero-movil-4k.webm -y
 ```
 
-El recorte de celular (`crop=1215:2160:600:0`) está elegido a mano para
-que el frente del auto quede en cuadro. Si cambiás de clip, movelo.
+```bash
+ffmpeg -ss 0 -t 12 -i original.mp4 -an -vf "hqdn3d=5:4:8:7,scale=1080:1920:flags=lanczos,fps=24,format=yuv420p" -c:v libx264 -preset slow -crf 29 -profile:v high -level 4.2 -g 48 -keyint_min 48 -sc_threshold 0 -movflags +faststart hero-movil-1080.mp4 -y
+```
+
+```bash
+ffmpeg -ss 0.1 -i original.mp4 -frames:v 1 -vf "scale=1080:-2:flags=lanczos" -q:v 3 hero-movil-4k-poster.jpg -y
+```
+
+El navegador usa el AV1 4K si lo soporta; si no, el MP4 de 1080×1920. Con
+«ahorro de datos» activado en el celular no se descarga video: queda el poster.

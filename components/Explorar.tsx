@@ -1,16 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import Container from "./Container";
 import Reveal from "./Reveal";
 import Tilt3D from "./Tilt3D";
 import VideoAuto from "./VideoAuto";
 import { videoDe } from "@/lib/videos";
+import { hrefCompra } from "@/lib/catalogo";
 import { MODELOS } from "@/lib/modelos";
 import { useIdioma } from "@/lib/idioma";
-
-const WHATSAPP = "https://wa.me/5493548409755";
 
 /**
  * Qué tres modelos van en la fila. Son ids de `lib/modelos.ts`: se
@@ -57,12 +57,8 @@ export default function Explorar() {
           {tarjetas.map((m, i) => (
             <Reveal as="li" key={m.id} delay={i * 0.1}>
               <Tilt3D className="rounded-[2rem]" grados={8}>
-                <a
-                  href={`${WHATSAPP}?text=${encodeURIComponent(
-                    `${t("Hola, quiero información sobre el")} ${m.marca} ${m.nombre}.`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={hrefCompra(m.id)}
                   className="group relative flex aspect-3/2 flex-col justify-end rounded-[2rem] [transform-style:preserve-3d]"
                 >
                   {/* Capa recortada: todo lo que es superficie. */}
@@ -109,8 +105,9 @@ export default function Explorar() {
 
                     <span
                       aria-hidden="true"
-                      className="border-bone/50 text-bone group-hover:bg-bone group-hover:text-ink group-hover:border-bone ease-premium flex size-11 shrink-0 items-center justify-center rounded-full border backdrop-blur-xs transition-colors duration-500"
+                      className="type-normal border-bone/50 text-bone group-hover:bg-bone group-hover:text-ink group-hover:border-bone ease-premium flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border px-4 text-sm font-semibold backdrop-blur-xs transition-colors duration-500"
                     >
+                      {t("Comprar")}
                       <ArrowRight
                         size={18}
                         weight="regular"
@@ -120,9 +117,9 @@ export default function Explorar() {
                   </div>
 
                   <span className="sr-only">
-                    {t("Consultar por WhatsApp (se abre en una pestaña nueva)")}
+                    {t("Comprar")} {m.marca} {m.nombre}
                   </span>
-                </a>
+                </Link>
               </Tilt3D>
             </Reveal>
           ))}

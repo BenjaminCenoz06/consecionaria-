@@ -10,6 +10,7 @@ import {
   useTransform,
 } from "motion/react";
 import Tilt3D from "./Tilt3D";
+import Magnetico from "./Magnetico";
 import { useIdioma } from "@/lib/idioma";
 import { formatoUSD, type Auto } from "@/lib/catalogo";
 import { WHATSAPP } from "@/lib/sitio";
@@ -162,9 +163,11 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
             {...entrar(0.8)}
             className="mt-6 flex flex-wrap justify-center gap-2.5 lg:mt-9 lg:gap-3"
           >
-            <a href="#comprar" className={primario}>
-              {t("Comprar este auto")}
-            </a>
+            <Magnetico>
+              <a href="#comprar" className={`${primario} destello`}>
+                {t("Comprar este auto")}
+              </a>
+            </Magnetico>
             <Link href="/#reservar" className={secundario}>
               {t("Reservar prueba")}
             </Link>

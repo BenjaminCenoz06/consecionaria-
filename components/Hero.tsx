@@ -15,20 +15,24 @@ import { useIdioma } from "@/lib/idioma";
 
    Ranura de archivos. Dejá los videos en `public/media/`:
 
-     hero-4k.webm         3840×2160 AV1   → escritorio, primera opción
-     hero-4k.mp4          3840×2160 H.264 → escritorio, respaldo
-     hero-mobile.mp4      1080×1920 H.264 → celular
-     hero-poster.jpg      1920px de ancho → primera pintura, escritorio
-     hero-poster-mov.jpg  1080px de ancho → primera pintura, celular
+     hero-4k.webm            3840×2160 AV1   → escritorio, primera opción
+     hero-4k.mp4             3840×2160 H.264 → escritorio, respaldo
+     hero-movil-4k.webm      2160×3840 AV1   → celular, primera opción (4K vertical)
+     hero-movil-1080.mp4     1080×1920 H.264 → celular, respaldo
+     hero-poster.jpg         1920px de ancho → primera pintura, escritorio
+     hero-movil-4k-poster.jpg 1080px de ancho → primera pintura, celular
 
+   El video del celular NO es el de escritorio recortado: es una toma
+   vertical propia, filmada en 9:16.
    Origen, licencia y recetas de ffmpeg: `public/media/CREDITOS.md`.
    Si falta un archivo queda el poster; y sin poster, negro.        */
 
 const FUENTE_ESCRITORIO = "/media/hero-4k.mp4";
 const FUENTE_ESCRITORIO_WEBM = "/media/hero-4k.webm";
-const FUENTE_CELULAR = "/media/hero-mobile.mp4";
+const FUENTE_CELULAR_AV1 = "/media/hero-movil-4k.webm";
+const FUENTE_CELULAR = "/media/hero-movil-1080.mp4";
 const POSTER_ESCRITORIO = "/media/hero-poster.jpg";
-const POSTER_CELULAR = "/media/hero-poster-mov.jpg";
+const POSTER_CELULAR = "/media/hero-movil-4k-poster.jpg";
 
 /** Debajo de esto se sirve el corte vertical y liviano. */
 const CORTE_CELULAR = "(max-width: 767px)";
@@ -55,6 +59,9 @@ export default function Hero() {
      empiece a bajar 4K por una suposición hecha en el servidor.      */
   const [esCelular, setEsCelular] = useState<boolean | null>(null);
   const [sinMovimiento, setSinMovimiento] = useState(false);
+  /* "Ahorro de datos" activado en el celular: el video 4K pesa ~10 MB,
+     así que se queda el poster, que ya es una foto de la misma toma. */
+  const [ahorroDatos, setAhorroDatos] = useState(false);
   const sinMovimientoSistema = useSinMovimiento();
 
   useEffect(() => {
@@ -64,6 +71,9 @@ export default function Hero() {
     const sincronizar = () => {
       setEsCelular(pantalla.matches);
       setSinMovimiento(movimiento.matches);
+      const conexion = (navigator as Navigator & { connection?: { saveData?: boolean } })
+        .connection;
+      setAhorroDatos(Boolean(conexion?.saveData));
     };
 
     sincronizar();
@@ -92,7 +102,7 @@ export default function Hero() {
   /* En el servidor todavía no se sabe la pantalla: va el apaisado,
      que es el que acierta en la mayoría de las visitas.            */
   const poster = esCelular ? POSTER_CELULAR : POSTER_ESCRITORIO;
-  const reproducir = esCelular !== null && !sinMovimiento;
+  const reproducir = esCelular !== null && !sinMovimiento && !(esCelular && ahorroDatos);
 
   return (
     <section
@@ -133,7 +143,13 @@ export default function Hero() {
             aria-hidden="true"
             tabIndex={-1}
           >
-            {!esCelular && (
+            {esCelular ? (
+              /* Celular: 4K vertical en AV1; sin soporte, el MP4 de 1080×1920. */
+              <source
+                src={FUENTE_CELULAR_AV1}
+                type='video/webm; codecs="av01.0.12M.08"'
+              />
+            ) : (
               <source src={FUENTE_ESCRITORIO_WEBM} type="video/webm" />
             )}
             <source src={fuente} type="video/mp4" />

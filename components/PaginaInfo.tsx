@@ -49,7 +49,7 @@ export default function PaginaInfo({ pagina }: { pagina: Pagina }) {
           };
         })
       : MODELOS.slice(0, 3).map((m) => ({
-          href: `/modelos/${m.id}`,
+          href: `/modelos/${m.id}#comprar`,
           titulo: `${m.marca} ${m.nombre}`,
           imagen: m.foto,
           alt: t(m.alt),

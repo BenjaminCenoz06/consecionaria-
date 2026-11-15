@@ -439,6 +439,9 @@ export const AUTOS: Auto[] = [
 
 export const autoPorId = (id: string) => AUTOS.find((a) => a.id === id);
 
+/** Enlace que lleva directo a la sección de compra de la ficha de un auto. */
+export const hrefCompra = (id: string) => `/modelos/${id}#comprar`;
+
 /** "USD 233.300" en español, "USD 233,300" en inglés. */
 export const formatoUSD = (valor: number, idioma: "es" | "en") =>
   `USD ${valor.toLocaleString(idioma === "en" ? "en-US" : "es-AR")}`;

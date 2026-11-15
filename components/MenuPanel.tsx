@@ -271,7 +271,7 @@ export default function MenuPanel({
                               {...entrada(0.06 + Math.min(i, 6) * 0.05, 22)}
                             >
                               <Link
-                                href={`/modelos/${m.id}`}
+                                href={`/modelos/${m.id}#comprar`}
                                 onClick={onCerrar}
                                 className="group block"
                               >

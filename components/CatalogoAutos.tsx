@@ -18,6 +18,7 @@ import {
   MARCAS,
   formatoDecimal,
   formatoUSD,
+  hrefCompra,
   type Auto,
 } from "@/lib/catalogo";
 import { categoriaPorId } from "@/lib/sitio";
@@ -55,8 +56,8 @@ function CartaProducto({
         style={{ transformStyle: "preserve-3d" }}
       >
         <Link
-          href={`/modelos/${auto.id}`}
-          aria-label={`${auto.marca} ${auto.nombre}`}
+          href={hrefCompra(auto.id)}
+          aria-label={`${t("Comprar")} ${auto.marca} ${auto.nombre}`}
           className="group absolute inset-x-0 top-0 z-10 block h-[84px] md:h-[150px]"
           style={{ transform: "translateZ(70px)" }}
         >
@@ -120,10 +121,10 @@ function CartaProducto({
 
           <div className="mt-auto flex flex-wrap gap-2 pt-3 md:pt-6">
             <Link
-              href={`/modelos/${auto.id}`}
-              className="type-normal inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-[#010205] px-4 text-sm font-medium whitespace-nowrap text-white transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98] md:h-11"
+              href={hrefCompra(auto.id)}
+              className="type-normal destello inline-flex h-10 flex-1 items-center justify-center rounded-xl bg-[#010205] px-4 text-sm font-medium whitespace-nowrap text-white transition-transform duration-300 hover:scale-[1.03] active:scale-[0.98] md:h-11"
             >
-              {t("Ver detalle")}
+              {t("Comprar")}
             </Link>
             <Link
               href="/#reservar"
@@ -246,10 +247,10 @@ function Comparador({
                 {autos.map((a) => (
                   <td key={a.id} className="px-3 py-5">
                     <Link
-                      href={`/modelos/${a.id}`}
+                      href={hrefCompra(a.id)}
                       className="type-normal inline-flex h-11 items-center rounded-xl bg-[#010205] px-5 text-sm font-medium text-white"
                     >
-                      {t("Ver detalle")}
+                      {t("Comprar")}
                     </Link>
                   </td>
                 ))}

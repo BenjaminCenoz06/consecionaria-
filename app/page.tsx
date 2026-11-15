@@ -6,6 +6,7 @@ import Marquesina from "@/components/Marquesina";
 import Destacados from "@/components/Destacados";
 import Explorar from "@/components/Explorar";
 import Gama from "@/components/Gama";
+import QueHacemos from "@/components/QueHacemos";
 import ComoFunciona from "@/components/ComoFunciona";
 import Preguntas from "@/components/Preguntas";
 import Reservar from "@/components/Reservar";
@@ -50,6 +51,7 @@ export default function Home() {
           <Destacados />
           <Explorar />
           <Gama />
+          <QueHacemos />
           <ComoFunciona />
           <Preguntas />
         </ZonaClara>
