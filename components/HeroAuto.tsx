@@ -11,6 +11,7 @@ import {
 } from "motion/react";
 import Tilt3D from "./Tilt3D";
 import Magnetico from "./Magnetico";
+import FondoPortada from "./FondoPortada";
 import { useIdioma } from "@/lib/idioma";
 import { formatoUSD, type Auto } from "@/lib/catalogo";
 import { WHATSAPP } from "@/lib/sitio";
@@ -37,7 +38,6 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
     target: seccion,
     offset: ["start start", "end start"],
   });
-  const marcaX = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
   const autoY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   const entrar = (retardo: number) =>
@@ -60,20 +60,17 @@ export default function HeroAuto({ auto }: { auto: Auto }) {
   return (
     <section ref={seccion} className="relative isolate">
       {/* Estudio oscuro. No es `overflow-hidden`: el auto lo desborda. */}
-      <div className="relative bg-black pt-20 lg:pt-28">
+      <div className="relative flex min-h-[24rem] flex-col justify-end bg-black pt-20 sm:min-h-[28rem] lg:min-h-[37rem] lg:pt-28">
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          {/* Color del auto, de respaldo mientras carga el video. */}
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `radial-gradient(ellipse 70% 80% at 50% 70%, ${auto.tono}, #000 72%)`,
             }}
           />
-          <motion.p
-            style={sinMovimiento ? undefined : { x: marcaX }}
-            className="type-condensed absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[58%] text-[clamp(7rem,24vw,24rem)] leading-none font-extrabold whitespace-nowrap text-transparent uppercase italic select-none [-webkit-text-stroke:1.5px_rgba(255,255,255,0.13)]"
-          >
-            {auto.nombre.length <= 9 ? auto.nombre : auto.marca}
-          </motion.p>
+          {/* En lugar de la marca de agua con el nombre: el auto andando. */}
+          <FondoPortada id={auto.id} />
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
         </div>
 

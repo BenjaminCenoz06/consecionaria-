@@ -20,6 +20,64 @@ export const VIDEOS: Record<string, string> = {
 export const videoDe = (id: string): string | undefined => VIDEOS[id];
 
 /* ------------------------------------------------------------------ */
+/* Fondo de la portada de cada ficha                                   */
+/* ------------------------------------------------------------------ */
+
+type Portada = {
+  pc: string;
+  pcPoster: string;
+  movil: string;
+  movilPoster: string;
+};
+
+const portada = (pc: string, movil: string): Portada => ({
+  pc: `/videos/portada/${pc}.mp4`,
+  pcPoster: `/videos/portada/${pc}.jpg`,
+  movil: `/videos/portada/${movil}.mp4`,
+  movilPoster: `/videos/portada/${movil}.jpg`,
+});
+
+/**
+ * Videos de la portada por modelo: uno horizontal para PC y uno vertical
+ * para celular, ambos de `public/videos/portada/`. Salvo donde se aclara,
+ * son tomas de stock de un auto del MISMO TIPO, no de la unidad: se
+ * reemplazan por videos propios cuando se tengan (ver CREDITOS.md).
+ * Para sumar uno: dejá `<nombre>-pc.mp4` y `<nombre>-movil.mp4` con su
+ * `.jpg` de poster y agregá la línea.
+ */
+const PORTADAS: Record<string, Portada> = {
+  // Deportivos rojos
+  "ferrari-488-spider": portada("ferrari-pc", "rojo-movil"),
+  "ferrari-812": portada("ferrari-pc", "rojo-movil"),
+  // Lamborghini
+  "lamborghini-miura": portada("lamborghini-pc", "naranja-movil"),
+  "lamborghini-huracan-tecnica": portada("lamborghini-pc", "naranja-movil"),
+  // Clásico
+  "porsche-356": portada("clasico-pc", "clasico-movil"),
+  // Convertibles
+  "mazda-mx5": portada("descapotable-pc", "roadster-movil"),
+  "jaguar-f-type": portada("descapotable-pc", "roadster-movil"),
+  "mercedes-amg-s63-cabrio": portada("descapotable-pc", "roadster-movil"),
+  // Alemanes y deportivos oscuros
+  "audi-r8": portada("negro-a-pc", "rs6-movil"),
+  "audi-rs5": portada("negro-a-pc", "rs6-movil"),
+  "lexus-lfa": portada("negro-a-pc", "rs6-movil"),
+  "bmw-i8": portada("negro-a-pc", "bmw-movil"),
+  "mercedes-amg-gt-r": portada("negro-b-pc", "mercedes-movil"),
+  "bentley-continental-gt": portada("negro-b-pc", "mercedes-movil"),
+  // Eléctrico
+  "tesla-model-s": portada("negro-b-pc", "tesla-movil"),
+  // Otros
+  "nissan-370z": portada("gtr-pc", "naranja-movil"),
+  "jeep-cj-renegade": portada("todoterreno-pc", "todoterreno-movil"),
+};
+
+/** Si un modelo todavía no tiene video, se usa uno genérico. */
+const PORTADA_GENERICA = portada("negro-b-pc", "generico-movil");
+
+export const portadaDe = (id: string): Portada => PORTADAS[id] ?? PORTADA_GENERICA;
+
+/* ------------------------------------------------------------------ */
 /* Fondo de la sección de compra de cada ficha                         */
 /* ------------------------------------------------------------------ */
 
